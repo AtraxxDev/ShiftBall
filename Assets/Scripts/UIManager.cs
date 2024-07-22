@@ -8,10 +8,13 @@ public class UIManager : MonoBehaviour
     public TMP_Text text_Score;
     public TMP_Text text_HighScore;
 
-    private void OnEnable()
+
+    private void Start()
     {
         ScoreManager.Instance.OnScoreChanged += UpdateScore;
         ScoreManager.Instance.OnHighScoreChanged += UpdateHighScore;
+
+        UpdateHighScore(ScoreManager.Instance.HighScore);
     }
 
     private void OnDisable()

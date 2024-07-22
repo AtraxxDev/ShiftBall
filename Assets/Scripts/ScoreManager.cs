@@ -62,8 +62,8 @@ public class ScoreManager : MonoBehaviour
 
         if (Score > HighScore) // si es mayor el score que l highscore
         {
-            HighScore = Score; // aumenta 
-            PlayerPrefs.SetInt("HIGHSCORE",HighScore); // se establece en highscore
+            HighScore = Score; // se iiguala 
+            PlayerPrefs.SetInt("HIGHSCORE", HighScore); // se establece en highscore
             PlayerPrefs.Save(); // se guarda el pref 
             OnHighScoreChanged.Invoke(HighScore);
         }
