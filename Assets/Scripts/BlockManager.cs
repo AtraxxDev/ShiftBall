@@ -30,7 +30,6 @@ public class BlockManager : MonoBehaviour
 
     IEnumerator DestroySelf()
     {
-        Debug.Log("Entre a la corrutina");
         yield return new WaitForSeconds(lifeBlock);
         Destroy(transform.parent.gameObject); // Destruye el objeto que tiene el script, que es el objectParent
     }

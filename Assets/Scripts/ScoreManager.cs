@@ -16,7 +16,7 @@ public class ScoreManager : MonoBehaviour
     public event ScoreChanged OnScoreChanged;
 
     public delegate void HighScoreChanged(int newHighScore);
-    public event ScoreChanged OnHighScoreChanged;
+    public event HighScoreChanged OnHighScoreChanged;
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class ScoreManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        HighScore = PlayerPrefs.GetInt("HIGHSCORE",0);
+        HighScore = PlayerPrefs.GetInt("HighScore",0);
     }
 
 
@@ -63,9 +63,9 @@ public class ScoreManager : MonoBehaviour
         if (Score > HighScore) // si es mayor el score que l highscore
         {
             HighScore = Score; // se iiguala 
-            PlayerPrefs.SetInt("HIGHSCORE", HighScore); // se establece en highscore
+            PlayerPrefs.SetInt("HighScore", HighScore); // se establece en highscore
             PlayerPrefs.Save(); // se guarda el pref 
-            OnHighScoreChanged.Invoke(HighScore);
+            OnHighScoreChanged?.Invoke(HighScore);
         }
     }
 
