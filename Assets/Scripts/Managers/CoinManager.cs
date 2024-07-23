@@ -8,7 +8,7 @@ public class CoinManager : MonoBehaviour
 
     public static CoinManager Instance;
 
-    public int Coins { get; private set; }
+    public int TotalCoins { get; private set; }
     public int CoinsCollected { get; private set; }
 
     public Action<int> OnCoinsChanged;
@@ -23,7 +23,7 @@ public class CoinManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            Coins = PlayerPrefs.GetInt("Coins",0);
+            TotalCoins = PlayerPrefs.GetInt("Coins",0);
         }
         else
         {
@@ -37,15 +37,15 @@ public class CoinManager : MonoBehaviour
         CoinsCollected = 0;
     }
 
-    public void AddCoin(int amount)
+    public void AddTotalCoin(int amount)
     {
-        Coins += amount;
-        OnCoinsChanged?.Invoke(Coins);
-        PlayerPrefs.SetInt("Coins",Coins);
+        TotalCoins += amount;
+        OnCoinsChanged?.Invoke(TotalCoins);
+        PlayerPrefs.SetInt("Coins", TotalCoins);
         PlayerPrefs.Save();
     }
 
-    public void CoinsNumber(int currentAmount)
+    public void AddCoinsCollected(int currentAmount)
     {
         CoinsCollected += currentAmount;
         OnCoinsCollectChanged?.Invoke(CoinsCollected);

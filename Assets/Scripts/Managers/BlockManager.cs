@@ -10,7 +10,7 @@ public class BlockManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.CompareTag("Player"))
+        if (collider.CompareTag("Player") && !GameManager.Instance.IsPaused())
         {
             InstantiateBlock();
             StartCoroutine(DestroySelf());

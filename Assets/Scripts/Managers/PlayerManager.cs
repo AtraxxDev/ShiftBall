@@ -16,6 +16,8 @@ public class PlayerManager : Unit
     // FixedUpdate is called at a fixed interval and is used for physics updates
     void FixedUpdate()
     {
+        if (GameManager.Instance.IsPaused()) return;
+
         float deltaspeed = speed * Time.fixedDeltaTime;
         transform.Translate(direction * deltaspeed);
     }
@@ -23,6 +25,7 @@ public class PlayerManager : Unit
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.IsPaused()) return;
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             ToggleDirection();
@@ -41,5 +44,8 @@ public class PlayerManager : Unit
     {
         isMovingLeft = !isMovingLeft;
         direction = new Vector3(isMovingLeft ? -1 : 1, 1, 0).normalized;
+        AudioManager.Instance.PlayWallHitSound();
     }
+
+    
 }
