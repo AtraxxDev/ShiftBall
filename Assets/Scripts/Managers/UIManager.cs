@@ -7,13 +7,15 @@ using Unity.VisualScripting;
 public class UIManager : MonoBehaviour
 {
     [Header("Score")]
-    public TMP_Text text_Score;
+    public TMP_Text text_Score; 
     public TMP_Text text_HighScore;
+
     public TMP_Text text_GameOverScore;
     public TMP_Text text_GameOverHighScore;
 
     [Header("Coins")]
     public TMP_Text text_TotalCoinsMenu;
+
     public TMP_Text text_GameOverCoins;
     public TMP_Text text_GameOverTotalCoins;
 

@@ -13,6 +13,13 @@ public class BlockManager : MonoBehaviour
         if (collider.CompareTag("Player") && !GameManager.Instance.IsPaused())
         {
             InstantiateBlock();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!GameManager.Instance.IsPaused())
+        {
             StartCoroutine(DestroySelf());
         }
     }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy : Unit
 {
-
     private GameObject target;
     [SerializeField] private Vector3 velocity;
 
@@ -12,7 +11,10 @@ public class Enemy : Unit
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
+       
     }
+
+    
 
     // Update is called once per frame
     void Update()
@@ -38,10 +40,11 @@ public class Enemy : Unit
         transform.position += velocity;
 
         
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         speed = 0;
     }
 
+    
 
 
 }

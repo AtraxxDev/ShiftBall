@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     public Action OnGameOver;
     private bool isPaused = false;
 
+   
+
+
 
     private void Awake()
     {
@@ -30,7 +33,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     public void SetState(GameState newstate)
@@ -62,9 +65,10 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log("StartGame");
         if (CurrentState == GameState.Paused)
         {
+            ScoreManager.Instance.ResetScore();
+            CoinManager.Instance.ResetCoinsCollected();
             SetState(GameState.Playing);
         }
     }
@@ -83,5 +87,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         AudioManager.Instance.PlayMusic();
     }
+
+
+
+
+
 }
 

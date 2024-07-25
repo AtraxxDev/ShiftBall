@@ -50,4 +50,10 @@ public class CoinManager : MonoBehaviour
         CoinsCollected += currentAmount;
         OnCoinsCollectChanged?.Invoke(CoinsCollected);
     }
+
+    public void ResetCoinsCollected()
+    {
+        CoinsCollected = 0;
+        OnCoinsCollectChanged?.Invoke(CoinsCollected);
+    }
 }

@@ -6,12 +6,20 @@ public class PlayerManager : Unit
 {
     [SerializeField] private bool isMovingLeft;
 
+    [SerializeField] private bool isInvecible = false;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
+        
         isMovingLeft = true;
         direction = new Vector3(isMovingLeft ? -1 : 1, 1, 0).normalized;
     }
+
+   
+
 
     // FixedUpdate is called at a fixed interval and is used for physics updates
     void FixedUpdate()
@@ -30,6 +38,7 @@ public class PlayerManager : Unit
         {
             ToggleDirection();
         }
+       
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -48,4 +57,5 @@ public class PlayerManager : Unit
     }
 
     
+   
 }

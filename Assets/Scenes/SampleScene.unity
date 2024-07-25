@@ -1827,6 +1827,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1831089581401715239, guid: 01485b634981ef048a34a326d5632b35, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3355251652297813210, guid: 01485b634981ef048a34a326d5632b35, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4372,6 +4376,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2080516486}
   m_CullTransparentMesh: 1
+--- !u!1 &2087763299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2087763301}
+  - component: {fileID: 2087763300}
+  m_Layer: 0
+  m_Name: ColorManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2087763300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087763299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4019b68102aebde47bb889f000a69f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorData: {fileID: 11400000, guid: 3fa42f812da0d4c4fabfe971eda5ab4f, type: 2}
+  currentPaletteID: 0
+--- !u!4 &2087763301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087763299}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 444.6258, y: 1223.5952, z: -6.816805}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2338351237805392430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4503,14 +4553,15 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+  - {fileID: 2338351237805392430}
+  - {fileID: 756757190}
   - {fileID: 6421585172912371821}
   - {fileID: 1294052198}
   - {fileID: 1795698401}
-  - {fileID: 2338351237805392430}
   - {fileID: 149216141}
   - {fileID: 1492301138}
   - {fileID: 1100249674}
   - {fileID: 1948899292}
   - {fileID: 1541289507}
   - {fileID: 2049077357}
-  - {fileID: 756757190}
+  - {fileID: 2087763301}
