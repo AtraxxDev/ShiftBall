@@ -7,6 +7,8 @@ public class ColorChange : MonoBehaviour
     [Header("Color Data")]
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private int colorID = 0;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,6 @@ public class ColorChange : MonoBehaviour
     {
         Color newColor = ColorManager.Instance.GetColor(colorID);
         spriteRenderer.color = newColor;
-        Debug.Log($"Color del jugador actualizado a: {newColor}");
     }
 
     private void OnPaletteChanged(int paletteID)

@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
         if (CurrentState == GameState.Paused)
         {
             ScoreManager.Instance.ResetScore();
-            CoinManager.Instance.ResetCoinsCollected();
+            CoinManager.Instance.ResetCoins_StarsCollected();
             SetState(GameState.Playing);
         }
     }

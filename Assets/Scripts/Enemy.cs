@@ -6,45 +6,64 @@ public class Enemy : Unit
 {
     private GameObject target;
     [SerializeField] private Vector3 velocity;
+    [SerializeField] private float visionRange;
+    private bool isChasing = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
-       
     }
 
-    
-
-    // Update is called once per frame
     void Update()
     {
         if (GameManager.Instance.IsPaused()) return;
-        StartCoroutine(SeePlayer());
 
+        if (Vector3.Distance(transform.position, target.transform.position) <= visionRange && !isChasing)
+        {
+            isChasing = true;
+            StartCoroutine(SeePlayer());
+        }
+
+        if (isChasing)
+        {
+            MoveTowardsPlayer();
+        }
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameManager.Instance.GameOver();
+        if (collision.CompareTag("Player"))
+        {
+            GameManager.Instance.GameOver();
+        }
     }
 
-    public IEnumerator SeePlayer()
+    private IEnumerator SeePlayer()
+    {
+        while (Vector3.Distance(transform.position, target.transform.position) <= visionRange)
+        {
+            MoveTowardsPlayer();
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(5);
+        speed = 0;
+        isChasing = false;
+    }
+
+    private void MoveTowardsPlayer()
     {
         direction = (target.transform.position - transform.position).normalized;
         velocity = direction * speed * Time.deltaTime;
 
-        transform.rotation = Quaternion.FromToRotation(Vector3.up,direction);
-
+        transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
         transform.position += velocity;
-
-        
-        yield return new WaitForSeconds(5);
-        speed = 0;
     }
 
-    
-
-
+    private void OnDrawGizmosSelected()
+    {
+        // Draw a yellow sphere at the transform's position to represent the vision range
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, visionRange);
+    }
 }

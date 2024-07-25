@@ -29,22 +29,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E)) // Supongamos que presionar C cambia la paleta
-        {
-
-            Debug.Log("Cambiando paleta a 1");
-            ColorManager.Instance.ChangePalette(1);
-        }
-        if (Input.GetKeyDown(KeyCode.M)) // Supongamos que presionar C cambia la paleta
-        {
-
-            Debug.Log("Cambiando paleta a 0");
-            ColorManager.Instance.ChangePalette(0);
-
-        }
-    }
+   
 
     private void Start()
     {
