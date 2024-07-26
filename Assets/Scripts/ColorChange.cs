@@ -1,42 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TB_Tools;
 
 public class ColorChange : MonoBehaviour
 {
     [Header("Color Data")]
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Image uiImage;
     [SerializeField] private int colorID = 0;
+    [SerializeField] private ColorTarget targetType;
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         ColorManager.Instance.OnPaletteChanged += OnPaletteChanged;
         UpdateColor(colorID);
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         ColorManager.Instance.OnPaletteChanged -= OnPaletteChanged;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     private void UpdateColor(int paletteID)
     {
         Color newColor = ColorManager.Instance.GetColor(colorID);
-        spriteRenderer.color = newColor;
+
+        switch (targetType)
+        {
+            case ColorTarget.Object:
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.color = newColor;
+                }
+                break;
+
+            case ColorTarget.UI:
+                if (uiImage != null)
+                {
+                    uiImage.color = newColor;
+                }
+                break;
+        }
     }
 
     private void OnPaletteChanged(int paletteID)
     {
-        // Actualiza el color usando el colorID actual y la nueva paleta
         UpdateColor(colorID);
     }
 }

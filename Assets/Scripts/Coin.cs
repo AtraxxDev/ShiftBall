@@ -12,7 +12,7 @@ public class Coin : MonoBehaviour
             AudioManager.Instance.PlayCoinPickupSound();
             CoinManager.Instance.AddTotalCoin(coinValue);
             CoinManager.Instance.AddCoinsCollected(coinValue);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         
     }

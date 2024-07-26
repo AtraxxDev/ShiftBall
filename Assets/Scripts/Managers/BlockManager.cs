@@ -4,9 +4,25 @@ using UnityEngine;
 
 public class BlockManager : MonoBehaviour
 {
+    [SerializeField] private PlayerManager playerManager;
+    [Space(10)]
     [SerializeField] private GameObject[] blockPrefab;
+    [SerializeField] private GameObject bonusBlockPrefab;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private float lifeBlock;
+
+    [SerializeField] private GameObject currentBlock; // Para rastrear el bloque actual
+
+    private void Start()
+    {
+        // Buscar el PlayerManager en la escena
+        playerManager = FindObjectOfType<PlayerManager>();
+
+
+        
+    }
+
+    
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -26,13 +42,18 @@ public class BlockManager : MonoBehaviour
 
     private void InstantiateBlock()
     {
-        // Selecciona un prefab aleatorio del array
-        int randomIndex = Random.Range(0, blockPrefab.Length);
-        GameObject blockToInstantiate = blockPrefab[randomIndex];
+        // Seleccionar el prefab a instanciar basado en el estado del Speed Boost
+        GameObject blockToInstantiate = playerManager.IsSpeedBoostActive ? bonusBlockPrefab : GetRandomBlockPrefab();
 
         // Instancia un nuevo bloque
-        GameObject newBlock = Instantiate(blockToInstantiate, spawnPoint.position, Quaternion.identity);
-      
+        currentBlock = Instantiate(blockToInstantiate, spawnPoint.position, Quaternion.identity);
+    }
+
+    private GameObject GetRandomBlockPrefab()
+    {
+        // Selecciona un prefab aleatorio del array
+        int randomIndex = Random.Range(0, blockPrefab.Length);
+        return blockPrefab[randomIndex];
     }
 
     IEnumerator DestroySelf()

@@ -12,7 +12,7 @@ public class Star : MonoBehaviour
             AudioManager.Instance.PlayCoinPickupSound();
             CoinManager.Instance.AddTotalStars(starValue);
             CoinManager.Instance.AddStarsCollected(starValue);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
     }

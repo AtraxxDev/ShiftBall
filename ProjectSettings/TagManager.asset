@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - Activator
+  - Destructible
   layers:
   - Default
   - TransparentFX

@@ -11,4 +11,17 @@ namespace TB_Tools
         GameOver
     }
 
+    public enum ColorTarget
+    {
+        Object,
+        UI
+    }
+
+    public enum PowerUpType
+    {
+        Invincibility,
+        SpeedBoost
+        // Añadir más tipos de power-ups según sea necesario
+    }
+
 }
