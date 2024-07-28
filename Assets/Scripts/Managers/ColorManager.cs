@@ -26,7 +26,7 @@ public class ColorManager : MonoBehaviour
 
     private void Start()
     {
-        ChangePalette(currentPaletteID);
+       // ChangePalette(currentPaletteID);
     }
 
     public void ChangePalette(int newPaletteID)

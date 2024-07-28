@@ -10,7 +10,7 @@ public class Coin : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             AudioManager.Instance.PlayCoinPickupSound();
-            CoinManager.Instance.AddTotalCoin(coinValue);
+            CoinManager.Instance.AddCoin(coinValue);
             CoinManager.Instance.AddCoinsCollected(coinValue);
             gameObject.SetActive(false);
         }

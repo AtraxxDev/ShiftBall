@@ -62,8 +62,8 @@ public class UIManager : MonoBehaviour
     private void InitializeUI()
     {
         UpdateHighScore(ScoreManager.Instance.HighScore);
-        UpdateTotalCoins(CoinManager.Instance.TotalCoins);
-        UpdateTotalStars(CoinManager.Instance.TotalStars);
+        UpdateTotalCoins(CoinManager.Instance.Coins);
+        UpdateTotalStars(CoinManager.Instance.Stars);
     }
 
     private void UpdateText(TMP_Text textElement, int newValue, string prefix = "")

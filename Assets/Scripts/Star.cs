@@ -10,7 +10,7 @@ public class Star : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             AudioManager.Instance.PlayCoinPickupSound();
-            CoinManager.Instance.AddTotalStars(starValue);
+            CoinManager.Instance.AddStars(starValue);
             CoinManager.Instance.AddStarsCollected(starValue);
             gameObject.SetActive(false);
         }

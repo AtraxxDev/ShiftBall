@@ -8,8 +8,8 @@ public class CoinManager : MonoBehaviour
 
     public static CoinManager Instance;
 
-    public int TotalCoins { get; private set; }
-    public int TotalStars { get; private set; }
+    public int Coins { get; private set; }
+    public int Stars { get; private set; }
     public int CoinsCollected { get; private set; }
     public int StarsCollected { get; private set; }
 
@@ -27,8 +27,8 @@ public class CoinManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            TotalCoins = PlayerPrefs.GetInt("Coins",0);
-            TotalStars = PlayerPrefs.GetInt("Stars",0);
+            Coins = PlayerPrefs.GetInt("Coins",0);
+            Stars = PlayerPrefs.GetInt("Stars",0);
         }
         else
         {
@@ -43,21 +43,49 @@ public class CoinManager : MonoBehaviour
         StarsCollected = 0;
     }
 
-    public void AddTotalCoin(int amount)
+    public void AddCoin(int amount)
     {
-        TotalCoins += amount;
-        OnCoinsChanged?.Invoke(TotalCoins);
-        PlayerPrefs.SetInt("Coins", TotalCoins);
+        Coins += amount;
+        OnCoinsChanged?.Invoke(Coins);
+        PlayerPrefs.SetInt("Coins", Coins);
         PlayerPrefs.Save();
     }
 
-    public void AddTotalStars(int amount)
+    public void AddStars(int amount)
     {
-        TotalStars += amount;
-        OnStarsChanged?.Invoke(TotalStars);
-        PlayerPrefs.SetInt("Stars", TotalStars);
+        Stars += amount;
+        OnStarsChanged?.Invoke(Stars);
+        PlayerPrefs.SetInt("Stars",Stars);
         PlayerPrefs.Save();
     }
+
+    public bool SpendCoins(int amount)
+    {
+        if (Coins >= amount)
+        {
+            Coins -= amount;
+            OnCoinsChanged?.Invoke(Coins);
+            PlayerPrefs.SetInt("Coins",Coins);
+            PlayerPrefs.Save();
+            return true;
+        }
+        return false;
+    }
+
+    public bool SpendStars(int amount)
+    {
+        if (Stars >= amount)
+        {
+            Stars -= amount;
+            OnStarsChanged?.Invoke(Stars);
+            PlayerPrefs.SetInt("Stars", Stars);
+            PlayerPrefs.Save();
+            return true;
+        }
+        return false;
+    }
+
+    // If use Coins Collected in UI
 
     public void AddCoinsCollected(int currentAmount)
     {

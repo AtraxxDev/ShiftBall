@@ -4,30 +4,66 @@ using UnityEngine;
 
 public class Enemy : Unit
 {
-    private GameObject target;
-    [SerializeField] private Vector3 velocity;
     [SerializeField] private float visionRange;
+    [SerializeField] private float chaseDuration = 5f; // Duración del tiempo que el enemigo persigue al jugador
+
+    private GameObject target;
     private bool isChasing = false;
 
-    void Start()
+    private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
     }
 
-    void Update()
+    private void Update()
     {
         if (GameManager.Instance.IsPaused()) return;
 
         if (Vector3.Distance(transform.position, target.transform.position) <= visionRange && !isChasing)
         {
-            isChasing = true;
-            StartCoroutine(SeePlayer());
+            StartChasing();
         }
 
         if (isChasing)
         {
             MoveTowardsPlayer();
         }
+    }
+
+    private void StartChasing()
+    {
+        isChasing = true;
+        StartCoroutine(ChasePlayerCoroutine());
+    }
+
+    private IEnumerator ChasePlayerCoroutine()
+    {
+        float chaseEndTime = Time.time + chaseDuration;
+
+        while (Vector3.Distance(transform.position, target.transform.position) <= visionRange && Time.time < chaseEndTime)
+        {
+            if (GameManager.Instance.IsPaused())
+            {
+                yield break; 
+            }
+
+            MoveTowardsPlayer();
+            yield return null;
+        }
+
+        // Después de que termine la persecución
+        isChasing = false;
+    }
+
+    private void MoveTowardsPlayer()
+    {
+        if (GameManager.Instance.IsPaused()) return; // No mover si el juego está en pausa
+
+        Vector3 direction = (target.transform.position - transform.position).normalized;
+        Vector3 velocity = direction * speed * Time.deltaTime;
+
+        transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
+        transform.position += velocity;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -38,32 +74,13 @@ public class Enemy : Unit
         }
     }
 
-    private IEnumerator SeePlayer()
-    {
-        while (Vector3.Distance(transform.position, target.transform.position) <= visionRange)
-        {
-            MoveTowardsPlayer();
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(5);
-        speed = 0;
-        isChasing = false;
-    }
-
-    private void MoveTowardsPlayer()
-    {
-        direction = (target.transform.position - transform.position).normalized;
-        velocity = direction * speed * Time.deltaTime;
-
-        transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
-        transform.position += velocity;
-    }
-
     private void OnDrawGizmosSelected()
     {
-        // Draw a yellow sphere at the transform's position to represent the vision range
+        // Dibujar una esfera amarilla en la posición del transform para representar el rango de visión
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, visionRange);
     }
+
+
+   
 }

@@ -158,10 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerManager: {fileID: 0}
-  blockPrefab:
-  - {fileID: 4936721412505499840, guid: 01485b634981ef048a34a326d5632b35, type: 3}
-  - {fileID: 4936721412505499840, guid: 4ce0925d74735fb46ad98d94385a6006, type: 3}
-  bonusBlockPrefab: {fileID: 2998391002636267477}
+  blockPrefabsSO: {fileID: 11400000, guid: f31a9d07567357d4c8ee70b8ae882550, type: 2}
   spawnPoint: {fileID: 120802350845703879}
   lifeBlock: 3
 --- !u!1 &5495818487795838806

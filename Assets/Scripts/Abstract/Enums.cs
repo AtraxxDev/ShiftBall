@@ -20,8 +20,15 @@ namespace TB_Tools
     public enum PowerUpType
     {
         Invincibility,
-        SpeedBoost
+        SpeedBoost,
+        Magnet
         // Añadir más tipos de power-ups según sea necesario
+    }
+
+    public enum CurrencyType
+    {
+        Coins,
+        Stars
     }
 
 }

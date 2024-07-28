@@ -8,31 +8,36 @@ public class PlayerManager : Unit
     [SerializeField] private bool isMovingLeft;
     [SerializeField] private bool isInvincible = false;
     public bool IsSpeedBoostActive { get; private set; }
+    public bool IsMagnetActive { get; private set; } // Indica si el imán está activo
 
     [Header("Invincibility Settings")]
     [SerializeField] private Collider2D invincibilityCollider;
     [SerializeField] private SpriteRenderer sp;
 
-    // Start is called before the first frame update
-    void Start()
+    [Header("Magnet Settings")]
+    [SerializeField] private float magnetRange = 2.6f; // Rango del imán
+    [SerializeField] private float magnetStrength = 10f; // Fuerza del imán
+
+    private void Start()
     {
         isMovingLeft = true;
         direction = new Vector3(isMovingLeft ? -1 : 1, 1, 0).normalized;
-
-        
     }
 
-    // FixedUpdate is called at a fixed interval and is used for physics updates
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (GameManager.Instance.IsPaused()) return;
 
         float deltaSpeed = speed * Time.fixedDeltaTime;
         transform.Translate(direction * deltaSpeed);
+
+        if (IsMagnetActive)
+        {
+            AttractCoins();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (GameManager.Instance.IsPaused()) return;
 
@@ -73,7 +78,6 @@ public class PlayerManager : Unit
         {
             case PowerUpType.Invincibility:
                 isInvincible = true;
-                // Asegúrate de que el collider de invencibilidad esté activo
                 invincibilityCollider.enabled = true;
                 sp.enabled = true;
                 break;
@@ -84,9 +88,12 @@ public class PlayerManager : Unit
                 transform.position = new Vector3(0, transform.position.y, transform.position.z); // Lleva al jugador a x=0
                 direction = Vector3.up; // Movimiento solo vertical
 
-                // También activa la invencibilidad
                 isInvincible = true;
                 invincibilityCollider.enabled = true;
+                break;
+
+            case PowerUpType.Magnet:
+                IsMagnetActive = true;
                 break;
         }
 
@@ -106,10 +113,31 @@ public class PlayerManager : Unit
                 speed /= 2; // Restablecer la velocidad
                 direction = new Vector3(isMovingLeft ? -1 : 1, 1, 0).normalized; // Restaurar el movimiento diagonal
 
-                // Desactiva la invencibilidad cuando el Speed Boost termina
                 isInvincible = false;
                 invincibilityCollider.enabled = false;
                 break;
+
+            case PowerUpType.Magnet:
+                IsMagnetActive = false;
+                break;
         }
+    }
+
+    private void AttractCoins()
+    {
+        Collider2D[] coins = Physics2D.OverlapCircleAll(transform.position, magnetRange, LayerMask.GetMask("Coin"));
+
+        foreach (Collider2D coin in coins)
+        {
+            Vector3 directionToPlayer = (transform.position - coin.transform.position).normalized;
+            coin.transform.position += directionToPlayer * magnetStrength * Time.fixedDeltaTime;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        // Dibuja una esfera amarilla para representar el rango del imán
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, magnetRange);
     }
 }
