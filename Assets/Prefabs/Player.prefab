@@ -93,7 +93,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2417528533875995493}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 5297671089456366166}
   - component: {fileID: 7040347019488858675}
   - component: {fileID: 8735731905829736954}
+  - component: {fileID: 8042971507116035129}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -264,7 +265,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Time: 0.4
   m_PreviewTimeScale: 0.66
   m_Parameters:
@@ -357,6 +358,7 @@ MonoBehaviour:
   magnetRange: 2.6
   magnetStrength: 10
   particleEffectID: 0
+  shakeCamera: {fileID: 0}
 --- !u!50 &5297671089456366166
 Rigidbody2D:
   serializedVersion: 4
@@ -435,3 +437,18 @@ MonoBehaviour:
   uiImage: {fileID: 0}
   colorID: 0
   targetType: 0
+--- !u!114 &8042971507116035129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8045826080229567226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b90139fd42355854fbf1fcc2ee38087f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trailRenderer: {fileID: 4064470524742777931}
+  gradientTrailData: {fileID: 11400000, guid: 6d83ed0a99993834abbf0ad362a0409b, type: 2}
+  currentTrailID: 0

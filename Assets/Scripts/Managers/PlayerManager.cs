@@ -21,7 +21,25 @@ public class PlayerManager : Unit
     [Header("Particle System")]
     [SerializeField] private int particleEffectID;
 
-    
+    [Header("Camera Shake Settings")]
+    [SerializeField] private ShakeCamera shakeCamera;
+
+
+    private void OnEnable()
+    {
+        if (ParticleManager.Instance != null)
+        {
+            ParticleManager.Instance.OnParticleEffectChanged += UpdateParticleEffectID;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (ParticleManager.Instance != null)
+        {
+            ParticleManager.Instance.OnParticleEffectChanged -= UpdateParticleEffectID;
+        }
+    }
 
     private void Start()
     {
@@ -64,6 +82,7 @@ public class PlayerManager : Unit
         if (!IsSpeedBoostActive && collision.gameObject.CompareTag("Wall"))
         {
             ToggleDirection();
+           
         }
     }
 
@@ -141,12 +160,22 @@ public class PlayerManager : Unit
         }
     }
 
+    private void UpdateParticleEffectID(int newParticleEffectID)
+    {
+        particleEffectID = newParticleEffectID;
+    }
+
     public void PlayGameOverParticles()
     {
         // Reproduce el efecto de partículas cuando el juego termine
         if (ParticleManager.Instance != null)
         {
+            gameObject.SetActive(false);
             ParticleManager.Instance.PlayParticleEffect(particleEffectID, transform.position);
+        }
+        if (shakeCamera != null)
+        {
+            shakeCamera.Shake();
         }
     }
 

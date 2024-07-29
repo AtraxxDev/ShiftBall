@@ -6,6 +6,9 @@ public class ParticleManager : MonoBehaviour
 
     [SerializeField] private ParticleData particleData;
 
+    public delegate void ParticleEffectChangedHandler(int newParticleEffectID);
+    public event ParticleEffectChangedHandler OnParticleEffectChanged;
+
     private void Awake()
     {
         if (Instance == null)
@@ -32,5 +35,10 @@ public class ParticleManager : MonoBehaviour
         {
             Debug.LogWarning($"ParticleEffect with ID {id} not found.");
         }
+    }
+
+    public void ChangeParticleEffectID(int newParticleEffectID)
+    {
+        OnParticleEffectChanged?.Invoke(newParticleEffectID);
     }
 }

@@ -31,4 +31,11 @@ namespace TB_Tools
         Stars
     }
 
+    public enum DataType
+    {
+        ColorPalette,
+        TrailGradient,
+        ParticleEffect
+    }
+
 }
