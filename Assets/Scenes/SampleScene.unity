@@ -313,9 +313,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 1
-  currencyType: 1
+  currencyType: 0
   isUnlocked: 1
-  itemKey: Palette_0
+  itemKey: Explosion_0
   buyButton: {fileID: 1504207125}
   selectButton: {fileID: 1192805861}
   costText: {fileID: 744995843}
@@ -540,7 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
+  m_Color: {r: 1, g: 0.51522136, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -829,7 +829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5686275, g: 0.72156864, b: 0.90588236, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.03915453, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1758,7 +1758,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7258e4d51e010d4aafb5a65461b009c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palleteValue: 1
+  dataID: 1
+  dataType: 2
   btn: {fileID: 270733108}
 --- !u!114 &270733108
 MonoBehaviour:
@@ -2160,7 +2161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5686275, g: 0.72156864, b: 0.90588236, a: 1}
+  m_Color: {r: 0.9860652, g: 0.8066038, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2293,9 +2294,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1466052218}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 157.22852, y: -60.54005}
   m_SizeDelta: {x: 216.765, y: 121.0801}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &295523856
@@ -3254,7 +3255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &349110688
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3731,9 +3732,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1466052218}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 786.1426, y: -60.54005}
   m_SizeDelta: {x: 216.765, y: 121.0801}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &369376114
@@ -3902,10 +3903,10 @@ RectTransform:
   - {fileID: 1777926913}
   m_Father: {fileID: 972869348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 462, y: -929}
+  m_SizeDelta: {x: 925, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &391466687
 MonoBehaviour:
@@ -3919,10 +3920,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 8
-  currencyType: 1
+  cost: 700
+  currencyType: 0
   isUnlocked: 0
-  itemKey: Palette_3
+  itemKey: TrailColor_3
   buyButton: {fileID: 816376838}
   selectButton: {fileID: 1777926915}
   costText: {fileID: 1002252263}
@@ -4382,10 +4383,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 2
-  currencyType: 1
+  cost: 500
+  currencyType: 0
   isUnlocked: 0
-  itemKey: Palette_1
+  itemKey: Explosion_1
   buyButton: {fileID: 1501173557}
   selectButton: {fileID: 270733108}
   costText: {fileID: 1340283238}
@@ -4810,10 +4811,10 @@ RectTransform:
   - {fileID: 842714566}
   m_Father: {fileID: 972869348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 462, y: -661}
+  m_SizeDelta: {x: 925, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &464079325
 MonoBehaviour:
@@ -4827,10 +4828,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 5
-  currencyType: 1
+  cost: 400
+  currencyType: 0
   isUnlocked: 0
-  itemKey: Palette_2
+  itemKey: TrailColor_2
   buyButton: {fileID: 343593989}
   selectButton: {fileID: 842714568}
   costText: {fileID: 694634294}
@@ -5926,7 +5927,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7258e4d51e010d4aafb5a65461b009c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palleteValue: 2
+  dataID: 2
+  dataType: 0
   btn: {fileID: 558591263}
 --- !u!114 &558591263
 MonoBehaviour:
@@ -6062,7 +6064,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7258e4d51e010d4aafb5a65461b009c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palleteValue: 4
+  dataID: 4
+  dataType: 0
   btn: {fileID: 561340921}
 --- !u!114 &561340921
 MonoBehaviour:
@@ -6181,7 +6184,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 449.07413, y: -60.54005}
+  m_AnchoredPosition: {x: 471.68555, y: -60.54005}
   m_SizeDelta: {x: 216.765, y: 121.0801}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &567976765
@@ -6904,10 +6907,10 @@ RectTransform:
   - {fileID: 1258091711}
   m_Father: {fileID: 972869348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 462, y: -393}
+  m_SizeDelta: {x: 925, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &704622193
 MonoBehaviour:
@@ -6921,10 +6924,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 2
-  currencyType: 1
+  cost: 200
+  currencyType: 0
   isUnlocked: 0
-  itemKey: Palette_1
+  itemKey: TrailColor_1
   buyButton: {fileID: 735773275}
   selectButton: {fileID: 1258091713}
   costText: {fileID: 2053995360}
@@ -8255,7 +8258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7258e4d51e010d4aafb5a65461b009c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palleteValue: 2
+  dataID: 2
+  dataType: 1
   btn: {fileID: 842714568}
 --- !u!114 &842714568
 MonoBehaviour:
@@ -8791,7 +8795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21176471, g: 0.03137255, b: 0.15294118, a: 1}
+  m_Color: {r: 0.630317, g: 0.3915094, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8868,7 +8872,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7258e4d51e010d4aafb5a65461b009c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palleteValue: 4
+  dataID: 0
+  dataType: 0
   btn: {fileID: 916233716}
 --- !u!114 &916233716
 MonoBehaviour:
@@ -9873,7 +9878,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7258e4d51e010d4aafb5a65461b009c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palleteValue: 1
+  dataID: 1
+  dataType: 0
   btn: {fileID: 1061363495}
 --- !u!1 &1071034897
 GameObject:
@@ -10340,7 +10346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1114350883
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10816,7 +10822,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7258e4d51e010d4aafb5a65461b009c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palleteValue: 0
+  dataID: 0
+  dataType: 2
   btn: {fileID: 1192805861}
 --- !u!114 &1192805861
 MonoBehaviour:
@@ -10998,7 +11005,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7258e4d51e010d4aafb5a65461b009c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palleteValue: 1
+  dataID: 1
+  dataType: 1
   btn: {fileID: 1258091713}
 --- !u!114 &1258091713
 MonoBehaviour:
@@ -11094,6 +11102,7 @@ GameObject:
   - component: {fileID: 1264816930}
   - component: {fileID: 1264816929}
   - component: {fileID: 1264816928}
+  - component: {fileID: 1264816931}
   m_Layer: 5
   m_Name: btn_Select
   m_TagString: Untagged
@@ -11203,6 +11212,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1264816925}
   m_CullTransparentMesh: 1
+--- !u!114 &1264816931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264816925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7258e4d51e010d4aafb5a65461b009c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataID: 0
+  dataType: 1
+  btn: {fileID: 1264816928}
 --- !u!1 &1284039380
 GameObject:
   m_ObjectHideFlags: 0
@@ -11221,7 +11245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1284039381
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11239,10 +11263,10 @@ RectTransform:
   - {fileID: 916233714}
   m_Father: {fileID: 972869348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 462, y: -1197}
+  m_SizeDelta: {x: 925, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1284039382
 MonoBehaviour:
@@ -11977,7 +12001,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 748.4569, y: -60.54005}
+  m_AnchoredPosition: {x: 786.1426, y: -60.54005}
   m_SizeDelta: {x: 216.765, y: 121.0801}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1379103382
@@ -12246,7 +12270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1399073890
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12577,7 +12601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1466052218
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13993,7 +14017,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 149.69138, y: -60.54005}
+  m_AnchoredPosition: {x: 157.22852, y: -60.54005}
   m_SizeDelta: {x: 216.765, y: 121.0801}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1540625552
@@ -14262,7 +14286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1557353659
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14811,7 +14835,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7258e4d51e010d4aafb5a65461b009c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palleteValue: 7
+  dataID: 7
+  dataType: 0
   btn: {fileID: 1633198749}
 --- !u!114 &1633198749
 MonoBehaviour:
@@ -15399,10 +15424,10 @@ RectTransform:
   - {fileID: 1264816926}
   m_Father: {fileID: 972869348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 462, y: -125}
+  m_SizeDelta: {x: 925, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1733084294
 MonoBehaviour:
@@ -15417,9 +15442,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 1
-  currencyType: 1
+  currencyType: 0
   isUnlocked: 1
-  itemKey: Palette_0
+  itemKey: TrailColor_0
   buyButton: {fileID: 1156677708}
   selectButton: {fileID: 1264816928}
   costText: {fileID: 271173880}
@@ -15513,7 +15538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7258e4d51e010d4aafb5a65461b009c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palleteValue: 3
+  dataID: 3
+  dataType: 1
   btn: {fileID: 1777926915}
 --- !u!114 &1777926915
 MonoBehaviour:
@@ -15799,7 +15825,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7258e4d51e010d4aafb5a65461b009c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palleteValue: 0
+  dataID: 0
+  dataType: 0
   btn: {fileID: 1831194430}
 --- !u!1 &1838721683
 GameObject:
@@ -16855,9 +16882,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1466052218}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 471.68555, y: -60.54005}
   m_SizeDelta: {x: 216.765, y: 121.0801}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1949724224
@@ -17396,7 +17423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7258e4d51e010d4aafb5a65461b009c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palleteValue: 5
+  dataID: 5
+  dataType: 0
   btn: {fileID: 1989592961}
 --- !u!114 &1989592961
 MonoBehaviour:
@@ -17532,7 +17560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7258e4d51e010d4aafb5a65461b009c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palleteValue: 3
+  dataID: 3
+  dataType: 0
   btn: {fileID: 2007257221}
 --- !u!114 &2007257221
 MonoBehaviour:
@@ -18189,7 +18218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7258e4d51e010d4aafb5a65461b009c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palleteValue: 6
+  dataID: 6
+  dataType: 0
   btn: {fileID: 2045018513}
 --- !u!114 &2045018513
 MonoBehaviour:
@@ -19105,7 +19135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.09411765, g: 0.003921569, b: 0.38039216, a: 1}
+  m_Color: {r: 0, g: 0.049153328, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

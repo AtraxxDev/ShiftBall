@@ -12,19 +12,27 @@ public class ColorTrail : MonoBehaviour
 
     private void Start()
     {
-        // Aplica el gradiente inicial basado en el ID actual
-        ApplyTrailGradient(currentTrailID);
+        currentTrailID = PlayerPrefs.GetInt("TrailKey", 0);
+        ApplyTrailGradient();
+    }
+
+    public void SetTrailGradient(int id)
+    {
+        currentTrailID = id;
+        ApplyTrailGradient();
+        PlayerPrefs.SetInt("TrailKey", currentTrailID);
+        PlayerPrefs.Save();
     }
 
 
 
-    private void ApplyTrailGradient(int id)
+    public void ApplyTrailGradient()
     {
         if (trailRenderer != null && gradientTrailData != null)
         {
-            Gradient newGradient = gradientTrailData.GetTrailGradient(id);
+            Gradient newGradient = gradientTrailData.GetTrailGradient(currentTrailID);
             trailRenderer.colorGradient = newGradient; // Aplicar el gradiente al TrailRenderer
-            OnTrailGradientChanged?.Invoke(id);
+            OnTrailGradientChanged?.Invoke(currentTrailID);
         }
     }
 }

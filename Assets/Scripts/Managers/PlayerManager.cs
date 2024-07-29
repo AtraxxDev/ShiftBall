@@ -43,6 +43,8 @@ public class PlayerManager : Unit
 
     private void Start()
     {
+        particleEffectID = PlayerPrefs.GetInt("ParticleKey", 0);
+
         isMovingLeft = true;
         direction = new Vector3(isMovingLeft ? -1 : 1, 1, 0).normalized;
 
@@ -160,9 +162,11 @@ public class PlayerManager : Unit
         }
     }
 
-    private void UpdateParticleEffectID(int newParticleEffectID)
+    public void UpdateParticleEffectID(int newParticleEffectID)
     {
         particleEffectID = newParticleEffectID;
+        PlayerPrefs.SetInt("ParticleKey", particleEffectID);
+        PlayerPrefs.Save();
     }
 
     public void PlayGameOverParticles()
