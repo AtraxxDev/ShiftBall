@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4454331223408517926}
   - component: {fileID: 8238291872190593987}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2417528533875995493}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -120,7 +120,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.1412294
+  m_Radius: 0.29076913
 --- !u!114 &8238291872190593987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +165,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6224917276629799333}
@@ -212,8 +212,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.972549, g: 0.972549, b: 0.972549, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 4effa616be085d14ab3792bd1f4bb728, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -266,10 +266,10 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Time: 0.4
-  m_PreviewTimeScale: 1
+  m_PreviewTimeScale: 0.66
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.24059993
+    widthMultiplier: 0.15488088
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -296,8 +296,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.91764706, g: 0.972549, b: 0.7490196, a: 1}
-      key1: {r: 0.91764706, g: 0.972549, b: 0.7490196, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0.91764706, g: 0.972549, b: 0.7490196, a: 0}
       key3: {r: 0.33774, g: 0.24248, b: 0.433, a: 0}
       key4: {r: 0.2051828, g: 0.36437637, b: 0.65800005, a: 0}
@@ -356,6 +356,7 @@ MonoBehaviour:
   sp: {fileID: 3197462563804851354}
   magnetRange: 2.6
   magnetStrength: 10
+  particleEffectID: 0
 --- !u!50 &5297671089456366166
 Rigidbody2D:
   serializedVersion: 4
@@ -417,7 +418,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.7884311
+  m_Radius: 0.19127059
 --- !u!114 &8735731905829736954
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,6 +18,9 @@ public class ScoreManager : MonoBehaviour
     public delegate void HighScoreChanged(int newHighScore);
     public event HighScoreChanged OnHighScoreChanged;
 
+
+    
+
     private void Awake()
     {
         if (Instance == null)
@@ -39,6 +42,8 @@ public class ScoreManager : MonoBehaviour
     {
         Score = 0;
         scoreTimer = 0;
+
+        
     }
 
     // Update is called once per frame
@@ -75,4 +80,7 @@ public class ScoreManager : MonoBehaviour
         Score = 0;
         OnScoreChanged?.Invoke(Score);
     }
+
+    
+
 }

@@ -18,10 +18,17 @@ public class PlayerManager : Unit
     [SerializeField] private float magnetRange = 2.6f; // Rango del imán
     [SerializeField] private float magnetStrength = 10f; // Fuerza del imán
 
+    [Header("Particle System")]
+    [SerializeField] private int particleEffectID;
+
+    
+
     private void Start()
     {
         isMovingLeft = true;
         direction = new Vector3(isMovingLeft ? -1 : 1, 1, 0).normalized;
+
+       
     }
 
     private void FixedUpdate()
@@ -131,6 +138,15 @@ public class PlayerManager : Unit
         {
             Vector3 directionToPlayer = (transform.position - coin.transform.position).normalized;
             coin.transform.position += directionToPlayer * magnetStrength * Time.fixedDeltaTime;
+        }
+    }
+
+    public void PlayGameOverParticles()
+    {
+        // Reproduce el efecto de partículas cuando el juego termine
+        if (ParticleManager.Instance != null)
+        {
+            ParticleManager.Instance.PlayParticleEffect(particleEffectID, transform.position);
         }
     }
 

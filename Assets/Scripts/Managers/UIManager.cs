@@ -24,6 +24,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject P_GameOver;
     [SerializeField] private GameObject P_InGame;
 
+
+    [Header("Combo")]
+    [SerializeField] private TMP_Text text_Combo;
     private void Start()
     {
         SubscribeToEvents();
@@ -45,7 +48,9 @@ public class UIManager : MonoBehaviour
         CoinManager.Instance.OnStarsChanged += UpdateTotalStars;
         CoinManager.Instance.OnStarsCollectChanged += UpdateStarsCollected;
 
-        GameManager.Instance.OnGameOver += ShowGameOverUI;
+        GameManager.Instance.OnGameOver += StartGameOverSequence;
+
+        ComboManager.Instance.OnComboChanged += UpdateComboText;
     }
 
     private void UnsubscribeFromEvents()
@@ -56,7 +61,9 @@ public class UIManager : MonoBehaviour
         CoinManager.Instance.OnCoinsCollectChanged -= UpdateCoinsCollected;
         CoinManager.Instance.OnStarsChanged -= UpdateTotalStars;
         CoinManager.Instance.OnStarsCollectChanged -= UpdateStarsCollected;
-        GameManager.Instance.OnGameOver -= ShowGameOverUI;
+        GameManager.Instance.OnGameOver -= StartGameOverSequence;
+
+        ComboManager.Instance.OnComboChanged -= UpdateComboText;
     }
 
     private void InitializeUI()
@@ -104,7 +111,31 @@ public class UIManager : MonoBehaviour
         UpdateText(text_GameOverStars, newStarsCollected);
     }
 
-    public void ShowGameOverUI()
+    private void UpdateComboText(int newCombo)
+    {
+        if (newCombo > 0)
+        {
+            text_Combo.text = "Combo x" + newCombo;
+        }
+        else
+        {
+            text_Combo.text = ""; // Borra el texto cuando el combo es 0
+        }
+    }
+
+
+    private void StartGameOverSequence()
+    {
+        StartCoroutine(ShowGameOverAfterDelay(2f)); // Llama a la corrutina con un retraso de 2 segundos
+    }
+
+    private IEnumerator ShowGameOverAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ShowGameOverUI();
+    }
+
+    private void ShowGameOverUI()
     {
         P_InGame.SetActive(false);
         P_GameOver.SetActive(true);
