@@ -20,6 +20,8 @@ public class PlayerManager : Unit
 
     [Header("Particle System")]
     [SerializeField] private int particleEffectID;
+    [SerializeField] private ParticleSystem particles_HighScore;
+    private bool hasPlayedHighScoreParticles = false;
 
     [Header("Camera Shake Settings")]
     [SerializeField] private ShakeCamera shakeCamera;
@@ -31,6 +33,10 @@ public class PlayerManager : Unit
         {
             ParticleManager.Instance.OnParticleEffectChanged += UpdateParticleEffectID;
         }
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.OnHighScoreChanged += PlayParticles;
+        }
     }
 
     private void OnDisable()
@@ -38,7 +44,15 @@ public class PlayerManager : Unit
         if (ParticleManager.Instance != null)
         {
             ParticleManager.Instance.OnParticleEffectChanged -= UpdateParticleEffectID;
+
         }
+
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.OnHighScoreChanged -= PlayParticles;
+
+        }
+        
     }
 
     private void Start()
@@ -180,6 +194,15 @@ public class PlayerManager : Unit
         if (shakeCamera != null)
         {
             shakeCamera.Shake();
+        }
+    }
+
+    public void PlayParticles(int _)
+    {
+        if (!hasPlayedHighScoreParticles)
+        {
+            particles_HighScore.Play();
+            hasPlayedHighScoreParticles = true;
         }
     }
 
