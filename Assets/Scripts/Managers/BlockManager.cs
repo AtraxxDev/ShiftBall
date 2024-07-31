@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class BlockManager : MonoBehaviour
 {
     [SerializeField] private PlayerManager playerManager;
@@ -11,6 +10,7 @@ public class BlockManager : MonoBehaviour
     [SerializeField] private float lifeBlock;
 
     private GameObject currentBlock;
+    private GameObject lastInstantiatedBlock; // Referencia al último bloque instanciado
 
     private void Start()
     {
@@ -35,16 +35,34 @@ public class BlockManager : MonoBehaviour
 
     private void InstantiateBlock()
     {
+        GameObject blockToInstantiate;
 
-        GameObject blockToInstantiate = playerManager.IsSpeedBoostActive ? blockPrefabsSO.bonusBlockPrefab : GetRandomBlockPrefab();
+        if (playerManager.IsSpeedBoostActive)
+        {
+            blockToInstantiate = blockPrefabsSO.bonusBlockPrefab;
+        }
+        else
+        {
+            blockToInstantiate = GetRandomBlockPrefab();
+        }
+
+        // Instanciar el nuevo bloque y actualizar la referencia al último bloque instanciado
         currentBlock = Instantiate(blockToInstantiate, spawnPoint.position, Quaternion.identity);
-
+        lastInstantiatedBlock = blockToInstantiate;
     }
 
     private GameObject GetRandomBlockPrefab()
     {
-        int randomIndex = Random.Range(0, blockPrefabsSO.blockPrefabs.Length);
-        GameObject prefab = blockPrefabsSO.blockPrefabs[randomIndex];
+        GameObject prefab;
+        int randomIndex;
+
+        // Asegurarse de que el nuevo prefab sea diferente al último instanciado
+        do
+        {
+            randomIndex = Random.Range(0, blockPrefabsSO.blockPrefabs.Length);
+            prefab = blockPrefabsSO.blockPrefabs[randomIndex];
+        } while (prefab == lastInstantiatedBlock);
+
         return prefab;
     }
 }

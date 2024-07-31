@@ -26,14 +26,19 @@ public class ColorManager : MonoBehaviour
 
     private void Start()
     {
-       // ChangePalette(currentPaletteID);
+        currentPaletteID = PlayerPrefs.GetInt("PaletteID", 0);
+        // ChangePalette(currentPaletteID);
     }
 
     public void ChangePalette(int newPaletteID)
     {
         currentPaletteID = newPaletteID;
-        // Invoca el evento pasando el color completo
-        OnPaletteChanged?.Invoke(currentPaletteID); // Asegúrate de que colorID está definido o usa otro método para obtener el color
+        // Guardar el ID de la paleta en PlayerPrefs
+        PlayerPrefs.SetInt("PaletteID", newPaletteID);
+        PlayerPrefs.Save(); // Asegura que los datos se guarden inmediatamente
+
+        // Invoca el evento pasando el ID de la paleta
+        OnPaletteChanged?.Invoke(currentPaletteID);
         Debug.Log($"Paleta cambiada a ID: {newPaletteID}");
     }
 
