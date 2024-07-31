@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip wallHitSound;
     [SerializeField] private AudioClip coinPickupSound;
     [SerializeField] private AudioClip gameOverSound;
+    [SerializeField] private AudioClip CelebrateSound;
 
     private void Awake()
     {
@@ -57,6 +58,11 @@ public class AudioManager : MonoBehaviour
     public void PlayWallHitSound()
     {
         PlaySFX(wallHitSound);
+    }
+
+    public void PlayCelebrationSFX()
+    {
+        PlaySFX(CelebrateSound);
     }
 
     public void PlayCoinPickupSound()

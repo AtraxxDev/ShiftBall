@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 36475370}
   - component: {fileID: 36475372}
   - component: {fileID: 36475371}
+  - component: {fileID: 36475373}
   m_Layer: 5
   m_Name: NewHighScore
   m_TagString: Untagged
@@ -286,7 +287,7 @@ RectTransform:
   m_GameObject: {fileID: 36475369}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 519210466}
@@ -393,6 +394,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 36475369}
   m_CullTransparentMesh: 1
+--- !u!114 &36475373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36475369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e80582a2d95464391eea6930e6c287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newHighScoreText: {fileID: 36475371}
+  maxScale: 1
+  rainbowDuration: 4
 --- !u!1 &43151057
 GameObject:
   m_ObjectHideFlags: 0
@@ -18502,7 +18518,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.27
+  m_Volume: 0.596
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -18598,7 +18614,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.456
+  m_Volume: 0.268
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -18700,6 +18716,7 @@ MonoBehaviour:
   wallHitSound: {fileID: 8300000, guid: 7064595b61818534aa7350be2b9c2011, type: 3}
   coinPickupSound: {fileID: 8300000, guid: 8a2997b1ad33ab64eacd0bc3e466661f, type: 3}
   gameOverSound: {fileID: 8300000, guid: 129db8becdad39f4f9a2b9fa714c6e14, type: 3}
+  CelebrateSound: {fileID: 8300000, guid: b8a3d22d6f6f2ba4d91ca8ed7d29f513, type: 3}
 --- !u!4 &2049077357
 Transform:
   m_ObjectHideFlags: 0

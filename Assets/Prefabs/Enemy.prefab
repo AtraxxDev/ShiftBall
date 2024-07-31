@@ -149,8 +149,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.5
   direction: {x: 0, y: 0, z: 0}
-  velocity: {x: 0, y: 0, z: 0}
-  visionRange: 4
+  visionRange: 2.5
+  chaseDuration: 5
 --- !u!114 &384555389785443730
 MonoBehaviour:
   m_ObjectHideFlags: 0
