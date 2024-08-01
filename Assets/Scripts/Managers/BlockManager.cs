@@ -9,12 +9,13 @@ public class BlockManager : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private float lifeBlock;
 
-    private GameObject currentBlock;
+    private GameObject nextBlock;
     private GameObject lastInstantiatedBlock; // Referencia al último bloque instanciado
 
     private void Start()
     {
         playerManager = FindObjectOfType<PlayerManager>();
+        lastInstantiatedBlock = transform.parent.gameObject;
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -37,18 +38,18 @@ public class BlockManager : MonoBehaviour
     {
         GameObject blockToInstantiate;
 
-        if (playerManager.IsSpeedBoostActive)
-        {
-            blockToInstantiate = blockPrefabsSO.bonusBlockPrefab;
-        }
-        else
+        // Elegir un bloque al azar si no está activado el boost de velocidad
+        if (!playerManager.IsSpeedBoostActive)
         {
             blockToInstantiate = GetRandomBlockPrefab();
         }
+        else
+        {
+            blockToInstantiate = blockPrefabsSO.bonusBlockPrefab;
+        }
 
         // Instanciar el nuevo bloque y actualizar la referencia al último bloque instanciado
-        currentBlock = Instantiate(blockToInstantiate, spawnPoint.position, Quaternion.identity);
-        lastInstantiatedBlock = blockToInstantiate;
+        nextBlock = Instantiate(blockToInstantiate, spawnPoint.position, Quaternion.identity);
     }
 
     private GameObject GetRandomBlockPrefab()

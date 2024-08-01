@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -102, y: 166.75}
+  m_AnchoredPosition: {x: -115, y: 166.75}
   m_SizeDelta: {x: 500, y: 80}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &22555464
@@ -861,8 +861,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281282524
-  m_fontColor: {r: 0.8627451, g: 0.18431373, b: 0.18431373, a: 1}
+    rgba: 4291821369
+  m_fontColor: {r: 0.2216981, g: 1, b: 0.813314, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1788,8 +1788,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283206143
-  m_fontColor: {r: 1, g: 0.5372549, b: 0.29803923, a: 1}
+    rgba: 4278191615
+  m_fontColor: {r: 1, g: 0.018630981, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2347,8 +2347,9 @@ GameObject:
   - component: {fileID: 294687608}
   - component: {fileID: 294687610}
   - component: {fileID: 294687609}
+  - component: {fileID: 294687611}
   m_Layer: 5
-  m_Name: Coin_Img
+  m_Name: Star_Img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2386,14 +2387,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.89104825, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 12262498072234047bd6ad6fae7ece9e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cd04099ec7dd3b140b2dd3d11bc2d6c6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2411,6 +2412,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294687607}
   m_CullTransparentMesh: 1
+--- !u!114 &294687611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294687607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8fcb4acee1ce541a1bcd517c5e3924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  uiImage: {fileID: 294687609}
+  colorID: 1
+  targetType: 1
 --- !u!1 &295523854
 GameObject:
   m_ObjectHideFlags: 0
@@ -2810,7 +2827,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -102, y: 71}
+  m_AnchoredPosition: {x: -115, y: 71}
   m_SizeDelta: {x: 500, y: 80}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &319409481
@@ -2978,8 +2995,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281282524
-  m_fontColor: {r: 0.8627451, g: 0.18431373, b: 0.18431373, a: 1}
+    rgba: 4291821369
+  m_fontColor: {r: 0.2216981, g: 1, b: 0.813314, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5431,8 +5448,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278249471
-  m_fontColor: {r: 1, g: 0.90592486, b: 0, a: 1}
+    rgba: 4291821369
+  m_fontColor: {r: 0.2216981, g: 1, b: 0.813314, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10141,6 +10158,7 @@ GameObject:
   - component: {fileID: 1071408524}
   - component: {fileID: 1071408526}
   - component: {fileID: 1071408525}
+  - component: {fileID: 1071408527}
   m_Layer: 5
   m_Name: Coin_Img
   m_TagString: Untagged
@@ -10180,14 +10198,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8627451, g: 0.18431373, b: 0.18431373, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: a8359d00c1ef33848b07c8385b649fdd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10205,6 +10223,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1071408523}
   m_CullTransparentMesh: 1
+--- !u!114 &1071408527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071408523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8fcb4acee1ce541a1bcd517c5e3924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  uiImage: {fileID: 1071408525}
+  colorID: 2
+  targetType: 1
 --- !u!1 &1100249673
 GameObject:
   m_ObjectHideFlags: 0
@@ -13852,8 +13886,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 69, y: 16}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 83, y: 13}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1522089592
 MonoBehaviour:
@@ -13868,14 +13902,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 710ec5ab6b742694f8ba3a20a7cf0fad, type: 2}
-  m_Color: {r: 1, g: 0.930903, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 12262498072234047bd6ad6fae7ece9e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cd04099ec7dd3b140b2dd3d11bc2d6c6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13944,8 +13978,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 69, y: 16}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 83, y: 13}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1529830972
 MonoBehaviour:
@@ -13960,14 +13994,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 710ec5ab6b742694f8ba3a20a7cf0fad, type: 2}
-  m_Color: {r: 0.8627451, g: 0.18431373, b: 0.18431373, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: a8359d00c1ef33848b07c8385b649fdd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15388,6 +15422,7 @@ GameObject:
   - component: {fileID: 1692026280}
   - component: {fileID: 1692026282}
   - component: {fileID: 1692026281}
+  - component: {fileID: 1692026283}
   m_Layer: 5
   m_Name: Coin_Img (1)
   m_TagString: Untagged
@@ -15427,14 +15462,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8627451, g: 0.18431373, b: 0.18431373, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: a8359d00c1ef33848b07c8385b649fdd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15452,6 +15487,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1692026279}
   m_CullTransparentMesh: 1
+--- !u!114 &1692026283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692026279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8fcb4acee1ce541a1bcd517c5e3924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  uiImage: {fileID: 1692026281}
+  colorID: 2
+  targetType: 1
 --- !u!114 &1723194470 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1671195736405301417, guid: 95c7a8f22e4e73247b4b44ea41069ad2, type: 3}
@@ -16790,8 +16841,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281282524
-  m_fontColor: {r: 0.8627451, g: 0.18431373, b: 0.18431373, a: 1}
+    rgba: 4291821369
+  m_fontColor: {r: 0.2216981, g: 1, b: 0.813314, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -17454,8 +17505,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281282524
-  m_fontColor: {r: 0.8627451, g: 0.18431373, b: 0.18431373, a: 1}
+    rgba: 4291821369
+  m_fontColor: {r: 0.2216981, g: 1, b: 0.813314, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
