@@ -136,7 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 5169149873378616620}
   uiImage: {fileID: 0}
-  colorID: 0
+  colorID: 5
   targetType: 0
 --- !u!114 &4995886385280236552
 MonoBehaviour:

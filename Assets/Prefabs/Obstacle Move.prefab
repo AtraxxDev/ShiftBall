@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6002920966758722303}
   - component: {fileID: 2130163136909960647}
   - component: {fileID: 7177680898106296806}
+  - component: {fileID: -7983504130315982947}
   m_Layer: 0
   m_Name: Obstacle Move
   m_TagString: Destructible
@@ -157,3 +158,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+--- !u!114 &-7983504130315982947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2623862931745126302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8fcb4acee1ce541a1bcd517c5e3924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 3985144763471670762}
+  uiImage: {fileID: 0}
+  colorID: 4
+  targetType: 0

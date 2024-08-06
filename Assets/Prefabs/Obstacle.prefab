@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3462188340596677716}
   - component: {fileID: 6056379631787498305}
   - component: {fileID: 1931448209794225273}
+  - component: {fileID: 8349253356476562726}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Destructible
@@ -134,7 +135,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 0.32}
+    oldSize: {x: 1, y: 0.28}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -143,3 +144,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.26507574}
   m_EdgeRadius: 0
+--- !u!114 &8349253356476562726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2534374924223809056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8fcb4acee1ce541a1bcd517c5e3924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 3462188340596677716}
+  uiImage: {fileID: 0}
+  colorID: 4
+  targetType: 0
