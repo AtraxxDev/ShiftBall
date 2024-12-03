@@ -11,6 +11,7 @@ public class ShopItem : MonoBehaviour
     public bool isUnlocked;
     public string itemKey; // Clave única para este ítem en PlayerPrefs
 
+
     [Header("UI")]
     public Button buyButton;
     public Button selectButton;
@@ -58,13 +59,27 @@ public class ShopItem : MonoBehaviour
                 purchaseSuccessful = CoinManager.Instance.SpendStars(cost);
             }
 
+            else if (currencyType == CurrencyType.AD)
+            {
+                Rewarded.Instance.ShowRewardedAd();
+                purchaseSuccessful = true;
+                buyButton.interactable = true;
+
+            }
+
             if (purchaseSuccessful)
             {
-                isUnlocked = true;
-                SaveItemState();
-                UpdateUI();
+                UnlockItem();
+
             }
         }
+    }
+
+    public void UnlockItem()
+    {
+        isUnlocked = true;
+        SaveItemState();
+        UpdateUI();
     }
 
     public void SelectItem()
@@ -73,6 +88,14 @@ public class ShopItem : MonoBehaviour
         {
             // Lógica para aplicar la paleta de colores, explosión o trail render.
             Debug.Log($"Item seleccionado: {gameObject.name}");
+        }
+    }
+
+    private void OnRewardedAdCompleted(bool success)
+    {
+        if (success)
+        {
+            UnlockItem();
         }
     }
 
@@ -86,9 +109,17 @@ public class ShopItem : MonoBehaviour
         }
         else
         {
-            buyButton.gameObject.SetActive(true);
-            selectButton.gameObject.SetActive(false);
-            costText.text = $"Cost: {cost} {(currencyType == CurrencyType.Coins ? "Coins" : "Stars")}";
+            if (currencyType == CurrencyType.AD)
+            {
+                costText.text = "ADS";
+                buyButton.gameObject.SetActive(true);
+            }
+
+            else
+            {
+                selectButton.gameObject.SetActive(false);
+                costText.text = $"Cost: {cost} {(currencyType == CurrencyType.Coins ? "Coins" : "Stars")}";
+            }
             buyButton.interactable = (currencyType == CurrencyType.Coins && CoinManager.Instance.Coins >= cost) ||
                                       (currencyType == CurrencyType.Stars && CoinManager.Instance.Stars >= cost);
         }

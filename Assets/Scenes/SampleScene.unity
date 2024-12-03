@@ -449,7 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 30
+  cost: 0
   currencyType: 1
   isUnlocked: 0
   itemKey: Palette_13
@@ -4854,7 +4854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 23
+  cost: 0
   currencyType: 1
   isUnlocked: 0
   itemKey: Palette_6
@@ -5206,7 +5206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 30
+  cost: 0
   currencyType: 1
   isUnlocked: 0
   itemKey: Palette_14
@@ -6898,7 +6898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 30
+  cost: 0
   currencyType: 1
   isUnlocked: 0
   itemKey: Palette_12
@@ -7831,7 +7831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 12
+  cost: 0
   currencyType: 1
   isUnlocked: 0
   itemKey: Palette_4
@@ -9943,7 +9943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 2
+  cost: 0
   currencyType: 1
   isUnlocked: 0
   itemKey: Palette_1
@@ -13306,7 +13306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 5
+  cost: 0
   currencyType: 1
   isUnlocked: 0
   itemKey: Palette_2
@@ -14035,7 +14035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 27
+  cost: 0
   currencyType: 1
   isUnlocked: 0
   itemKey: Palette_7
@@ -14569,7 +14569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 30
+  cost: 0
   currencyType: 1
   isUnlocked: 0
   itemKey: Palette_11
@@ -16290,7 +16290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 8
+  cost: 0
   currencyType: 1
   isUnlocked: 0
   itemKey: Palette_3
@@ -17482,7 +17482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 48
+  cost: 0
   currencyType: 1
   isUnlocked: 0
   itemKey: Palette_10
@@ -19982,7 +19982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 38
+  cost: 0
   currencyType: 1
   isUnlocked: 0
   itemKey: Palette_9
@@ -21560,7 +21560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 18
+  cost: 0
   currencyType: 1
   isUnlocked: 0
   itemKey: Palette_5
@@ -21658,7 +21658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 30
+  cost: 0
   currencyType: 1
   isUnlocked: 0
   itemKey: Palette_15
@@ -23740,7 +23740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 32
+  cost: 0
   currencyType: 1
   isUnlocked: 0
   itemKey: Palette_8
@@ -24778,7 +24778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6930d76c9e65ea542af4aa1212ef8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 1
+  cost: 0
   currencyType: 1
   isUnlocked: 1
   itemKey: Palette_0

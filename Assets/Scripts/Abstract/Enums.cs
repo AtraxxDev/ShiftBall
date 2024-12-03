@@ -28,7 +28,8 @@ namespace TB_Tools
     public enum CurrencyType
     {
         Coins,
-        Stars
+        Stars,
+        AD
     }
 
     public enum DataType
