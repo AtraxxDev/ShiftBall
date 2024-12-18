@@ -99,16 +99,6 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.PlayMusic();
     }
 
-    private string GetCallerObjectName()
-    {
-        var stackTrace = new System.Diagnostics.StackTrace(true);
-        var frame = stackTrace.GetFrame(1);
-        var method = frame.GetMethod();
-        var caller = method.DeclaringType;
-
-        return caller != null ? caller.Name : "Unknown";
-    }
-
 
 
 }
