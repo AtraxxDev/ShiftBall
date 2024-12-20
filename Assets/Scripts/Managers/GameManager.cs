@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public Action OnGameOver;
     private bool isPaused = false;
 
-    private PlayerManager playerManager;
+    private PlayerParticles playerParticles;
 
 
 
@@ -77,18 +77,14 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.PlayGameOverSound();
         SetState(GameState.GameOver);
 
-        playerManager = FindObjectOfType<PlayerManager>();
+        playerParticles = FindObjectOfType<PlayerParticles>();
         // Llama al método del PlayerManager para reproducir el efecto de partículas
-        if (playerManager != null)
+        if (playerParticles != null)
         {
-            playerManager.PlayGameOverParticles();
+            var objectPos = playerParticles.transform;
+            playerParticles.PlayGameOverParticles(objectPos, objectPos.position);
         }
 
-        // Registrar qué métodos están suscritos al evento
-        foreach (var handler in OnGameOver.GetInvocationList())
-        {
-            Debug.Log("GameOver invocado por: " + handler.Target.ToString());
-        }
         OnGameOver?.Invoke();
     }
 

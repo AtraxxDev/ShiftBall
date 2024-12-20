@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 857861456840012990}
+  - component: {fileID: 3060725137539748339}
   m_Layer: 0
-  m_Name: Screen (1) 1
+  m_Name: BG_Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192416784969480974}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -5.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -32,6 +33,18 @@ Transform:
   - {fileID: 5249446727780551965}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3060725137539748339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192416784969480974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b0a9e7dfc6ab640843e436273539f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8635379990972328038
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,6 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5249446727780551965}
   - component: {fileID: 4280695712823501249}
+  - component: {fileID: 6408680958355612815}
   m_Layer: 0
   m_Name: VisualBG
   m_TagString: Untagged
@@ -116,3 +130,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6408680958355612815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8635379990972328038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8fcb4acee1ce541a1bcd517c5e3924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 4280695712823501249}
+  uiImage: {fileID: 0}
+  colorID: 3
+  targetType: 0

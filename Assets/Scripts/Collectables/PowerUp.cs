@@ -12,11 +12,18 @@ public class PowerUp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerManager playerManager = other.GetComponent<PlayerManager>();
-            
-                playerManager.ActivatePowerUp(powerUpType, duration);
-                gameObject.SetActive(false);
-            
+            // Busca el componente PowerUpController en los hijos del objeto "Player"
+            PowerUpController powerUpController = other.GetComponentInChildren<PowerUpController>();
+            if (powerUpController != null)
+            {
+                // Activa el power-up
+                powerUpController.ActivatePowerUp(powerUpType, duration);
+                gameObject.SetActive(false); // Desactiva este objeto
+            }
+            else
+            {
+                Debug.LogWarning("PowerUpController no encontrado en los hijos del jugador.");
+            }
         }
     }
 }

@@ -34,7 +34,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        PlayBackgroundMusic();
+        //PlayBackgroundMusic();
     }
 
     public void PlayBackgroundMusic()
@@ -77,7 +77,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic()
     {
-        backgroundMusicSource.Play();
+        //backgroundMusicSource.Play();
 
     }
 
