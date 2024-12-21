@@ -25836,7 +25836,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundMusicSource: {fileID: 2049077355}
   sfxSource: {fileID: 2049077354}
-  backgroundMusic: {fileID: 8300000, guid: 785849e444bfffc41aa5c139f0cc207c, type: 3}
+  backgroundMusic: {fileID: 8300000, guid: a9e67a9914a24654e84a85c91f706c97, type: 3}
   wallHitSound: {fileID: 8300000, guid: 7064595b61818534aa7350be2b9c2011, type: 3}
   coinPickupSound: {fileID: 8300000, guid: 8a2997b1ad33ab64eacd0bc3e466661f, type: 3}
   gameOverSound: {fileID: 8300000, guid: 129db8becdad39f4f9a2b9fa714c6e14, type: 3}
@@ -26865,6 +26865,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3197462563804851354, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: m_Color.a
+      value: 0.20392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 3197462563804851354, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5156815527298393992, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -26903,6 +26911,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5156815527298393992, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6224917276629799333, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6224917276629799333, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6224917276629799333, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6673626033853392520, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
@@ -27001,7 +27021,6 @@ SceneRoots:
   - {fileID: 1960644554}
   - {fileID: 1795698401}
   - {fileID: 408544828}
-  - {fileID: 1109348417}
   - {fileID: 1492301138}
   - {fileID: 1100249674}
   - {fileID: 1948899292}
@@ -27012,5 +27031,6 @@ SceneRoots:
   - {fileID: 1127307912}
   - {fileID: 185430098}
   - {fileID: 327656070}
+  - {fileID: 1109348417}
   - {fileID: 31081454}
   - {fileID: 1206264602}
