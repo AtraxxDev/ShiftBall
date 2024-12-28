@@ -23,8 +23,8 @@ namespace TB_Tools
 
     public enum PowerUpType
     {
-        Invincibility,
-        SpeedBoost,
+        None,
+        Shield,
         Magnet
         // Añadir más tipos de power-ups según sea necesario
     }

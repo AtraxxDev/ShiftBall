@@ -1,36 +1,26 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
+using TB_Tools;
 using UnityEngine;
 
 public abstract class PowerUpBase : MonoBehaviour
 {
+    public static event Action<PowerUpType,Sprite,float> OnPowerUpActivate;
 
-    [SerializeField] private float duration; // Duración del power-up en segundos
-    private bool isActive = false;          // Estado del power-up
+    public PowerUPSO powerUpData;
 
-    public abstract void Activate();        // Lógica específica de cada power-up
-    public virtual void Deactivate()        // Lógica al desactivar el power-up
+
+    public bool isActive;
+
+    public float timerRemaining;
+    public virtual void OnActivate()
     {
-        isActive = false;                   // Marcamos el power-up como inactivo
-        Destroy(gameObject);                // Opcional: destruir el objeto al finalizar
-    }
+        isActive = true;
+        timerRemaining = powerUpData.duration;
 
-    public void StartPowerUpCoroutine()
-    {
-        if (!isActive)
-        {
-            isActive = true;
-            StartCoroutine(PowerUpDurationCoroutine());
-        }
-    }
-
-    private IEnumerator PowerUpDurationCoroutine()
-    {
-        Activate();                         // Llama a la lógica de activación del power-up
-        yield return new WaitForSeconds(duration); // Espera el tiempo definido en `duration`
-        Deactivate();                       // Llama a la lógica de desactivación
-    }
-
+        OnPowerUpActivate?.Invoke(powerUpData.powerUpType, powerUpData.icon, powerUpData.duration);
+    } 
+    public abstract void OnDeactivate();
 
 
 }

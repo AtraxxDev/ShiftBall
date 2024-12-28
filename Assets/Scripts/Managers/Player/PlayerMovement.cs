@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : Unit
 {
-    [HideInInspector] public float speed;
     [SerializeField] private bool isMovingLeft = true;
-    private Vector3 direction;
 
     private void Start()
     {

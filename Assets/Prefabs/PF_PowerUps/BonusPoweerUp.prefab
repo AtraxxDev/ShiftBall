@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7203734758633324485}
   - component: {fileID: 6848658330626295385}
   - component: {fileID: 7829945485694013608}
-  - component: {fileID: 3488711482413256193}
   m_Layer: 0
   m_Name: BonusPoweerUp
   m_TagString: Untagged
@@ -121,17 +120,3 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &3488711482413256193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1939568198199097885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19c295f4c78960948afc633bd9a2f77d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  powerUpType: 1
-  duration: 2.6

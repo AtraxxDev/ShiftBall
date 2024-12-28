@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 7728245231565791486}
   - component: {fileID: 5585220725988101481}
   - component: {fileID: 9111249810083034189}
-  - component: {fileID: 2091882095882263970}
+  - component: {fileID: 476015450770329472}
+  - component: {fileID: 6551637940641909468}
   m_Layer: 0
-  m_Name: MagnentPoweerUp
-  m_TagString: Untagged
+  m_Name: MagnetPowerUp
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,13 +116,13 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &2091882095882263970
+--- !u!114 &476015450770329472
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,8 +131,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 1956898463502400549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19c295f4c78960948afc633bd9a2f77d, type: 3}
+  m_Script: {fileID: 11500000, guid: dc3164ab998cdb645bab792a7242a475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpType: 2
-  duration: 2.6
+  powerUpData: {fileID: 11400000, guid: c22deb97a63d814478b5fddaf458707b, type: 2}
+--- !u!50 &6551637940641909468
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956898463502400549}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

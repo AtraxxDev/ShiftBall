@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 2417528533875995493}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.4, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5156815527298393992}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d8093ff2dd7d5664bb902cc36cafe42f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.20392157}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -373,7 +373,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 906346243077793962}
-  - component: {fileID: 7169375323705519467}
+  - component: {fileID: 2600874568401427550}
+  - component: {fileID: 4919459084564755154}
+  - component: {fileID: 358962847338244535}
   m_Layer: 0
   m_Name: PowerUpsController
   m_TagString: Untagged
@@ -396,7 +398,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5156815527298393992}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7169375323705519467
+--- !u!114 &2600874568401427550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -405,15 +407,60 @@ MonoBehaviour:
   m_GameObject: {fileID: 6354354879339975014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e369ebbde616ac6408eec118f18937f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 39b991fc282ba2f40b9942e09b621d22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInvincible: 0
-  invincibilityCollider: {fileID: 4454331223408517926}
-  invincibilitySprite: {fileID: 3197462563804851354}
-  magnetRange: 2.6
-  magnetStrength: 10
-  playerMovement: {fileID: 6034778039218677977}
+  magnetManager: {fileID: 4919459084564755154}
+--- !u!114 &4919459084564755154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6354354879339975014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 209b37a1fc21577469ed87cf718be8b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnetPowerUp: {fileID: 11400000, guid: c22deb97a63d814478b5fddaf458707b, type: 2}
+  attractionRadius: 2.5
+  magnetSpeed: 7
+--- !u!58 &358962847338244535
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6354354879339975014}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.2
 --- !u!1 &8045826080229567226
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,6 +590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  direction: {x: 0, y: 0, z: 0}
   isMovingLeft: 1
 --- !u!114 &6673626033853392520
 MonoBehaviour:
