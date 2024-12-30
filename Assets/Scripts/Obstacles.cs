@@ -8,7 +8,12 @@ public class Obstacles : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            GameManager.Instance.GameOver();
+            PlayerController player = collider.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                player.TakeDamage(gameObject); // Llamar al método para manejar el daño
+            }
+
         }
     }
 }

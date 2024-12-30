@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 6224917276629799333}
   - component: {fileID: 3197462563804851354}
   - component: {fileID: 4454331223408517926}
-  - component: {fileID: 8238291872190593987}
   m_Layer: 0
-  m_Name: ColliderDestroy
+  m_Name: ShieldVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,18 +120,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4
---- !u!114 &8238291872190593987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2417528533875995493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c56d74cb3345fd4ea7e6d9834ae0b4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6299088699401169584
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,9 +360,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 906346243077793962}
+  - component: {fileID: 358962847338244535}
   - component: {fileID: 2600874568401427550}
   - component: {fileID: 4919459084564755154}
-  - component: {fileID: 358962847338244535}
+  - component: {fileID: 8010516378323014003}
   m_Layer: 0
   m_Name: PowerUpsController
   m_TagString: Untagged
@@ -398,34 +386,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5156815527298393992}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2600874568401427550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6354354879339975014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39b991fc282ba2f40b9942e09b621d22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magnetManager: {fileID: 4919459084564755154}
---- !u!114 &4919459084564755154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6354354879339975014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 209b37a1fc21577469ed87cf718be8b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magnetPowerUp: {fileID: 11400000, guid: c22deb97a63d814478b5fddaf458707b, type: 2}
-  attractionRadius: 2.5
-  magnetSpeed: 7
 --- !u!58 &358962847338244535
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -461,6 +421,53 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.2
+--- !u!114 &2600874568401427550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6354354879339975014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39b991fc282ba2f40b9942e09b621d22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUps:
+  - {fileID: 4919459084564755154}
+  - {fileID: 8010516378323014003}
+--- !u!114 &4919459084564755154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6354354879339975014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 209b37a1fc21577469ed87cf718be8b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpData: {fileID: 11400000, guid: c22deb97a63d814478b5fddaf458707b, type: 2}
+  isActive: 0
+  timerRemaining: 0
+  attractionRadius: 2.5
+  magnetSpeed: 7
+--- !u!114 &8010516378323014003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6354354879339975014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 700e6e0069ebb7f4e941a2d1606a1aa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpData: {fileID: 11400000, guid: 64c2636d19d2ca140a855a123a054e5f, type: 2}
+  isActive: 0
+  timerRemaining: 0
 --- !u!1 &8045826080229567226
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,6 +584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 6034778039218677977}
   playerParticles: {fileID: 6673626033853392520}
+  shieldPowerUp: {fileID: 8010516378323014003}
 --- !u!114 &6034778039218677977
 MonoBehaviour:
   m_ObjectHideFlags: 0

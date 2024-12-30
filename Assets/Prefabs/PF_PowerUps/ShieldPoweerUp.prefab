@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5751119939508076709}
   - component: {fileID: 8296626614887954745}
   - component: {fileID: 4648091306273648584}
+  - component: {fileID: 7000592750934978492}
   m_Layer: 0
   m_Name: ShieldPoweerUp
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,3 +121,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &7000592750934978492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945823401490220413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc3164ab998cdb645bab792a7242a475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpData: {fileID: 11400000, guid: 64c2636d19d2ca140a855a123a054e5f, type: 2}

@@ -13,10 +13,8 @@ public class MagnentPowerUp : PowerUpBase
         {
             timerRemaining -= Time.deltaTime;
 
-            // Atraer monedas si el power-up está activo
             AttractCoins();
 
-            // Desactivar el imán cuando se acabe el tiempo
             if (timerRemaining <= 0)
             {
                 OnDeactivate();
@@ -33,8 +31,7 @@ public class MagnentPowerUp : PowerUpBase
 
     public override void OnDeactivate()
     {
-        isActive = false;
-        // Desactivar efectos visuales si es necesario
+        base.OnDeactivate();
     }
 
     private void AttractCoins()

@@ -5,7 +5,7 @@ using TB_Tools;
 
 public class PowerUpCollector : MonoBehaviour
 {
-    public PowerUpBase[] powerUps;  // Referencia al manager de Magnet
+    public PowerUpBase[] powerUps;
 
 
     void OnTriggerEnter2D(Collider2D other)
@@ -18,6 +18,9 @@ public class PowerUpCollector : MonoBehaviour
             {
                 case PowerUpType.Magnet:
                     powerUps[0].OnActivate();
+                    break;
+                case PowerUpType.Shield:
+                    powerUps[1].OnActivate();
                     break;
 
                 // Agrega más tipos de power-ups aquí

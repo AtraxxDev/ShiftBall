@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private PlayerParticles playerParticles;
+    [SerializeField] private ShieldPowerUp shieldPowerUp;
+
 
     private void OnEnable()
     {
@@ -33,6 +35,21 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance.IsPaused()) return;
         playerMovement.MovePlayer();
     }
+
+    public void TakeDamage(GameObject visual)
+    {
+        if (shieldPowerUp != null && shieldPowerUp.AbsorbHit())
+        {
+            Debug.Log("Golpe absorbido por el escudo");
+            visual.SetActive(false);
+            return; // Interrumpir el daño si el golpe fue absorbido
+        }
+
+        Debug.Log("El jugador recibió daño. No había escudo activo.");
+        GameManager.Instance.GameOver();
+    }
+
+
 
     private void SuscribeEvents()
     {
