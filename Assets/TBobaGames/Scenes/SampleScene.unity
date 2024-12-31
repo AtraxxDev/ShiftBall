@@ -27206,6 +27206,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3197462563804851354, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 72c77ceb2b205ee43b948506c4633949, type: 3}
+    - target: {fileID: 3197462563804851354, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: m_Color.a
+      value: 0.23921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 3197462563804851354, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8207547
+      objectReference: {fileID: 0}
+    - target: {fileID: 3197462563804851354, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7890405
+      objectReference: {fileID: 0}
+    - target: {fileID: 3197462563804851354, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3197462563804851354, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3197462563804851354, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5156815527298393992, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -27245,6 +27273,30 @@ PrefabInstance:
     - target: {fileID: 5156815527298393992, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406531451877412718, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.20392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406531451877412718, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.1981132
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406531451877412718, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.1981132
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406531451877412718, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.1981132
+      objectReference: {fileID: 0}
+    - target: {fileID: 6224917276629799333, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6224917276629799333, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6673626033853392520, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
       propertyPath: shakeCamera

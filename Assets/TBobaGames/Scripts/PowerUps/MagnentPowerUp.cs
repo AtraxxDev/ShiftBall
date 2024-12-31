@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MagnentPowerUp : PowerUpBase
 {
-    public float attractionRadius = 2.5f;  
+    public float attractionRadius = 2.5f;
     public float magnetSpeed = 7f;
+
+    [SerializeField] private ParticleSystem particleEffect;
 
     void Update()
     {
@@ -25,6 +27,7 @@ public class MagnentPowerUp : PowerUpBase
     public override void OnActivate()
     {
         base.OnActivate();
+        particleEffect.Play();
         Debug.Log("Magnet Activated");
         // Aquí puedes agregar efectos visuales si es necesario
     }
@@ -32,6 +35,8 @@ public class MagnentPowerUp : PowerUpBase
     public override void OnDeactivate()
     {
         base.OnDeactivate();
+        particleEffect.Stop();
+
     }
 
     private void AttractCoins()
