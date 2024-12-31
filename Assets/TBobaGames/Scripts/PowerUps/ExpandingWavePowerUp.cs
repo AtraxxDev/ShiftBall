@@ -9,6 +9,8 @@ public class ExpandingWavePowerUp : PowerUpBase
     [SerializeField] private float waveInterval = 1f;
     [SerializeField] private LayerMask destructibleLayer;
 
+    [SerializeField] private ParticleSystem particleEffect;
+
     private float currentRadius;
     private bool isWaveInProgress = false;
 
@@ -45,6 +47,8 @@ public class ExpandingWavePowerUp : PowerUpBase
     {
         isWaveInProgress = true;
         currentRadius = 0f;
+        particleEffect.startColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        particleEffect.Play();
 
         while (currentRadius < waveRadius)
         {
