@@ -14717,8 +14717,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420032}
-  prefabRooms:
+  easyRooms:
   - {fileID: 1619054929922645123, guid: 9f352215c77d6874c9d1a6a44fd2b7f8, type: 3}
+  - {fileID: 1619054929922645123, guid: 557466ec1f01c0c4a8a76ed3b0b86479, type: 3}
+  - {fileID: 1619054929922645123, guid: 06a0cf3502878ed4c836c34670d733e5, type: 3}
+  mediumRooms:
+  - {fileID: 1619054929922645123, guid: 58562f2b175af1d40856f0762d16ae81, type: 3}
+  - {fileID: 1619054929922645123, guid: de0e9d33835e2b84bbbe6e86515cdf06, type: 3}
+  - {fileID: 1619054929922645123, guid: 6b8ac9f9c24c22b4d8b0ffff12901dd5, type: 3}
+  hardRooms:
+  - {fileID: 1619054929922645123, guid: f20a0091dfc135c4aa5173979e5a52ae, type: 3}
+  - {fileID: 1619054929922645123, guid: 17523f818acd5974cb67a7329f9b3f34, type: 3}
+  - {fileID: 1619054929922645123, guid: 664343fa3702a0b49865344b88a62c18, type: 3}
   parent: {fileID: 31081454}
 --- !u!114 &1109348416
 MonoBehaviour:
@@ -18039,11 +18049,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1504268367}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -1967.7139}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -288}
   m_SizeDelta: {x: 500, y: 80}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1378648834
 MonoBehaviour:
   m_ObjectHideFlags: 0

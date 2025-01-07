@@ -22,8 +22,8 @@ public class PlayerParticles : MonoBehaviour
     {
         if (!hasPlayedHighScoreParticles)
         {
-            particles_HighScore.Play();
             hasPlayedHighScoreParticles = true;
+            particles_HighScore.Play();
         }
     }
 
