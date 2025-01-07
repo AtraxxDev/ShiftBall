@@ -51,4 +51,5 @@ public class PlayerMovement : Unit
         direction = new Vector3(isMovingLeft ? -1 : 1, 1, 0).normalized; // Restaurar movimiento diagonal
     }
 
+
 }

@@ -36,6 +36,12 @@ public class PlayerController : MonoBehaviour
         playerMovement.MovePlayer();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        playerMovement.HandleCollision(collision);
+    }
+
+
     public void TakeDamage(GameObject visual)
     {
         if (shieldPowerUp != null && shieldPowerUp.AbsorbHit())
