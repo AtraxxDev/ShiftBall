@@ -11,17 +11,27 @@ public class ShopItem : MonoBehaviour
     public bool isUnlocked;
     public string itemKey; // Clave única para este ítem en PlayerPrefs
 
+    [Space(5)]
+    [SerializeField] private ItemCategory category; // Cambiado de string a ItemCategory
+    [SerializeField] private string defaultNameKey;
+
     [Header("UI")]
     public Button buyButton;
     public Button selectButton;
     public TMP_Text costText;
 
-    private static ShopItem currentSelectedItem;
+    private static ShopItem currentSelectedItemPalette;
+    private static ShopItem currentSelectedItemTrail;
+    private static ShopItem currentSelectedItemExplosion;
+
     private Image selectButtonImage;
 
     private void Start()
     {
         selectButtonImage = selectButton.GetComponent<Image>(); // Asignar la imagen del botón
+
+        selectButton.onClick.AddListener(SelectItem);
+        buyButton.onClick.AddListener(BuyItem); // Asegúrate de agregar el listener al botón de compra
 
         LoadItemState();
         UpdateUI();
@@ -45,18 +55,16 @@ public class ShopItem : MonoBehaviour
 
     private void LoadUnlockState()
     {
-        // Cargar el estado del ítem desde PlayerPrefs
         if (PlayerPrefs.HasKey(itemKey))
         {
             isUnlocked = PlayerPrefs.GetInt(itemKey, 0) == 1;
         }
         else
         {
-            // Si es el primer ítem (por ejemplo, el predeterminado), lo marcamos como desbloqueado
-            if (itemKey == "Palette_0")  // Aquí puedes verificar la clave de tu ítem predeterminado
+            if (itemKey == defaultNameKey)
             {
                 isUnlocked = true;
-                PlayerPrefs.SetInt(itemKey, 1);  // Guardamos el estado de desbloqueo
+                PlayerPrefs.SetInt(itemKey, 1);
                 PlayerPrefs.Save();
             }
             else
@@ -68,14 +76,12 @@ public class ShopItem : MonoBehaviour
 
     private void SetSelectedItem()
     {
-        // Cargar el ítem seleccionado
-        string selectedItemKey = PlayerPrefs.GetString("SelectedColorPalette", string.Empty);
+        string selectedItemKey = PlayerPrefs.GetString(GetSelectedKeyForCategory(), string.Empty);
 
-        // Verificar si este ítem es el seleccionado
         if (itemKey == selectedItemKey && isUnlocked)
         {
             selectButtonImage.color = new Color32(95, 100, 236, 255); // Color verde
-            currentSelectedItem = this; // Establecer este ítem como el ítem seleccionado
+            SetCurrentSelectedItem(this);
         }
         else
         {
@@ -85,25 +91,49 @@ public class ShopItem : MonoBehaviour
 
     private void AutoSelectDefaultItem()
     {
-        // Si no hay un ítem seleccionado en PlayerPrefs, marcar el predeterminado como seleccionado
-        string selectedItemKey = PlayerPrefs.GetString("SelectedColorPalette", string.Empty);
+        string selectedItemKey = PlayerPrefs.GetString(GetSelectedKeyForCategory(), string.Empty);
         if (string.IsNullOrEmpty(selectedItemKey))
         {
-            if (itemKey == "Palette_0" && isUnlocked)
+            if (itemKey == defaultNameKey && isUnlocked)
             {
-                selectButtonImage.color = new Color32(95, 100, 236, 255); // Color azul (seleccionado)
-                currentSelectedItem = this; // Establecer el ítem predeterminado como el seleccionado
-                PlayerPrefs.SetString("SelectedColorPalette", itemKey); // Guardar la selección
+                selectButtonImage.color = new Color32(95, 100, 236, 255); // Color azul
+                SetCurrentSelectedItem(this);
+                PlayerPrefs.SetString(GetSelectedKeyForCategory(), itemKey);
                 PlayerPrefs.Save();
             }
         }
     }
 
-    private void SaveItemState()
+    private string GetSelectedKeyForCategory()
     {
-        // Guardar el estado del ítem en PlayerPrefs
-        PlayerPrefs.SetInt(itemKey, isUnlocked ? 1 : 0);
-        PlayerPrefs.Save();
+        return $"Selected_{category}"; // Ejemplo: "Selected_Palette", "Selected_Trail", "Selected_Explosion"
+    }
+
+    private void SetCurrentSelectedItem(ShopItem item)
+    {
+        switch (category)
+        {
+            case ItemCategory.Palette:
+                currentSelectedItemPalette = item;
+                break;
+            case ItemCategory.Trail:
+                currentSelectedItemTrail = item;
+                break;
+            case ItemCategory.Explosion:
+                currentSelectedItemExplosion = item;
+                break;
+        }
+    }
+
+    private ShopItem GetCurrentSelectedItem()
+    {
+        return category switch
+        {
+            ItemCategory.Palette => currentSelectedItemPalette,
+            ItemCategory.Trail => currentSelectedItemTrail,
+            ItemCategory.Explosion => currentSelectedItemExplosion,
+            _ => null
+        };
     }
 
     public void BuyItem()
@@ -124,7 +154,6 @@ public class ShopItem : MonoBehaviour
             {
                 Rewarded.Instance.ShowRewardedAd();
                 purchaseSuccessful = true;
-                buyButton.interactable = true;
             }
 
             if (purchaseSuccessful)
@@ -145,36 +174,30 @@ public class ShopItem : MonoBehaviour
     {
         if (isUnlocked)
         {
-            // Primero, deselecciona el ítem actualmente seleccionado si existe
-            if (currentSelectedItem != null && currentSelectedItem != this)
+            var currentItem = GetCurrentSelectedItem();
+            if (currentItem != null && currentItem != this)
             {
-                Debug.Log($"Deseleccionando ítem anterior: {currentSelectedItem.gameObject.name}");
-                currentSelectedItem.DeselectItem(); // Deseleccionar el ítem anterior
+                currentItem.DeselectItem();
             }
 
-            // Establecer este ítem como el seleccionado
-            currentSelectedItem = this;
-            Debug.Log($"Ítem seleccionado: {gameObject.name}");
+            SetCurrentSelectedItem(this);
 
-            selectButtonImage = selectButton.GetComponent<Image>(); // Asignar la imagen del botón
-
-            // Cambiar el color del botón a verde
             selectButtonImage.color = new Color32(95, 100, 236, 255);
-
-            // Guardar el ítem seleccionado en PlayerPrefs
-            PlayerPrefs.SetString("SelectedColorPalette", itemKey);
+            PlayerPrefs.SetString(GetSelectedKeyForCategory(), itemKey);
             PlayerPrefs.Save();
         }
     }
 
     private void DeselectItem()
     {
-        selectButtonImage.color = Color.red; // Cambiar el color del botón a rojo
-        // Resetear currentSelectedItem si es necesario
-        if (currentSelectedItem == this)
-        {
-            currentSelectedItem = null;
-        }
+        selectButtonImage.color = Color.red;
+        SetCurrentSelectedItem(null);
+    }
+
+    private void SaveItemState()
+    {
+        PlayerPrefs.SetInt(itemKey, isUnlocked ? 1 : 0);
+        PlayerPrefs.Save();
     }
 
     private void UpdateUI()
@@ -185,8 +208,7 @@ public class ShopItem : MonoBehaviour
             selectButton.gameObject.SetActive(true);
             costText.text = "Unlocked";
 
-            // Si este ítem es el seleccionado actualmente, establece su color en verde
-            if (currentSelectedItem == this)
+            if (GetCurrentSelectedItem() == this)
             {
                 selectButtonImage.color = new Color32(95, 100, 236, 255);
             }

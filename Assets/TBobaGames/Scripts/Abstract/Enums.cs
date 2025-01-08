@@ -6,7 +6,13 @@ using UnityEngine;
 
 namespace TB_Tools
 {
-  
+
+    public enum ItemCategory
+    {
+        Palette,
+        Trail,
+        Explosion
+    }
 
     public enum GameState
     {
