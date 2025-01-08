@@ -31,7 +31,7 @@ public class SpawnRoom : MonoBehaviour
         int score = ScoreManager.Instance.Score;
         float randomValue = Random.value * 100f; // Genera un número aleatorio entre 0 y 100
 
-        if (score < 30)
+        if (score < 20)
         {
             return easyRooms;
         }

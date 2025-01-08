@@ -14,19 +14,17 @@ public class UIManager : MonoBehaviour
     [Header("Coins")]
     [SerializeField] private TMP_Text text_TotalCoinsMenu;
     [SerializeField] private TMP_Text text_GameOverCoins;
-    [SerializeField] private TMP_Text text_GameOverTotalCoins;
 
     [Header("Stars")]
     [SerializeField] private TMP_Text text_TotalStarsMenu;
-    [SerializeField] private TMP_Text text_GameOverStars;
 
     [Header("UI")]
     [SerializeField] private GameObject P_GameOver;
     [SerializeField] private GameObject P_InGame;
 
-
     [Header("Combo")]
     [SerializeField] private TMP_Text text_Combo;
+
     private void Start()
     {
         SubscribeToEvents();
@@ -46,7 +44,6 @@ public class UIManager : MonoBehaviour
         CoinManager.Instance.OnCoinsChanged += UpdateTotalCoins;
         CoinManager.Instance.OnCoinsCollectChanged += UpdateCoinsCollected;
         CoinManager.Instance.OnStarsChanged += UpdateTotalStars;
-        CoinManager.Instance.OnStarsCollectChanged += UpdateStarsCollected;
 
         GameManager.Instance.OnGameOver += StartGameOverSequence;
 
@@ -60,7 +57,6 @@ public class UIManager : MonoBehaviour
         CoinManager.Instance.OnCoinsChanged -= UpdateTotalCoins;
         CoinManager.Instance.OnCoinsCollectChanged -= UpdateCoinsCollected;
         CoinManager.Instance.OnStarsChanged -= UpdateTotalStars;
-        CoinManager.Instance.OnStarsCollectChanged -= UpdateStarsCollected;
         GameManager.Instance.OnGameOver -= StartGameOverSequence;
 
         ComboManager.Instance.OnComboChanged -= UpdateComboText;
@@ -93,7 +89,6 @@ public class UIManager : MonoBehaviour
     public void UpdateTotalCoins(int newCoins)
     {
         UpdateText(text_TotalCoinsMenu, newCoins);
-        UpdateText(text_GameOverTotalCoins, newCoins);
     }
 
     public void UpdateCoinsCollected(int newCoinsCollected)
@@ -106,20 +101,41 @@ public class UIManager : MonoBehaviour
         UpdateText(text_TotalStarsMenu, newStars);
     }
 
-    public void UpdateStarsCollected(int newStarsCollected)
-    {
-        UpdateText(text_GameOverStars, newStarsCollected);
-    }
-
     private void UpdateComboText(int newCombo)
     {
         if (newCombo > 0)
         {
             text_Combo.text = "Combo x" + newCombo;
+
+            // Resetea la escala inicial para evitar acumulación de animaciones
+            text_Combo.transform.localScale = Vector3.one;
+
+            // Efecto pequeño de "pum"
+            float scaleMultiplier = 1.1f; // Incremento pequeño
+            if (newCombo % 5 == 0) // Efecto más grande cada 5 combos
+            {
+                scaleMultiplier = 1.3f;
+            }
+
+            LeanTween.scale(text_Combo.gameObject, Vector3.one * scaleMultiplier, 0.2f)
+                     .setEase(LeanTweenType.easeOutBack)
+                     .setOnComplete(() =>
+                     {
+                         // Vuelve a su tamaño original
+                         LeanTween.scale(text_Combo.gameObject, Vector3.one, 0.2f)
+                                  .setEase(LeanTweenType.easeInOutQuad);
+                     });
         }
         else
         {
-            text_Combo.text = ""; // Borra el texto cuando el combo es 0
+            // Efecto "pop-up end" cuando el combo llega a 0
+            LeanTween.scale(text_Combo.gameObject, Vector3.zero, 0.3f)
+                     .setEase(LeanTweenType.easeInBack)
+                     .setOnComplete(() =>
+                     {
+                         // Borra el texto cuando la animación termine
+                         text_Combo.text = "";
+                     });
         }
     }
 
@@ -138,9 +154,17 @@ public class UIManager : MonoBehaviour
     private void ShowGameOverUI()
     {
         P_InGame.SetActive(false);
-        P_GameOver.SetActive(true);
-    }
 
+        // Activa el panel antes de animarlo
+        P_GameOver.SetActive(true);
+
+        // Resetea la escala inicial para evitar conflictos
+        P_GameOver.transform.localScale = Vector3.zero;
+
+        // Anima el panel con un efecto de "pop-up"
+        LeanTween.scale(P_GameOver, Vector3.one, 0.5f)
+                 .setEase(LeanTweenType.easeOutBack); // Efecto elástico al aparecer
+    }
 
     public void StartGame()
     {
