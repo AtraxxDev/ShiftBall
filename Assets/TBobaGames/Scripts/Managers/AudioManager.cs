@@ -11,7 +11,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource sfxSource;
 
     [Header("Audio Clips")]
-    [SerializeField] private AudioClip backgroundMusic;
+    [SerializeField] private AudioClip menuMusic;
+    [SerializeField] private AudioClip gameplayMusic;
     [SerializeField] private AudioClip wallHitSound;
     [SerializeField] private AudioClip coinPickupSound;
     [SerializeField] private AudioClip gameOverSound;
@@ -34,18 +35,30 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        PlayBackgroundMusic();
+        PlayMenuMusic();
     }
 
-    public void PlayBackgroundMusic()
+    public void PlayMenuMusic()
     {
-        if (backgroundMusicSource != null && backgroundMusic != null)
+        if (backgroundMusicSource != null && menuMusic != null)
         {
-            backgroundMusicSource.clip = backgroundMusic;
+            backgroundMusicSource.clip = menuMusic;
             backgroundMusicSource.loop = true;
             backgroundMusicSource.Play();
         }
     }
+
+    public void PlayGameplayMusic()
+    {
+        if (backgroundMusicSource != null && gameplayMusic != null)
+        {
+            backgroundMusicSource.clip = gameplayMusic;
+            backgroundMusicSource.loop = true;
+            backgroundMusicSource.Play();
+        }
+    }
+
+
 
     public void PlaySFX(AudioClip clip)
     {
@@ -77,6 +90,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic()
     {
+        backgroundMusicSource.clip = menuMusic;
         backgroundMusicSource.Play();
 
     }

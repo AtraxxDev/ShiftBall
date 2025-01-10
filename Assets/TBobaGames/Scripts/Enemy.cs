@@ -1,27 +1,29 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Unit
 {
     [SerializeField] private float visionRange;
-    [SerializeField] private float chaseDuration = 5f; // Duración del tiempo que el enemigo persigue al jugador
+    [SerializeField] private float chaseDuration = 5f;
+    [SerializeField] private DangerZoneSprite ChangeSprite; 
 
     private GameObject target;
     private bool isChasing = false;
+    private bool isDetecting = false; 
 
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
+        ChangeSprite.StartIdleAnimation();
     }
 
     private void Update()
     {
         if (GameManager.Instance.IsPaused()) return;
 
-        if (Vector3.Distance(transform.position, target.transform.position) <= visionRange && !isChasing)
+        if (!isDetecting && !isChasing && Vector3.Distance(transform.position, target.transform.position) <= visionRange)
         {
-            StartChasing();
+            StartCoroutine(StartDetectionAndChasing());
         }
 
         if (isChasing)
@@ -30,10 +32,21 @@ public class Enemy : Unit
         }
     }
 
-    private void StartChasing()
+    private IEnumerator StartDetectionAndChasing()
     {
+        isDetecting = true;
+
+        // Iniciar la animación de detección
+        ChangeSprite.StartDetectAnimation();
+
+        // Esperar a que termine la animación de detección
+        yield return new WaitForSeconds(0.2f);
+
+        isDetecting = false;
         isChasing = true;
-        StartCoroutine(ChasePlayerCoroutine());
+
+        // Iniciar la lógica de persecución
+        yield return StartCoroutine(ChasePlayerCoroutine());
     }
 
     private IEnumerator ChasePlayerCoroutine()
@@ -44,7 +57,7 @@ public class Enemy : Unit
         {
             if (GameManager.Instance.IsPaused())
             {
-                yield break; 
+                yield break;
             }
 
             MoveTowardsPlayer();
@@ -84,7 +97,4 @@ public class Enemy : Unit
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, visionRange);
     }
-
-
-   
 }

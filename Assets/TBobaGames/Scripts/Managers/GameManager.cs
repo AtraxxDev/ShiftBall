@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
         {
             ScoreManager.Instance.ResetScore();
             CoinManager.Instance.ResetCoins_StarsCollected();
+            AudioManager.Instance.PlayGameplayMusic();
             SetState(GameState.Playing);
         }
     }

@@ -9578,6 +9578,7 @@ MonoBehaviour:
   - {fileID: 1619054929922645123, guid: 9f352215c77d6874c9d1a6a44fd2b7f8, type: 3}
   - {fileID: 1619054929922645123, guid: 557466ec1f01c0c4a8a76ed3b0b86479, type: 3}
   - {fileID: 1619054929922645123, guid: 06a0cf3502878ed4c836c34670d733e5, type: 3}
+  - {fileID: 1619054929922645123, guid: f20a0091dfc135c4aa5173979e5a52ae, type: 3}
   mediumRooms:
   - {fileID: 1619054929922645123, guid: 58562f2b175af1d40856f0762d16ae81, type: 3}
   - {fileID: 1619054929922645123, guid: de0e9d33835e2b84bbbe6e86515cdf06, type: 3}
@@ -17335,7 +17336,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundMusicSource: {fileID: 2049077355}
   sfxSource: {fileID: 2049077354}
-  backgroundMusic: {fileID: 8300000, guid: a9e67a9914a24654e84a85c91f706c97, type: 3}
+  menuMusic: {fileID: 8300000, guid: 272a471cf94f64048a20a1834a55ce36, type: 3}
+  gameplayMusic: {fileID: 8300000, guid: a9e67a9914a24654e84a85c91f706c97, type: 3}
   wallHitSound: {fileID: 8300000, guid: 7064595b61818534aa7350be2b9c2011, type: 3}
   coinPickupSound: {fileID: 8300000, guid: 8a2997b1ad33ab64eacd0bc3e466661f, type: 3}
   gameOverSound: {fileID: 8300000, guid: 129db8becdad39f4f9a2b9fa714c6e14, type: 3}
