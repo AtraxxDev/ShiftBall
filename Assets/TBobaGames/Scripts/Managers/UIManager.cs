@@ -175,4 +175,42 @@ public class UIManager : MonoBehaviour
     {
         GameManager.Instance.ReturnToMainMenu();
     }
+
+
+    public void PopUpStart(GameObject _object)
+    {
+        StartCoroutine(startPopUpAnim(_object));
+
+    }
+
+    public void PopUpEnd(GameObject _object)
+    {
+        StartCoroutine(endPopUpAnim(_object));
+    }
+
+
+
+
+
+    private IEnumerator startPopUpAnim(GameObject _object)
+    {
+        _object.transform.localScale = Vector3.zero;
+        yield return new WaitForSeconds(0.8f);
+        _object.SetActive(true);
+        LeanTween.scale(_object, Vector3.one, 0.3f)
+            .setEase(LeanTweenType.easeOutBack);
+
+
+    }
+
+    private IEnumerator endPopUpAnim(GameObject _object)
+    {
+        LeanTween.scale(_object, Vector3.zero, 0.3f)
+            .setEase(LeanTweenType.easeInBack);
+
+        yield return new WaitForSeconds(0.3f);
+        _object.SetActive(false);
+
+    }
+
 }
