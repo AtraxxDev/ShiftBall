@@ -10072,6 +10072,8 @@ MonoBehaviour:
   - {fileID: 1619054929922645123, guid: 9f352215c77d6874c9d1a6a44fd2b7f8, type: 3}
   - {fileID: 1619054929922645123, guid: 557466ec1f01c0c4a8a76ed3b0b86479, type: 3}
   - {fileID: 1619054929922645123, guid: 06a0cf3502878ed4c836c34670d733e5, type: 3}
+  - {fileID: 1619054929922645123, guid: 2e1d6e3590f6c3d45a4b06646dda14b5, type: 3}
+  - {fileID: 1619054929922645123, guid: 7f053817666532d4daa1b3aed41363b7, type: 3}
   mediumRooms:
   - {fileID: 1619054929922645123, guid: 58562f2b175af1d40856f0762d16ae81, type: 3}
   - {fileID: 1619054929922645123, guid: de0e9d33835e2b84bbbe6e86515cdf06, type: 3}
@@ -10080,6 +10082,9 @@ MonoBehaviour:
   - {fileID: 1619054929922645123, guid: f20a0091dfc135c4aa5173979e5a52ae, type: 3}
   - {fileID: 1619054929922645123, guid: 17523f818acd5974cb67a7329f9b3f34, type: 3}
   - {fileID: 1619054929922645123, guid: 664343fa3702a0b49865344b88a62c18, type: 3}
+  - {fileID: 1619054929922645123, guid: 4e832fae9fea1b24290d6e4dd00576d6, type: 3}
+  - {fileID: 1619054929922645123, guid: 83f86498e4b91e244b4b8245e206eefc, type: 3}
+  - {fileID: 1619054929922645123, guid: 8aa89ed38f333f94dbe1b55c9cfaef9d, type: 3}
   parent: {fileID: 31081454}
 --- !u!114 &1109348416
 MonoBehaviour:
@@ -15235,7 +15240,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 17.157104}
+  m_AnchoredPosition: {x: 0, y: 17.157227}
   m_SizeDelta: {x: 24.7181, y: 36.007}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1750956282
@@ -19465,6 +19470,10 @@ PrefabInstance:
       propertyPath: shakeCamera
       value: 
       objectReference: {fileID: 519420034}
+    - target: {fileID: 7040347019488858675, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: m_Radius
+      value: 0.13
+      objectReference: {fileID: 0}
     - target: {fileID: 8045826080229567226, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
       propertyPath: m_Name
       value: Player
