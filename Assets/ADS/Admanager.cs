@@ -5,12 +5,19 @@ using UnityEngine;
 
 public class Admanager : MonoBehaviour
 {
-   
-    public void RewardBtnClicked()
+
+    public void RewardDoubleCoins()
     {
-        Rewarded.Instance.ShowRewardedAd(); 
+        // Mostrar el anuncio recompensado y pasar el callback para duplicar las monedas
+        Rewarded.Instance.ShowRewardedAd(OnAdWatched);
     }
-    
+
+    private void OnAdWatched()
+    {
+        // Este método se ejecutará solo después de que el anuncio haya sido visto.
+        CoinManager.Instance.DoubleCoinsCollected();
+    }
+
 
 
 }

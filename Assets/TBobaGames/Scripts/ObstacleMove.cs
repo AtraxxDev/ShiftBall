@@ -6,6 +6,8 @@ public class ObstacleMove : MonoBehaviour
     private Vector2 initialPosition; // Posición inicial del obstáculo
     private Vector2 targetPosition; // Posición objetivo
 
+    [SerializeField] private bool isLeft;
+
     void Start()
     {
         // Establecer la posición inicial como la posición actual del obstáculo

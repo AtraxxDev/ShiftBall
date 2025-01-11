@@ -72,7 +72,7 @@ public class Rewarded : MonoBehaviour
             });
     }
 
-    public void ShowRewardedAd()
+    public void ShowRewardedAd(Action onAdWatchedCallback)
     {
         const string rewardMsg =
             "Rewarded ad rewarded the user. Type: {0}, amount: {1}.";
@@ -81,11 +81,15 @@ public class Rewarded : MonoBehaviour
         {
             rewardedAd.Show((Reward reward) =>
             {
-                // TODO: Reward the user.
+                // Aquí aplicamos el doble de monedas cuando se vea el anuncio
                 Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
+
+                onAdWatchedCallback?.Invoke();
+
             });
         }
     }
+
 
     private void RegisterEventHandlers(RewardedAd ad)
     {

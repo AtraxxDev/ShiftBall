@@ -20,8 +20,6 @@ public class SpawnRoom : MonoBehaviour
             GameObject newRoom = Instantiate(currentRooms[randomIndex], parent);
             newRoom.transform.position = gameObject.transform.position;
 
-            Debug.Log($"Se generó una sala: {newRoom.name}");
-
             gameObject.transform.Translate(0, 10.5f, 0);
         }
     }
@@ -31,11 +29,11 @@ public class SpawnRoom : MonoBehaviour
         int score = ScoreManager.Instance.Score;
         float randomValue = Random.value * 100f; // Genera un número aleatorio entre 0 y 100
 
-        if (score < 20)
+        if (score < 20) // Aqui va el puntaje facil 
         {
             return easyRooms;
         }
-        else if (score < 50)
+        else if (score >= 50) // Aqui va el puntaje medio 
         {
             // Rango medio: 70% de salas medias, 30% de salas fáciles
             if (randomValue < 70f)
@@ -47,10 +45,10 @@ public class SpawnRoom : MonoBehaviour
                 return easyRooms; // 30% de probabilidades
             }
         }
-        else
+        else // Aqui va el puntaje dificil 
         {
             // Rango difícil: 60% de salas difíciles, 30% de salas medias, 10% de salas fáciles
-            if (randomValue < 60f)
+            if (randomValue >= 60f)
             {
                 return hardRooms; // 60% de probabilidades
             }

@@ -19,12 +19,15 @@ public class ShopItem : MonoBehaviour
     public Button buyButton;
     public Button selectButton;
     public TMP_Text costText;
+    public Image spriteADS;
 
     private static ShopItem currentSelectedItemPalette;
     private static ShopItem currentSelectedItemTrail;
     private static ShopItem currentSelectedItemExplosion;
 
     private Image selectButtonImage;
+
+    private Color adButtonColor = new Color32(128, 0, 128, 255); // Color morado para el botón de anuncios
 
     private void Start()
     {
@@ -152,8 +155,9 @@ public class ShopItem : MonoBehaviour
             }
             else if (currencyType == CurrencyType.AD)
             {
-                Rewarded.Instance.ShowRewardedAd();
-                purchaseSuccessful = true;
+                // Mostrar el anuncio recompensado y esperar a que se complete
+                Rewarded.Instance.ShowRewardedAd(OnAdWatched);
+                return; // Salimos para no intentar desbloquear antes de ver el anuncio
             }
 
             if (purchaseSuccessful)
@@ -161,6 +165,12 @@ public class ShopItem : MonoBehaviour
                 UnlockItem();
             }
         }
+    }
+
+    private void OnAdWatched()
+    {
+        // Desbloquear el ítem después de ver el anuncio
+        UnlockItem();
     }
 
     public void UnlockItem()
@@ -221,17 +231,32 @@ public class ShopItem : MonoBehaviour
         {
             if (currencyType == CurrencyType.AD)
             {
-                costText.text = "ADS";
                 buyButton.gameObject.SetActive(true);
+                if (spriteADS != null)
+                {
+                    spriteADS.gameObject.SetActive(true);
+                }
+                costText.gameObject.SetActive(false);
+                // Cambiar el color del botón a morado cuando sea para un anuncio
+                buyButton.GetComponent<Image>().color = adButtonColor; // Establecer el color morado
             }
             else
             {
-                selectButton.gameObject.SetActive(false);
+                buyButton.gameObject.SetActive(true);
                 costText.text = $"Cost: {cost} {(currencyType == CurrencyType.Coins ? "Coins" : "Stars")}";
             }
 
-            buyButton.interactable = (currencyType == CurrencyType.Coins && CoinManager.Instance.Coins >= cost) ||
-                                      (currencyType == CurrencyType.Stars && CoinManager.Instance.Stars >= cost);
+            buyButton.interactable = true; // Mantener siempre el botón interactuable
+
+            // Activar la compra solo si tiene suficiente moneda o estrellas
+            if (currencyType == CurrencyType.Coins)
+            {
+                buyButton.interactable = CoinManager.Instance.Coins >= cost;
+            }
+            else if (currencyType == CurrencyType.Stars)
+            {
+                buyButton.interactable = CoinManager.Instance.Stars >= cost;
+            }
         }
     }
 
