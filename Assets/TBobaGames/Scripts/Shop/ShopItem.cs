@@ -27,7 +27,7 @@ public class ShopItem : MonoBehaviour
 
     private Image selectButtonImage;
 
-    private Color adButtonColor = new Color32(95, 95, 236, 255); // Color morado para el botón de anuncios
+    private Color adButtonColor = new Color32(155, 95, 236, 255); // Color morado para el botón de anuncios
 
     private void Start()
     {
@@ -243,7 +243,7 @@ public class ShopItem : MonoBehaviour
             else
             {
                 buyButton.gameObject.SetActive(true);
-                costText.text = $"Cost: {cost} {(currencyType == CurrencyType.Coins ? "Coins" : "Stars")}";
+                costText.text = $"{cost} {(currencyType == CurrencyType.Coins ? "Coins" : "Stars")}";
             }
 
             buyButton.interactable = true; // Mantener siempre el botón interactuable
