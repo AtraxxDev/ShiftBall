@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -25,10 +26,12 @@ public class UIManager : MonoBehaviour
     [Header("Combo")]
     [SerializeField] private TMP_Text text_Combo;
 
+
     private void Start()
     {
         SubscribeToEvents();
         InitializeUI();
+
     }
 
     private void OnDisable()
@@ -38,6 +41,8 @@ public class UIManager : MonoBehaviour
 
     private void SubscribeToEvents()
     {
+       
+
         ScoreManager.Instance.OnScoreChanged += UpdateScore;
         ScoreManager.Instance.OnHighScoreChanged += UpdateHighScore;
 
@@ -93,7 +98,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateCoinsCollected(int newCoinsCollected)
     {
-        UpdateText(text_GameOverCoins, newCoinsCollected);
+        UpdateText(text_GameOverCoins, newCoinsCollected, "+ ");
     }
 
     public void UpdateTotalStars(int newStars)

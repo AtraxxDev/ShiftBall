@@ -2,10 +2,11 @@ using GoogleMobileAds.Api;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using UnityEngine.UI;
 
 public class Admanager : MonoBehaviour
 {
-
     public void RewardDoubleCoins()
     {
         // Mostrar el anuncio recompensado y pasar el callback para duplicar las monedas
@@ -16,6 +17,9 @@ public class Admanager : MonoBehaviour
     {
         // Este método se ejecutará solo después de que el anuncio haya sido visto.
         CoinManager.Instance.DoubleCoinsCollected();
+
+        
+        
     }
 
 
