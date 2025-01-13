@@ -20,10 +20,6 @@ public class PlayerController : MonoBehaviour
         UnsuscribeEvents();
     }
 
-    private void Start()
-    {
-    }
-
     private void Update()
     {
         if (GameManager.Instance.IsPaused()) return;

@@ -65,7 +65,6 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentState == GameState.Paused)
         {
-            ScoreManager.Instance.ResetScore();
             CoinManager.Instance.ResetCoins_StarsCollected();
             AudioManager.Instance.PlayGameplayMusic();
             SetState(GameState.Playing);
@@ -85,12 +84,13 @@ public class GameManager : MonoBehaviour
             var objectPos = playerParticles.transform;
             playerParticles.PlayGameOverParticles(objectPos, objectPos.position);
         }
-
         OnGameOver?.Invoke();
     }
 
     public void ReturnToMainMenu()
     {
+        ScoreManager.Instance.ResetScore();
+
         // Reinicia la escena actual
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         AudioManager.Instance.PlayMusic();
