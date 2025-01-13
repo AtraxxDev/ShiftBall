@@ -27,7 +27,7 @@ public class ShopItem : MonoBehaviour
 
     private Image selectButtonImage;
 
-    private Color adButtonColor = new Color32(128, 0, 128, 255); // Color morado para el botón de anuncios
+    private Color adButtonColor = new Color32(95, 95, 236, 255); // Color morado para el botón de anuncios
 
     private void Start()
     {
