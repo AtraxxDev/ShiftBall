@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 public class PlayerMovement : Unit
 {
@@ -10,12 +12,16 @@ public class PlayerMovement : Unit
     {
         direction = new Vector3(isMovingLeft ? -1 : 1, 1, 0).normalized;
 
+
     }
 
     public void HandleInput()
     {
+
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
+            print("Cambie de direccion 2");
+
             ToggleDirection();
         }
     }
@@ -37,19 +43,21 @@ public class PlayerMovement : Unit
 
     private void ToggleDirection()
     {
+
         isMovingLeft = !isMovingLeft;
         direction = new Vector3(isMovingLeft ? -1 : 1, 1, 0).normalized;
     }
 
-    public void SetVerticalDirectionOnly()
+    public void SetZero()
     {
-        direction = Vector3.up; // Movimiento solo vertical
+        direction = Vector3.zero; // Movimiento solo vertical
     }
 
     public void RestoreDiagonalMovement()
     {
         direction = new Vector3(isMovingLeft ? -1 : 1, 1, 0).normalized; // Restaurar movimiento diagonal
     }
+
 
 
 }

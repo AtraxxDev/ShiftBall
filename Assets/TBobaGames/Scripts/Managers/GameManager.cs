@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     private PlayerParticles playerParticles;
 
+    public static event Action OnPauseGame;
+
 
 
     private void Awake()
@@ -69,6 +71,19 @@ public class GameManager : MonoBehaviour
             AudioManager.Instance.PlayGameplayMusic();
             SetState(GameState.Playing);
         }
+    }
+
+    public void PausedGame()
+    {
+        SetState(GameState.Paused);
+
+        OnPauseGame?.Invoke();
+        print("Esta en pausa");
+    }
+
+    public void ResumeGame()
+    {
+        SetState(GameState.Playing);
     }
 
     public void GameOver()
