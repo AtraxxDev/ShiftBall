@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
         SetState(GameState.Paused);
 
         OnPauseGame?.Invoke();
+        
         print("Esta en pausa");
     }
 

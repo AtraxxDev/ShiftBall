@@ -17,12 +17,21 @@ public class PlayerMovement : Unit
 
     public void HandleInput()
     {
-
+        // Verifica si hay un toque y no está sobre la UI
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            print("Cambie de direccion 2");
+            if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+            {
 
-            ToggleDirection();
+                print("Se apreto la UI");
+            }
+            else
+            {
+
+                print("Cambié de dirección");
+                ToggleDirection();
+            }
+
         }
     }
 

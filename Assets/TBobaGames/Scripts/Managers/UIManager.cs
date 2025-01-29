@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject P_GameOver;
     [SerializeField] private GameObject P_InGame;
+    [SerializeField] private GameObject ButtonPause;
 
     [Header("Combo")]
     [SerializeField] private TMP_Text text_Combo;
@@ -174,6 +175,7 @@ public class UIManager : MonoBehaviour
     public void StartGame()
     {
         GameManager.Instance.StartGame();
+        ButtonPause.SetActive(true);
     }
 
     public void ReturnToMainMenu()
