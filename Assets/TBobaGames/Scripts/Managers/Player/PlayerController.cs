@@ -3,6 +3,7 @@
     using UnityEngine;
     using UnityEngine.EventSystems;
     using TB_Tools;
+using System.Runtime.Serialization;
 
 
 public class PlayerController : MonoBehaviour
@@ -11,14 +12,25 @@ public class PlayerController : MonoBehaviour
         [SerializeField] private PlayerParticles playerParticles;
         [SerializeField] private ShieldPowerUp shieldPowerUp;
 
+        [SerializeField] private SpriteRenderer playerSprite;
+        [SerializeField] private float invulnerabilityDuration = 3f;
+        [SerializeField] private float blinkInterval = 0.2f;
 
-        private void OnEnable()
+    public  bool isInvencible;
+
+
+    private void OnEnable()
         {
             SuscribeEvents();
 
         }
 
-        private void OnDisable()
+    private void Start()
+    {
+        GameManager.Instance.OnRevivePlayer += HandlePlayerRevival;
+    }
+
+    private void OnDisable()
         {
             UnsuscribeEvents();
         }
@@ -50,12 +62,13 @@ public class PlayerController : MonoBehaviour
         {
             if (shieldPowerUp != null && shieldPowerUp.AbsorbHit())
             {
-                Debug.Log("Golpe absorbido por el escudo");
                 visual.SetActive(false);
                 return; // Interrumpir el daño si el golpe fue absorbido
             }
 
-            Debug.Log("El jugador recibió daño. No había escudo activo.");
+        if (isInvencible) return;
+
+
             GameManager.Instance.GameOver();
         }
 
@@ -98,6 +111,35 @@ public class PlayerController : MonoBehaviour
             {
                 GameManager.OnPauseGame -= PausedGame;
             }
-    }
+
+        GameManager.Instance.OnRevivePlayer -= HandlePlayerRevival;
 
     }
+
+    private void HandlePlayerRevival()
+    {
+        //playerMovement.SetZero(); // Detener movimiento
+        transform.GetChild(0).gameObject.SetActive(true);
+        isInvencible = true;
+        StartCoroutine(InvulnerabilityCoroutine());
+    }
+
+    private IEnumerator InvulnerabilityCoroutine()
+    {
+
+
+        // Parpadeo del sprite
+        float elapsedTime = 0f;
+        while (elapsedTime < invulnerabilityDuration)
+        {
+            playerSprite.enabled = !playerSprite.enabled; // Alterna visibilidad
+            elapsedTime += blinkInterval;
+            yield return new WaitForSeconds(blinkInterval);
+        }
+
+        // Asegúrate de que el sprite esté visible y reactiva el collider
+        playerSprite.enabled = true;
+        isInvencible = false;
+    }
+
+}

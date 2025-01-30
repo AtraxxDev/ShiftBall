@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TB_Tools;
 
@@ -19,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     public static event Action OnPauseGame;
 
+
+    public Action OnRevivePlayer;
 
 
     private void Awake()
@@ -77,9 +80,7 @@ public class GameManager : MonoBehaviour
     {
         SetState(GameState.Paused);
 
-        OnPauseGame?.Invoke();
-        
-        print("Esta en pausa");
+        OnPauseGame?.Invoke();       
     }
 
     public void ResumeGame()
@@ -87,11 +88,23 @@ public class GameManager : MonoBehaviour
         SetState(GameState.Playing);
     }
 
+    public void ResumeNewLive()
+    {
+        SetState(GameState.Playing);
+        AudioManager.Instance.backgroundMusicSource.Play();
+
+
+    }
+
     public void GameOver()
     {
         AudioManager.Instance.StopMusic();
         AudioManager.Instance.PlayGameOverSound();
         SetState(GameState.GameOver);
+
+
+        // ShowReviveButton(); // Mostrar botón de revivir
+
 
         playerParticles = FindObjectOfType<PlayerParticles>();
         // Llama al método del PlayerManager para reproducir el efecto de partículas
@@ -103,14 +116,33 @@ public class GameManager : MonoBehaviour
         OnGameOver?.Invoke();
     }
 
-    public void ReturnToMainMenu()
+    public void Restart()
     {
         ScoreManager.Instance.ResetScore();
 
         // Reinicia la escena actual
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        AudioManager.Instance.PlayMusic();
+        AudioManager.Instance.PlayGameplayMusic();
     }
+
+    public void ReturnToMainMenu()
+    {
+        ScoreManager.Instance.ResetScore();
+
+        // Reinicia la escena actual
+        SceneManager.LoadScene("Menu");
+        AudioManager.Instance.PlayMenuMusic();
+    }
+
+
+
+    public void RevivePlayer()
+    {
+        OnRevivePlayer?.Invoke();
+        AudioManager.Instance?.PlayReviveSound();
+        ResumeNewLive();
+    }
+
 
 
 

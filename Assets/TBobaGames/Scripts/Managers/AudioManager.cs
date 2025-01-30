@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance { get; private set; }
 
     [Header("Audio Sources")]
-    [SerializeField] private AudioSource backgroundMusicSource;
+    [SerializeField] public AudioSource backgroundMusicSource;
     [SerializeField] private AudioSource sfxSource;
 
     [Header("Audio Clips")]
@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip coinPickupSound;
     [SerializeField] private AudioClip gameOverSound;
     [SerializeField] private AudioClip CelebrateSound;
+    [SerializeField] private AudioClip reviveSound;
 
     private void Awake()
     {
@@ -81,6 +82,11 @@ public class AudioManager : MonoBehaviour
     public void PlayCoinPickupSound()
     {
         PlaySFX(coinPickupSound);
+    }
+
+    public void PlayReviveSound()
+    {
+        PlaySFX(reviveSound);
     }
 
     public void PlayGameOverSound()

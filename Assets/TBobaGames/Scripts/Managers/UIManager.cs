@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System;
 
@@ -23,6 +24,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject P_GameOver;
     [SerializeField] private GameObject P_InGame;
     [SerializeField] private GameObject ButtonPause;
+
+    [SerializeField] private GameObject P_Lives;
+    [SerializeField] private GameObject P_Score;
+
+    [Header("Countdown Slider")]
+    [SerializeField] private Image filledImage;
+    [SerializeField] private TMP_Text countdownText;
+    [SerializeField] private CountdownSlider timer;
 
     [Header("Combo")]
     [SerializeField] private TMP_Text text_Combo;
@@ -54,6 +63,11 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.OnGameOver += StartGameOverSequence;
 
         ComboManager.Instance.OnComboChanged += UpdateComboText;
+
+        GameManager.Instance.OnRevivePlayer += CloseGameOver;
+
+        timer.OnTimeChanged += UpdateCounter;
+        timer.OnTimerCompleted += OnCountdownComplete;
     }
 
     private void UnsubscribeFromEvents()
@@ -66,6 +80,9 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.OnGameOver -= StartGameOverSequence;
 
         ComboManager.Instance.OnComboChanged -= UpdateComboText;
+
+        timer.OnTimeChanged -= UpdateCounter;
+        timer.OnTimerCompleted -= OnCountdownComplete;
     }
 
     private void InitializeUI()
@@ -146,6 +163,27 @@ public class UIManager : MonoBehaviour
     }
 
 
+    private void UpdateCounter(float normalizedTime)
+    {
+        filledImage.fillAmount = 1 - normalizedTime;
+        countdownText.text = Mathf.Ceil(normalizedTime * timer.countdownDuration).ToString();
+    }
+
+    private void OnCountdownComplete()
+    {
+        countdownText.text = "0";
+        Debug.Log("¡Cuenta regresiva finalizada!");
+        DesInitilizePopUp();
+    }
+
+
+    public void CloseGameOver()
+    {
+        P_GameOver.SetActive(false);
+        P_InGame.SetActive(true);
+
+    }
+
     private void StartGameOverSequence()
     {
         StartCoroutine(ShowGameOverAfterDelay(2f)); // Llama a la corrutina con un retraso de 2 segundos
@@ -155,6 +193,8 @@ public class UIManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         ShowGameOverUI();
+        timer.StartCountdown();
+
     }
 
     private void ShowGameOverUI()
@@ -164,12 +204,15 @@ public class UIManager : MonoBehaviour
         // Activa el panel antes de animarlo
         P_GameOver.SetActive(true);
 
+
         // Resetea la escala inicial para evitar conflictos
         P_GameOver.transform.localScale = Vector3.zero;
 
         // Anima el panel con un efecto de "pop-up"
         LeanTween.scale(P_GameOver, Vector3.one, 0.5f)
                  .setEase(LeanTweenType.easeOutBack); // Efecto elástico al aparecer
+
+
     }
 
     public void StartGame()
@@ -178,11 +221,28 @@ public class UIManager : MonoBehaviour
         ButtonPause.SetActive(true);
     }
 
-    public void ReturnToMainMenu()
+    public void Restart()
+    {
+        GameManager.Instance.Restart();
+    }
+
+    public void ReturnMainMenu()
     {
         GameManager.Instance.ReturnToMainMenu();
     }
 
+
+    public void DesInitilizePopUp()
+    {
+        PopUpEnd(P_Lives);
+        PopUpStart(P_Score);
+    }
+
+    public void InitilizePopUp()
+    {
+        PopUpStart(P_Score);
+        PopUpEnd(P_Lives);
+    }
 
     public void PopUpStart(GameObject _object)
     {
@@ -194,6 +254,8 @@ public class UIManager : MonoBehaviour
     {
         StartCoroutine(endPopUpAnim(_object));
     }
+
+
 
 
 

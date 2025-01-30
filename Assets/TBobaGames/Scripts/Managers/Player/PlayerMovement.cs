@@ -22,13 +22,10 @@ public class PlayerMovement : Unit
         {
             if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
             {
-
                 print("Se apreto la UI");
             }
             else
             {
-
-                print("Cambié de dirección");
                 ToggleDirection();
             }
 

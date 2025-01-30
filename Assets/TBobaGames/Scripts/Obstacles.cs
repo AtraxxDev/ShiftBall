@@ -11,7 +11,9 @@ public class Obstacles : MonoBehaviour
             PlayerController player = collider.GetComponent<PlayerController>();
             if (player != null)
             {
+
                 player.TakeDamage(gameObject); // Llamar al método para manejar el daño
+                Destroy(this.gameObject);
             }
 
         }

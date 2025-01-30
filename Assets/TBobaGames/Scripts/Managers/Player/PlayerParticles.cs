@@ -6,6 +6,7 @@ public class PlayerParticles : MonoBehaviour
 {
     [Header("Particle Systems")]
     [SerializeField] private ParticleSystem particles_HighScore; 
+    [SerializeField] private ParticleSystem particles_Revive;
     [SerializeField] private int particleEffectID;
 
     [Header("Dependencies")]
@@ -13,9 +14,19 @@ public class PlayerParticles : MonoBehaviour
 
     private bool hasPlayedHighScoreParticles = false;
 
+
+
     private void Start()
     {
         particleEffectID = PlayerPrefs.GetInt("ParticleKey", 0);
+
+        GameManager.Instance.OnRevivePlayer += PlayReviveParticles;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnRevivePlayer -= PlayReviveParticles;
+
     }
 
     public void PlayHighScoreParticles()
@@ -27,9 +38,15 @@ public class PlayerParticles : MonoBehaviour
         }
     }
 
+
+    public void PlayReviveParticles()
+    {
+        particles_Revive.Play();
+    }
+
     public void PlayGameOverParticles(Transform objectReference ,Vector3 position)
     {
-        objectReference.gameObject.SetActive(false);
+        objectReference.transform.GetChild(0).gameObject.SetActive(false);
         ParticleManager.Instance.PlayParticleEffect(particleEffectID, position);
         
         if (shakeCamera != null)

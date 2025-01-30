@@ -26,6 +26,9 @@ public class ObstacleMove : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.IsPaused()) return;
+
+
         // Mueve el obstáculo hacia la posición objetivo
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
