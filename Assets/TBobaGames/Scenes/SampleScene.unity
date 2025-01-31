@@ -600,6 +600,7 @@ GameObject:
   - component: {fileID: 64863630}
   - component: {fileID: 64863632}
   - component: {fileID: 64863631}
+  - component: {fileID: 64863633}
   m_Layer: 5
   m_Name: P_GameOver
   m_TagString: Untagged
@@ -668,6 +669,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64863629}
   m_CullTransparentMesh: 1
+--- !u!114 &64863633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64863629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5888952a275a2d247a9e289559c29fdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countdownDuration: 7
+  remainingTime: 0
 --- !u!1 &71360718
 GameObject:
   m_ObjectHideFlags: 0
@@ -6966,7 +6981,7 @@ MonoBehaviour:
   P_Score: {fileID: 1658648399}
   filledImage: {fileID: 340460885}
   countdownText: {fileID: 436325856}
-  timer: {fileID: 2031705263}
+  timer: {fileID: 64863633}
   text_Combo: {fileID: 1378648834}
 --- !u!1 &1494226608
 GameObject:
@@ -8875,14 +8890,13 @@ GameObject:
   - component: {fileID: 2031705260}
   - component: {fileID: 2031705262}
   - component: {fileID: 2031705261}
-  - component: {fileID: 2031705263}
   m_Layer: 5
   m_Name: PopUp RetryLives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2031705260
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8944,20 +8958,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2031705259}
   m_CullTransparentMesh: 1
---- !u!114 &2031705263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2031705259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5888952a275a2d247a9e289559c29fdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  countdownDuration: 7
-  remainingTime: 0
 --- !u!1 &2054145653
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,11 +17,18 @@ public class CountdownSlider : MonoBehaviour
     private float elapsedTime;
     public float remainingTime;
 
-    private void Start()
-    {
-       // StartCountdown();
-    }
+    private int maxCounter = 3;
 
+    private int counter;
+
+    public int GetCounter() => counter;
+    public int GetMaxCounter() => maxCounter;
+
+    public void ResetCounter()
+    {
+        counter = 0;
+        Debug.Log("Reinicié el contador");
+    }
     public void StartCountdown()
     {
         if (countdownCoroutine != null)
@@ -37,14 +44,12 @@ public class CountdownSlider : MonoBehaviour
         countdownCoroutine = StartCoroutine(CountdownRoutine());
     }
 
-    public void RestartCountdown()
-    {
-        StopCoroutine(CountdownRoutine());
-    }
 
 
     private IEnumerator CountdownRoutine()
     {
+        counter++;
+        Debug.Log($"Contador : {counter}");
         elapsedTime = 0f;
         Debug.Log($"Puse elapsed time en 0");
 

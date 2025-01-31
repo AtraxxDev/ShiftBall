@@ -179,6 +179,8 @@ public class UIManager : MonoBehaviour
 
     public void CloseGameOver()
     {
+        P_Lives.SetActive(false);
+        P_Score.SetActive(false);
         P_GameOver.SetActive(false);
         P_InGame.SetActive(true);
 
@@ -193,26 +195,36 @@ public class UIManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         ShowGameOverUI();
-        timer.StartCountdown();
+
+  
 
     }
 
     private void ShowGameOverUI()
     {
+        // Ocultar el panel de juego
         P_InGame.SetActive(false);
 
-        // Activa el panel antes de animarlo
         P_GameOver.SetActive(true);
 
+        if (timer.GetCounter() >= timer.GetMaxCounter())
+        {
+            // Mostrar panel de puntaje si ya se alcanzaron los intentos
+            Debug.Log("Contador máximo alcanzado. Mostrando panel de puntaje.");
+            P_Score.SetActive(true);
+        }
+        else
+        {
+            // Mostrar panel de vidas y reiniciar la cuenta regresiva
+            Debug.Log("Mostrando panel de vidas.");
+            timer.StartCountdown();
+            P_Lives.SetActive(true);
+        }
 
-        // Resetea la escala inicial para evitar conflictos
+        // Animación del panel Game Over
         P_GameOver.transform.localScale = Vector3.zero;
-
-        // Anima el panel con un efecto de "pop-up"
         LeanTween.scale(P_GameOver, Vector3.one, 0.5f)
-                 .setEase(LeanTweenType.easeOutBack); // Efecto elástico al aparecer
-
-
+                 .setEase(LeanTweenType.easeOutBack);
     }
 
     public void StartGame()
