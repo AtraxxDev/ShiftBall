@@ -769,6 +769,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExpandingWavePowerUp
       objectReference: {fileID: 0}
+    - target: {fileID: 1939568198199097885, guid: adf00e49092d00a45b07f5045737bab0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7203734758633324485, guid: adf00e49092d00a45b07f5045737bab0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0014160872

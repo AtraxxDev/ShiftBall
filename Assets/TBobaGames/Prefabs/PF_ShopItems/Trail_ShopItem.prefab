@@ -12,21 +12,29 @@ PrefabInstance:
       propertyPath: dataType
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 885616253670078577, guid: 93c0f7ec1a01fd14e921bbba98dfaf91, type: 3}
-      propertyPath: m_Color.b
-      value: 0.654902
+    - target: {fileID: 2146756647126509991, guid: 93c0f7ec1a01fd14e921bbba98dfaf91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 885616253670078577, guid: 93c0f7ec1a01fd14e921bbba98dfaf91, type: 3}
-      propertyPath: m_Color.g
-      value: 0.7372549
+    - target: {fileID: 2431986799685704012, guid: 93c0f7ec1a01fd14e921bbba98dfaf91, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 70
       objectReference: {fileID: 0}
-    - target: {fileID: 885616253670078577, guid: 93c0f7ec1a01fd14e921bbba98dfaf91, type: 3}
-      propertyPath: m_Color.r
-      value: 1
+    - target: {fileID: 2431986799685704012, guid: 93c0f7ec1a01fd14e921bbba98dfaf91, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2431986799685704012, guid: 93c0f7ec1a01fd14e921bbba98dfaf91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2845088292111685729, guid: 93c0f7ec1a01fd14e921bbba98dfaf91, type: 3}
       propertyPath: m_Name
       value: Trail_ShopItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 4863452721268121796, guid: 93c0f7ec1a01fd14e921bbba98dfaf91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5534853832122964798, guid: 93c0f7ec1a01fd14e921bbba98dfaf91, type: 3}
       propertyPath: category

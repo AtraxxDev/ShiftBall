@@ -10,7 +10,7 @@ public class Admanager : MonoBehaviour
     public void RewardDoubleCoins()
     {
         // Mostrar el anuncio recompensado y pasar el callback para duplicar las monedas
-        Rewarded.Instance.ShowRewardedAd(OnAdWatchedDoubleCoins);
+        Rewarded.Instance.ShowRewardedAd(OnAdWatchedMoreStars);
     }
 
     public void ShowReviveAd()
@@ -18,10 +18,10 @@ public class Admanager : MonoBehaviour
         Rewarded.Instance.ShowRewardedAd(OnAdWatcheRevive);
     }
 
-    private void OnAdWatchedDoubleCoins()
+    private void OnAdWatchedMoreStars()
     {
         // Este método se ejecutará solo después de que el anuncio haya sido visto.
-        CoinManager.Instance.DoubleCoinsCollected();
+        CoinManager.Instance.MoreStarsCollected(5);
 
         
         

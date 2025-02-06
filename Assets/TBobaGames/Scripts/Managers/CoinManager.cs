@@ -107,18 +107,17 @@ public class CoinManager : MonoBehaviour
         OnStarsCollectChanged?.Invoke(StarsCollected);
     }
 
-    public void DoubleCoinsCollected()
+    public void MoreStarsCollected(int stars)
     {
-        // Calcula el doble de las monedas recogidas en la partida
-        int doubledCoins = CoinsCollected;
+      
 
-        // Añade las monedas duplicadas al total de monedas
-        AddCoin(doubledCoins);
+        // Añade las monedas al total de monedas
+        AddStars(stars);
 
         // También actualiza el total de las monedas recogidas
-        AddCoinsCollected(doubledCoins);
+        AddStarsCollected(stars);
 
-        Debug.Log($"Se han añadido {doubledCoins} monedas al total.");
+        Debug.Log($"Se han añadido {stars} estrellas al total.");
     }
 
 }

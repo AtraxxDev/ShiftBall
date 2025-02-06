@@ -1,25 +1,39 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Sirenix.OdinInspector;
 using TB_Tools;
 
 public class ShopItem : MonoBehaviour
 {
-    [Header("Data Currency")]
-    public int cost;
-    public CurrencyType currencyType;
-    public bool isUnlocked;
-    public string itemKey; // Clave única para este ítem en PlayerPrefs
-
-    [Space(5)]
-    [SerializeField] private ItemCategory category; // Cambiado de string a ItemCategory
+    [BoxGroup("Currency Data",centerLabel: true)]
+    [SerializeField] private int cost;
+    [BoxGroup("Currency Data")]
+    [SerializeField] private CurrencyType currencyType;
+    [BoxGroup("Currency Data")]
+    [SerializeField] private bool isUnlocked;
+    [BoxGroup("Currency Data")]
+    [SerializeField] private string itemKey;
+    [BoxGroup("Currency Data")]
+    [SerializeField] private ItemCategory category;
+    [BoxGroup("Currency Data")]
     [SerializeField] private string defaultNameKey;
 
-    [Header("UI")]
-    public Button buyButton;
-    public Button selectButton;
-    public TMP_Text costText;
-    public Image spriteADS;
+    [BoxGroup("UI Elements", centerLabel: true)]
+    [SerializeField] private Button buyButton;
+    [BoxGroup("UI Elements")]
+    [SerializeField] private Button selectButton;
+    [BoxGroup("UI Elements")]
+    [SerializeField] private TMP_Text costText;
+    [BoxGroup("UI Elements")]
+    [SerializeField] private Image spriteADS;
+
+    [FoldoutGroup("Colors")]
+    [SerializeField, ColorUsage(false)] private Color selectedColor = new Color32(95, 100, 236, 255);
+    [FoldoutGroup("Colors")]
+    [SerializeField, ColorUsage(false)] private Color deselectedColor = new Color32(95, 237, 110, 255);
+    [FoldoutGroup("Colors")]
+    [SerializeField, ColorUsage(false)] private Color adButtonColor = new Color32(155, 95, 236, 255);
 
     private static ShopItem currentSelectedItemPalette;
     private static ShopItem currentSelectedItemTrail;
@@ -27,14 +41,11 @@ public class ShopItem : MonoBehaviour
 
     private Image selectButtonImage;
 
-    private Color adButtonColor = new Color32(155, 95, 236, 255); // Color morado para el botón de anuncios
-
     private void Start()
     {
-        selectButtonImage = selectButton.GetComponent<Image>(); // Asignar la imagen del botón
-
+        selectButtonImage = selectButton.GetComponent<Image>();
         selectButton.onClick.AddListener(SelectItem);
-        buyButton.onClick.AddListener(BuyItem); // Asegúrate de agregar el listener al botón de compra
+        buyButton.onClick.AddListener(BuyItem);
 
         LoadItemState();
         UpdateUI();
@@ -58,59 +69,41 @@ public class ShopItem : MonoBehaviour
 
     private void LoadUnlockState()
     {
-        if (PlayerPrefs.HasKey(itemKey))
+        isUnlocked = PlayerPrefs.GetInt(itemKey, itemKey == defaultNameKey ? 1 : 0) == 1;
+
+        if (!PlayerPrefs.HasKey(itemKey) && isUnlocked)
         {
-            isUnlocked = PlayerPrefs.GetInt(itemKey, 0) == 1;
-        }
-        else
-        {
-            if (itemKey == defaultNameKey)
-            {
-                isUnlocked = true;
-                PlayerPrefs.SetInt(itemKey, 1);
-                PlayerPrefs.Save();
-            }
-            else
-            {
-                isUnlocked = false;
-            }
+            PlayerPrefs.SetInt(itemKey, 1);
+            PlayerPrefs.Save();
         }
     }
 
     private void SetSelectedItem()
     {
         string selectedItemKey = PlayerPrefs.GetString(GetSelectedKeyForCategory(), string.Empty);
-
         if (itemKey == selectedItemKey && isUnlocked)
         {
-            selectButtonImage.color = new Color32(95, 100, 236, 255); // Color verde
+            HighlightSelectButton(selectedColor);
             SetCurrentSelectedItem(this);
         }
         else
         {
-            selectButtonImage.color = Color.red; // Color rojo si no es seleccionado
+            HighlightSelectButton(deselectedColor);
         }
     }
 
     private void AutoSelectDefaultItem()
     {
-        string selectedItemKey = PlayerPrefs.GetString(GetSelectedKeyForCategory(), string.Empty);
-        if (string.IsNullOrEmpty(selectedItemKey))
+        if (string.IsNullOrEmpty(PlayerPrefs.GetString(GetSelectedKeyForCategory(), string.Empty)) && itemKey == defaultNameKey && isUnlocked)
         {
-            if (itemKey == defaultNameKey && isUnlocked)
-            {
-                selectButtonImage.color = new Color32(95, 100, 236, 255); // Color azul
-                SetCurrentSelectedItem(this);
-                PlayerPrefs.SetString(GetSelectedKeyForCategory(), itemKey);
-                PlayerPrefs.Save();
-            }
+            HighlightSelectButton(selectedColor);
+            SetCurrentSelectedItem(this);
+            PlayerPrefs.SetString(GetSelectedKeyForCategory(), itemKey);
+            PlayerPrefs.Save();
         }
     }
 
-    private string GetSelectedKeyForCategory()
-    {
-        return $"Selected_{category}"; // Ejemplo: "Selected_Palette", "Selected_Trail", "Selected_Explosion"
-    }
+    private string GetSelectedKeyForCategory() => $"Selected_{category}";
 
     private void SetCurrentSelectedItem(ShopItem item)
     {
@@ -128,50 +121,36 @@ public class ShopItem : MonoBehaviour
         }
     }
 
-    private ShopItem GetCurrentSelectedItem()
+    private ShopItem GetCurrentSelectedItem() => category switch
     {
-        return category switch
-        {
-            ItemCategory.Palette => currentSelectedItemPalette,
-            ItemCategory.Trail => currentSelectedItemTrail,
-            ItemCategory.Explosion => currentSelectedItemExplosion,
-            _ => null
-        };
-    }
+        ItemCategory.Palette => currentSelectedItemPalette,
+        ItemCategory.Trail => currentSelectedItemTrail,
+        ItemCategory.Explosion => currentSelectedItemExplosion,
+        _ => null
+    };
 
     public void BuyItem()
     {
-        if (!isUnlocked)
+        if (isUnlocked) return;
+
+        bool purchaseSuccessful = currencyType switch
         {
-            bool purchaseSuccessful = false;
+            CurrencyType.Coins => CoinManager.Instance.SpendCoins(cost),
+            CurrencyType.Stars => CoinManager.Instance.SpendStars(cost),
+            CurrencyType.AD => HandleAdPurchase(),
+            _ => false
+        };
 
-            if (currencyType == CurrencyType.Coins)
-            {
-                purchaseSuccessful = CoinManager.Instance.SpendCoins(cost);
-            }
-            else if (currencyType == CurrencyType.Stars)
-            {
-                purchaseSuccessful = CoinManager.Instance.SpendStars(cost);
-            }
-            else if (currencyType == CurrencyType.AD)
-            {
-                // Mostrar el anuncio recompensado y esperar a que se complete
-                Rewarded.Instance.ShowRewardedAd(OnAdWatched);
-                return; // Salimos para no intentar desbloquear antes de ver el anuncio
-            }
-
-            if (purchaseSuccessful)
-            {
-                UnlockItem();
-            }
-        }
+        if (purchaseSuccessful) UnlockItem();
     }
 
-    private void OnAdWatched()
+    private bool HandleAdPurchase()
     {
-        // Desbloquear el ítem después de ver el anuncio
-        UnlockItem();
+        Rewarded.Instance.ShowRewardedAd(OnAdWatched);
+        return false; // Defer purchase until the ad is watched
     }
+
+    private void OnAdWatched() => UnlockItem();
 
     public void UnlockItem()
     {
@@ -182,25 +161,19 @@ public class ShopItem : MonoBehaviour
 
     public void SelectItem()
     {
-        if (isUnlocked)
-        {
-            var currentItem = GetCurrentSelectedItem();
-            if (currentItem != null && currentItem != this)
-            {
-                currentItem.DeselectItem();
-            }
+        if (!isUnlocked) return;
 
-            SetCurrentSelectedItem(this);
+        GetCurrentSelectedItem()?.DeselectItem();
+        SetCurrentSelectedItem(this);
 
-            selectButtonImage.color = new Color32(95, 100, 236, 255);
-            PlayerPrefs.SetString(GetSelectedKeyForCategory(), itemKey);
-            PlayerPrefs.Save();
-        }
+        HighlightSelectButton(selectedColor);
+        PlayerPrefs.SetString(GetSelectedKeyForCategory(), itemKey);
+        PlayerPrefs.Save();
     }
 
     private void DeselectItem()
     {
-        selectButtonImage.color = Color.red;
+        HighlightSelectButton(deselectedColor);
         SetCurrentSelectedItem(null);
     }
 
@@ -212,56 +185,40 @@ public class ShopItem : MonoBehaviour
 
     private void UpdateUI()
     {
+        buyButton.gameObject.SetActive(!isUnlocked);
+        selectButton.gameObject.SetActive(isUnlocked);
+
         if (isUnlocked)
         {
-            buyButton.gameObject.SetActive(false);
-            selectButton.gameObject.SetActive(true);
             costText.text = "Unlocked";
-
-            if (GetCurrentSelectedItem() == this)
-            {
-                selectButtonImage.color = new Color32(95, 100, 236, 255);
-            }
-            else
-            {
-                selectButtonImage.color = Color.red;
-            }
+            HighlightSelectButton(GetCurrentSelectedItem() == this ? selectedColor : deselectedColor);
         }
         else
         {
-            if (currencyType == CurrencyType.AD)
-            {
-                buyButton.gameObject.SetActive(true);
-                if (spriteADS != null)
-                {
-                    spriteADS.gameObject.SetActive(true);
-                }
-                costText.gameObject.SetActive(false);
-                // Cambiar el color del botón a morado cuando sea para un anuncio
-                buyButton.GetComponent<Image>().color = adButtonColor; // Establecer el color morado
-            }
-            else
-            {
-                buyButton.gameObject.SetActive(true);
-                costText.text = $"{cost} {(currencyType == CurrencyType.Coins ? "Coins" : "Stars")}";
-            }
-
-            buyButton.interactable = true; // Mantener siempre el botón interactuable
-
-            // Activar la compra solo si tiene suficiente moneda o estrellas
-            if (currencyType == CurrencyType.Coins)
-            {
-                buyButton.interactable = CoinManager.Instance.Coins >= cost;
-            }
-            else if (currencyType == CurrencyType.Stars)
-            {
-                buyButton.interactable = CoinManager.Instance.Stars >= cost;
-            }
+            HandleLockedStateUI();
         }
     }
 
-    private void OnCurrencyChanged(int _)
+    private void HandleLockedStateUI()
     {
-        UpdateUI();
+        if (currencyType == CurrencyType.AD)
+        {
+            spriteADS?.gameObject.SetActive(true);
+            costText.gameObject.SetActive(false);
+            buyButton.GetComponent<Image>().color = adButtonColor;
+            buyButton.interactable = true; // Aseguramos que el botón siempre sea interactuable para anuncios
+        }
+        else
+        {
+            spriteADS?.gameObject.SetActive(false);
+            costText.text = $"{cost} {(currencyType == CurrencyType.Coins ? "Coins" : "Stars")}";
+            buyButton.interactable = (currencyType == CurrencyType.Coins && CoinManager.Instance.Coins >= cost) ||
+                                      (currencyType == CurrencyType.Stars && CoinManager.Instance.Stars >= cost);
+        }
     }
+
+
+    private void HighlightSelectButton(Color color) => selectButtonImage.color = color;
+
+    private void OnCurrencyChanged(int _) => UpdateUI();
 }

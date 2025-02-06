@@ -29,14 +29,16 @@ public class SpawnRoom : MonoBehaviour
         int score = ScoreManager.Instance.Score;
         float randomValue = Random.value * 100f; // Genera un número aleatorio entre 0 y 100
 
-        if (score < 60) // Rango fácil: 100% de salas fáciles
+        print(randomValue);
+
+        if (score < 120) // Rango fácil: 100% de salas fáciles
         {
             return easyRooms;
         }
-        else if (score >= 60 && score < 100) // Rango medio
+        else if (score >= 120 && score < 300) // Rango medio
         {
             // Rango medio: 70% de salas medias, 30% de salas fáciles
-            if (randomValue < 70f)
+            if (randomValue < 50f)
             {
                 return mediumRooms; // 70% de probabilidades
             }
@@ -45,22 +47,23 @@ public class SpawnRoom : MonoBehaviour
                 return easyRooms; // 30% de probabilidades
             }
         }
-        else if (score >= 100) // Rango difícil
+        else if (score >= 300) // Rango difícil
         {
-            // Rango difícil: 60% de salas difíciles, 30% de salas medias, 10% de salas fáciles
-            if (randomValue < 60f)
+            // Rango difícil: 30% de salas difíciles, 40% de salas medias, 30% de salas fáciles
+            if (randomValue < 30f)
             {
-                return hardRooms; // 60% de probabilidades
+                return hardRooms; // 30% de probabilidades
             }
-            else if (randomValue >= 60 && randomValue < 90f)
+            else if (randomValue >= 30f && randomValue < 70f)
             {
-                return mediumRooms; // 30% de probabilidades
+                return mediumRooms; // 40% de probabilidades
             }
             else
             {
-                return easyRooms; // 10% de probabilidades
+                return easyRooms; // 30% de probabilidades
             }
         }
+
 
         // Por defecto, devolver salas fáciles (nunca debería llegar aquí)
         return easyRooms;

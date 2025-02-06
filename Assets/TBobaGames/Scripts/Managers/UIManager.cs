@@ -183,7 +183,6 @@ public class UIManager : MonoBehaviour
         P_Score.SetActive(false);
         P_GameOver.SetActive(false);
         P_InGame.SetActive(true);
-
     }
 
     private void StartGameOverSequence()
@@ -193,6 +192,7 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator ShowGameOverAfterDelay(float delay)
     {
+        ButtonPause.SetActive(false);
         yield return new WaitForSeconds(delay);
         ShowGameOverUI();
 
