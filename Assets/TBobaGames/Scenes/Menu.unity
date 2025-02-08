@@ -7920,6 +7920,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ColorPallete-Scroll
       objectReference: {fileID: 0}
+    - target: {fileID: 7007763494034402097, guid: 573626dd1ddd14649ae5b96a5a3de4ea, type: 3}
+      propertyPath: currencyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7674296288066721889, guid: 573626dd1ddd14649ae5b96a5a3de4ea, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

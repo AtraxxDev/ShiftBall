@@ -57,6 +57,7 @@ public class ShieldPowerUp : PowerUpBase
             if (sprite != null)
             {
                 sprite.enabled = isEnabled; // Activa o desactiva el sprite
+
             }
         }
         else
