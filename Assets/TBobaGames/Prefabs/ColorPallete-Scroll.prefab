@@ -49,8 +49,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -2140.295}
-  m_SizeDelta: {x: 865.77, y: 4280.5884}
+  m_AnchoredPosition: {x: 0, y: -2148.462}
+  m_SizeDelta: {x: 865.77, y: 4296.923}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5269810525340431391
 MonoBehaviour:
@@ -362,6 +362,10 @@ PrefabInstance:
       propertyPath: itemKey
       value: Palette_2
       objectReference: {fileID: 0}
+    - target: {fileID: 4379171206458741832, guid: 8d6c1a956eb566c44a95013c9d2bde75, type: 3}
+      propertyPath: currencyType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6301091701767345943, guid: 8d6c1a956eb566c44a95013c9d2bde75, type: 3}
       propertyPath: m_Name
       value: Pallete_ShopItem (2)
@@ -479,6 +483,10 @@ PrefabInstance:
     - target: {fileID: 4379171206458741832, guid: 8d6c1a956eb566c44a95013c9d2bde75, type: 3}
       propertyPath: itemKey
       value: Palette_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4379171206458741832, guid: 8d6c1a956eb566c44a95013c9d2bde75, type: 3}
+      propertyPath: currencyType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6301091701767345943, guid: 8d6c1a956eb566c44a95013c9d2bde75, type: 3}
       propertyPath: m_Name
@@ -1912,6 +1920,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallete_ShopItem
       objectReference: {fileID: 0}
+    - target: {fileID: 7769220293664773358, guid: 8d6c1a956eb566c44a95013c9d2bde75, type: 3}
+      propertyPath: m_Color.b
+      value: 0.9254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 7769220293664773358, guid: 8d6c1a956eb566c44a95013c9d2bde75, type: 3}
+      propertyPath: m_Color.g
+      value: 0.372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 7769220293664773358, guid: 8d6c1a956eb566c44a95013c9d2bde75, type: 3}
+      propertyPath: m_Color.r
+      value: 0.38394925
+      objectReference: {fileID: 0}
     - target: {fileID: 8473066163276307507, guid: 8d6c1a956eb566c44a95013c9d2bde75, type: 3}
       propertyPath: m_Type
       value: 0
@@ -1920,6 +1940,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: c7d6d3ae4a461c049a4be0ef445b0fdb, type: 3}
+    - target: {fileID: 8953268710695548679, guid: 8d6c1a956eb566c44a95013c9d2bde75, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2021,6 +2045,10 @@ PrefabInstance:
     - target: {fileID: 4379171206458741832, guid: 8d6c1a956eb566c44a95013c9d2bde75, type: 3}
       propertyPath: itemKey
       value: Palette_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4379171206458741832, guid: 8d6c1a956eb566c44a95013c9d2bde75, type: 3}
+      propertyPath: currencyType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6301091701767345943, guid: 8d6c1a956eb566c44a95013c9d2bde75, type: 3}
       propertyPath: m_Name

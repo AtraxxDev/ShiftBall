@@ -480,7 +480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3529412, g: 0.3529412, b: 0.3529412, a: 1}
+  m_Color: {r: 0.13333334, g: 0.13333334, b: 0.13333334, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -534,6 +534,7 @@ GameObject:
   - component: {fileID: 3064201628775546515}
   - component: {fileID: 7652144970999293192}
   - component: {fileID: 8498350737701928627}
+  - component: {fileID: 6799560214508731420}
   m_Layer: 5
   m_Name: btn_Buy
   m_TagString: Untagged
@@ -644,6 +645,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 6799560214508731420}
+        m_TargetAssemblyTypeName: PlaySFX, Assembly-CSharp
+        m_MethodName: PlaySoundSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 5534853832122964798}
         m_TargetAssemblyTypeName: ShopItem, Assembly-CSharp
         m_MethodName: BuyItem
@@ -656,6 +669,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6799560214508731420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5244865922337296847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91a5500919c6aae488785ddf3777ce6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7407687349031655111
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,6 +694,7 @@ GameObject:
   - component: {fileID: 2007446064316324760}
   - component: {fileID: 819295968797499992}
   - component: {fileID: 470331545159939871}
+  - component: {fileID: 1951127721178810253}
   m_Layer: 5
   m_Name: btn_Select
   m_TagString: Untagged
@@ -777,7 +803,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2007446064316324760}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6799560214508731420}
+        m_TargetAssemblyTypeName: PlaySFX, Assembly-CSharp
+        m_MethodName: PlaySoundSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &470331545159939871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,3 +831,15 @@ MonoBehaviour:
   dataID: 0
   dataType: 0
   btn: {fileID: 819295968797499992}
+--- !u!114 &1951127721178810253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7407687349031655111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91a5500919c6aae488785ddf3777ce6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

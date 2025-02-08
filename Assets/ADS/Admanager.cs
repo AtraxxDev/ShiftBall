@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Admanager : MonoBehaviour
 {
-    public void RewardDoubleCoins()
+    public void RewardMoreStars()
     {
         // Mostrar el anuncio recompensado y pasar el callback para duplicar las monedas
         Rewarded.Instance.ShowRewardedAd(OnAdWatchedMoreStars);

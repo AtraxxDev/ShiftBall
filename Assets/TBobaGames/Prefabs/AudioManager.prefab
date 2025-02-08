@@ -55,6 +55,7 @@ MonoBehaviour:
   gameOverSound: {fileID: 8300000, guid: 129db8becdad39f4f9a2b9fa714c6e14, type: 3}
   CelebrateSound: {fileID: 8300000, guid: b8a3d22d6f6f2ba4d91ca8ed7d29f513, type: 3}
   reviveSound: {fileID: 8300000, guid: 5435caad299860a48b4d07c3a34f730e, type: 3}
+  selectSound: {fileID: 8300000, guid: 4f614459b299ce444aac2dd00f58f42b, type: 3}
 --- !u!82 &492522111483484808
 AudioSource:
   m_ObjectHideFlags: 0

@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     public Action OnRevivePlayer;
 
+    public static bool IsVibrationEnabled = true;
 
     private void Awake()
     {
@@ -98,6 +99,11 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        if (IsVibrationEnabled)
+        {
+            Handheld.Vibrate();
+            Debug.Log("Vibración activada");
+        }
         AudioManager.Instance.StopMusic();
         AudioManager.Instance.PlayGameOverSound();
         SetState(GameState.GameOver);

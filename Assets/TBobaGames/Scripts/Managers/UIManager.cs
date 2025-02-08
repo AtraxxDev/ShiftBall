@@ -209,6 +209,7 @@ public class UIManager : MonoBehaviour
 
         if (timer.GetCounter() >= timer.GetMaxCounter())
         {
+            timer.StopCoroutine(timer.countdownCoroutine);
             // Mostrar panel de puntaje si ya se alcanzaron los intentos
             Debug.Log("Contador máximo alcanzado. Mostrando panel de puntaje.");
             P_Score.SetActive(true);
@@ -246,6 +247,7 @@ public class UIManager : MonoBehaviour
 
     public void DesInitilizePopUp()
     {
+        timer.StopCoroutine(timer.countdownCoroutine);
         PopUpEnd(P_Lives);
         PopUpStart(P_Score);
     }

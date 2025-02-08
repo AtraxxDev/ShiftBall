@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,17 +8,26 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance { get; private set; }
 
     [Header("Audio Sources")]
-    [SerializeField] public AudioSource backgroundMusicSource;
-    [SerializeField] private AudioSource sfxSource;
+    public AudioSource backgroundMusicSource;
+    public AudioSource sfxSource;
 
-    [Header("Audio Clips")]
+    [FoldoutGroup("Audio Clips")]
     [SerializeField] private AudioClip menuMusic;
+    [FoldoutGroup("Audio Clips")]
     [SerializeField] private AudioClip gameplayMusic;
+    [FoldoutGroup("Audio Clips")]
     [SerializeField] private AudioClip wallHitSound;
+    [FoldoutGroup("Audio Clips")]
     [SerializeField] private AudioClip coinPickupSound;
+    [FoldoutGroup("Audio Clips")]
     [SerializeField] private AudioClip gameOverSound;
+    [FoldoutGroup("Audio Clips")]
     [SerializeField] private AudioClip CelebrateSound;
+    [FoldoutGroup("Audio Clips")]
     [SerializeField] private AudioClip reviveSound;
+    [FoldoutGroup("Audio Clips")]
+    [SerializeField] private AudioClip selectSound;
+
 
     private void Awake()
     {
@@ -72,6 +82,11 @@ public class AudioManager : MonoBehaviour
     public void PlayWallHitSound()
     {
         PlaySFX(wallHitSound);
+    }
+
+    public void PlaySelectSFX()
+    {
+        PlaySFX(selectSound);
     }
 
     public void PlayCelebrationSFX()
