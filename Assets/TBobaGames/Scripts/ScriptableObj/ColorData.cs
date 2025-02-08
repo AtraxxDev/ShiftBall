@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="Color Data",menuName ="Scriptable Objects/ColorData")]
 public class ColorData : ScriptableObject
 {
-    [Header("Color Pallete")]
+    [BoxGroup("Color Pallete")]
     public List<ColorPalette> colorPaletteList;
 
     [System.Serializable]

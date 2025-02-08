@@ -77,6 +77,11 @@ public class AccesibilitySettings : MonoBehaviour
 
         PlayerPrefs.SetInt(VibrationKey, isEnabled ? (int)SettingState.On : (int)SettingState.Off);
         PlayerPrefs.Save();
+
+        if (isEnabled)
+        {
+            Handheld.Vibrate();
+        }
     }
 
 
