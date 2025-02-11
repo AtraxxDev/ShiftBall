@@ -20,6 +20,8 @@ public class AudioManager : MonoBehaviour
     [FoldoutGroup("Audio Clips")]
     [SerializeField] private AudioClip coinPickupSound;
     [FoldoutGroup("Audio Clips")]
+    [SerializeField] private AudioClip starPickupSound;
+    [FoldoutGroup("Audio Clips")]
     [SerializeField] private AudioClip gameOverSound;
     [FoldoutGroup("Audio Clips")]
     [SerializeField] private AudioClip CelebrateSound;
@@ -99,6 +101,11 @@ public class AudioManager : MonoBehaviour
         PlaySFX(coinPickupSound);
     }
 
+    public void PlayStarPickupSound()
+    {
+        PlaySFX(starPickupSound);
+    }
+
     public void PlayReviveSound()
     {
         PlaySFX(reviveSound);
@@ -118,7 +125,7 @@ public class AudioManager : MonoBehaviour
 
     public void StopMusic()
     {
-        backgroundMusicSource.Stop();
+        backgroundMusicSource.Pause();
 
     }
 

@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         QualitySettings.vSyncCount = 0;
+        AudioManager.Instance.PlayGameplayMusic();
         SetState(GameState.Paused);
     }
 
@@ -72,7 +73,6 @@ public class GameManager : MonoBehaviour
         if (CurrentState == GameState.Paused)
         {
             CoinManager.Instance.ResetCoins_StarsCollected();
-            AudioManager.Instance.PlayGameplayMusic();
             SetState(GameState.Playing);
         }
     }
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
     public void ResumeNewLive()
     {
         SetState(GameState.Playing);
-        AudioManager.Instance.backgroundMusicSource.Play();
+        AudioManager.Instance.backgroundMusicSource.UnPause();
 
 
     }
@@ -128,7 +128,6 @@ public class GameManager : MonoBehaviour
 
         // Reinicia la escena actual
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        AudioManager.Instance.PlayGameplayMusic();
     }
 
     public void ReturnToMainMenu()

@@ -52,6 +52,7 @@ MonoBehaviour:
   gameplayMusic: {fileID: 8300000, guid: a9e67a9914a24654e84a85c91f706c97, type: 3}
   wallHitSound: {fileID: 8300000, guid: 7064595b61818534aa7350be2b9c2011, type: 3}
   coinPickupSound: {fileID: 8300000, guid: 8a2997b1ad33ab64eacd0bc3e466661f, type: 3}
+  starPickupSound: {fileID: 8300000, guid: 882a375561dbd4148b1bf157bb5a8300, type: 3}
   gameOverSound: {fileID: 8300000, guid: 129db8becdad39f4f9a2b9fa714c6e14, type: 3}
   CelebrateSound: {fileID: 8300000, guid: b8a3d22d6f6f2ba4d91ca8ed7d29f513, type: 3}
   reviveSound: {fileID: 8300000, guid: 5435caad299860a48b4d07c3a34f730e, type: 3}
@@ -68,7 +69,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.127
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0

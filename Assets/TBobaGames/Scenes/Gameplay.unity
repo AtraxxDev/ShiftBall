@@ -7384,18 +7384,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AdMaster
       objectReference: {fileID: 0}
-    - target: {fileID: 975825731914307620, guid: 95c7a8f22e4e73247b4b44ea41069ad2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671195736405301417, guid: 95c7a8f22e4e73247b4b44ea41069ad2, type: 3}
-      propertyPath: adButtonDoubleCoins
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4599993384252049664, guid: 95c7a8f22e4e73247b4b44ea41069ad2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5095075851588862133, guid: 95c7a8f22e4e73247b4b44ea41069ad2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.9320053
@@ -7434,10 +7422,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5095075851588862133, guid: 95c7a8f22e4e73247b4b44ea41069ad2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9046823507026555718, guid: 95c7a8f22e4e73247b4b44ea41069ad2, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
