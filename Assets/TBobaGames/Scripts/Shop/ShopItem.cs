@@ -35,15 +35,15 @@ public class ShopItem : MonoBehaviour
     [FoldoutGroup("Colors")]
     [SerializeField, ColorUsage(false)] private Color adButtonColor = new Color32(155, 95, 236, 255);
 
-    private static ShopItem currentSelectedItemPalette;
-    private static ShopItem currentSelectedItemTrail;
-    private static ShopItem currentSelectedItemExplosion;
+    private static ShopItem _currentSelectedItemPalette;
+    private static ShopItem _currentSelectedItemTrail;
+    private static ShopItem _currentSelectedItemExplosion;
 
-    private Image selectButtonImage;
+    private Image _selectButtonImage;
 
     private void Start()
     {
-        selectButtonImage = selectButton.GetComponent<Image>();
+        _selectButtonImage = selectButton.GetComponent<Image>();
         selectButton.onClick.AddListener(SelectItem);
         buyButton.onClick.AddListener(BuyItem);
 
@@ -110,22 +110,22 @@ public class ShopItem : MonoBehaviour
         switch (category)
         {
             case ItemCategory.Palette:
-                currentSelectedItemPalette = item;
+                _currentSelectedItemPalette = item;
                 break;
             case ItemCategory.Trail:
-                currentSelectedItemTrail = item;
+                _currentSelectedItemTrail = item;
                 break;
             case ItemCategory.Explosion:
-                currentSelectedItemExplosion = item;
+                _currentSelectedItemExplosion = item;
                 break;
         }
     }
 
     private ShopItem GetCurrentSelectedItem() => category switch
     {
-        ItemCategory.Palette => currentSelectedItemPalette,
-        ItemCategory.Trail => currentSelectedItemTrail,
-        ItemCategory.Explosion => currentSelectedItemExplosion,
+        ItemCategory.Palette => _currentSelectedItemPalette,
+        ItemCategory.Trail => _currentSelectedItemTrail,
+        ItemCategory.Explosion => _currentSelectedItemExplosion,
         _ => null
     };
 
@@ -146,7 +146,6 @@ public class ShopItem : MonoBehaviour
 
     private bool HandleAdPurchase()
     {
-        Rewarded.Instance.ShowRewardedAd(OnAdWatched);
         return false; // Defer purchase until the ad is watched
     }
 
@@ -206,7 +205,7 @@ public class ShopItem : MonoBehaviour
             spriteADS?.gameObject.SetActive(true);
             costText.gameObject.SetActive(false);
             buyButton.GetComponent<Image>().color = adButtonColor;
-            buyButton.interactable = true; // Aseguramos que el botón siempre sea interactuable para anuncios
+            buyButton.interactable = true; // Aseguramos que el botï¿½n siempre sea interactuable para anuncios
         }
         else
         {
@@ -218,7 +217,7 @@ public class ShopItem : MonoBehaviour
     }
 
 
-    private void HighlightSelectButton(Color color) => selectButtonImage.color = color;
+    private void HighlightSelectButton(Color color) => _selectButtonImage.color = color;
 
     private void OnCurrencyChanged(int _) => UpdateUI();
 }
