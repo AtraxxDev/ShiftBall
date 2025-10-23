@@ -1,0 +1,16 @@
+{
+    "name": "AtraxxDev.HuePop.Audio",
+    "rootNamespace": "",
+    "references": [
+        "GUID:38dccafe9a9a47142bd3527ac2aaa0e8"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,18 @@
+{
+    "name": "AtraxxDev.HuePop.UI",
+    "rootNamespace": "",
+    "references": [
+        "GUID:38dccafe9a9a47142bd3527ac2aaa0e8",
+        "GUID:85d8e5046d1424e4fbb2c48d86e90683",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

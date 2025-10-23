@@ -20,29 +20,54 @@ MonoBehaviour:
     - bb17963a48b616a4bb46fb17d2a479c8
     - 99f9ea9221167e740b5e4ea022bba389
     - ed9617d6c681fd04f917c7fc65e10d4b
+    - 94698a88b5171bb4ab764c2a561d840e
+    - 64109580e6ecdca47bc68ccf9825753c
+    - 0c8ae44a7d5e55747b906382fb31eb4e
+    - b52ca85778363664a95386b204820aec
+    - 05ad2240a96f8984da416fb9c2c92f1d
     values:
     - iconNameOrGuid: 
       colorIndex: 4
       isIconRecursive: 0
       isColorRecursive: 0
-    - iconNameOrGuid: Prefab Icon
-      colorIndex: 0
-      isIconRecursive: 1
+    - iconNameOrGuid: 
+      colorIndex: 6
+      isIconRecursive: 0
       isColorRecursive: 0
     - iconNameOrGuid: AudioClip Icon
-      colorIndex: 0
+      colorIndex: 2
       isIconRecursive: 1
       isColorRecursive: 0
     - iconNameOrGuid: cs Script Icon
       colorIndex: 0
       isIconRecursive: 1
       isColorRecursive: 0
-    - iconNameOrGuid: RawImage Icon
-      colorIndex: 0
-      isIconRecursive: 1
+    - iconNameOrGuid: 
+      colorIndex: 1
+      isIconRecursive: 0
       isColorRecursive: 0
     - iconNameOrGuid: 
       colorIndex: 9
       isIconRecursive: 0
       isColorRecursive: 1
+    - iconNameOrGuid: 
+      colorIndex: 5
+      isIconRecursive: 0
+      isColorRecursive: 0
+    - iconNameOrGuid: 
+      colorIndex: 10
+      isIconRecursive: 0
+      isColorRecursive: 0
+    - iconNameOrGuid: 
+      colorIndex: 3
+      isIconRecursive: 0
+      isColorRecursive: 0
+    - iconNameOrGuid: 
+      colorIndex: 3
+      isIconRecursive: 0
+      isColorRecursive: 0
+    - iconNameOrGuid: 
+      colorIndex: 7
+      isIconRecursive: 0
+      isColorRecursive: 0
   bookmarks: []
