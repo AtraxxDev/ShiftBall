@@ -4495,6 +4495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420032}
+  parent: {fileID: 31081454}
   easyRooms:
   - {fileID: 1619054929922645123, guid: 9f352215c77d6874c9d1a6a44fd2b7f8, type: 3}
   - {fileID: 1619054929922645123, guid: 557466ec1f01c0c4a8a76ed3b0b86479, type: 3}
@@ -4512,7 +4513,6 @@ MonoBehaviour:
   - {fileID: 1619054929922645123, guid: 4e832fae9fea1b24290d6e4dd00576d6, type: 3}
   - {fileID: 1619054929922645123, guid: 83f86498e4b91e244b4b8245e206eefc, type: 3}
   - {fileID: 1619054929922645123, guid: 8aa89ed38f333f94dbe1b55c9cfaef9d, type: 3}
-  parent: {fileID: 31081454}
 --- !u!114 &1109348416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6771,6 +6771,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921239104}
   m_CullTransparentMesh: 1
+--- !u!1 &1936052221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1936052223}
+  - component: {fileID: 1936052222}
+  m_Layer: 0
+  m_Name: DificultyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1936052222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936052221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd11d1caa81dd745838f84bd6811054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxScoreForFullDifficulty: 1000
+  difficultyCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1936052223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936052221}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 720, y: 1280, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1960644550
 GameObject:
   m_ObjectHideFlags: 0
@@ -7416,6 +7485,7 @@ SceneRoots:
   - {fileID: 1541289507}
   - {fileID: 1203896669}
   - {fileID: 185430098}
+  - {fileID: 1936052223}
   - {fileID: 327656070}
   - {fileID: 1109348417}
   - {fileID: 31081454}

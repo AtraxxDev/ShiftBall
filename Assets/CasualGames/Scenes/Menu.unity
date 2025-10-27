@@ -3109,6 +3109,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a5500919c6aae488785ddf3777ce6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &953935576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 953935578}
+  - component: {fileID: 953935577}
+  m_Layer: 0
+  m_Name: TrailManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &953935577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953935576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f01104f367a24304ab5ced226c604261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentTrailID: 0
+--- !u!4 &953935578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953935576}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 720, y: 1280, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &973599864
 GameObject:
   m_ObjectHideFlags: 0
@@ -12033,3 +12078,4 @@ SceneRoots:
   - {fileID: 672728658}
   - {fileID: 1110726177}
   - {fileID: 1851811920}
+  - {fileID: 953935578}

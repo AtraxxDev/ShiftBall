@@ -1,75 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class SpawnRoom : MonoBehaviour
 {
     public Transform cam;
+    public Transform parent;
+    
+    [Title("Difficulty Prefabs")]
     public GameObject[] easyRooms;  
     public GameObject[] mediumRooms; 
     public GameObject[] hardRooms;  
-    public Transform parent;
+
+    private float _roomHeight = 10.5f;
 
     public void GenerateRooms()
     {
-        if (gameObject.transform.position.y - 12 < cam.position.y)
+        if (transform.position.y - 12 < cam.position.y)
         {
-            GameObject[] currentRooms = GetRoomListBasedOnScore();
+            GameObject nextRoom = GetRoomBasedOnDifficulty();
 
-            int randomIndex = Random.Range(0, currentRooms.Length);
-            GameObject newRoom = Instantiate(currentRooms[randomIndex], parent);
-            newRoom.transform.position = gameObject.transform.position;
+            GameObject newRoom = Instantiate(nextRoom, parent);
+            newRoom.transform.position = transform.position;
 
-            gameObject.transform.Translate(0, 10.5f, 0);
+            transform.Translate(0, _roomHeight, 0);
         }
     }
 
-    private GameObject[] GetRoomListBasedOnScore()
+    private GameObject GetRoomBasedOnDifficulty()
     {
-        int score = ScoreManager.Instance.Score;
-        float randomValue = Random.value * 100f; // Genera un número aleatorio entre 0 y 100
+        float diff = DificultyManager.Instance.GetDifficult();
+        
+        // Pesos que cambian progresivamente
+        float easyWeight = Mathf.Lerp(1f, 0.2f, diff); // cada vez menos
+        float mediumWeight = Mathf.Sin(diff * Mathf.PI); // sube al medio
+        float hardWeight = Mathf.Lerp(0f, 1f, diff); // cada vez mas
+        
+        float total = easyWeight + mediumWeight + hardWeight;
+        float rand = Random.value * total;  
+        
+        if (rand < easyWeight)
+            return easyRooms[Random.Range(0, easyRooms.Length)];
+        else if  (rand < easyWeight + mediumWeight)
+            return mediumRooms[Random.Range(0, mediumRooms.Length)];
+        else
+            return hardRooms[Random.Range(0, hardRooms.Length)];
 
-        print(randomValue);
-
-        if (score < 120) // Rango fácil: 100% de salas fáciles
-        {
-            return easyRooms;
-        }
-        else if (score >= 120 && score < 300) // Rango medio
-        {
-            // Rango medio: 70% de salas medias, 30% de salas fáciles
-            if (randomValue < 50f)
-            {
-                return mediumRooms; // 70% de probabilidades
-            }
-            else
-            {
-                return easyRooms; // 30% de probabilidades
-            }
-        }
-        else if (score >= 300) // Rango difícil
-        {
-            // Rango difícil: 30% de salas difíciles, 40% de salas medias, 30% de salas fáciles
-            if (randomValue < 30f)
-            {
-                return hardRooms; // 30% de probabilidades
-            }
-            else if (randomValue >= 30f && randomValue < 70f)
-            {
-                return mediumRooms; // 40% de probabilidades
-            }
-            else
-            {
-                return easyRooms; // 30% de probabilidades
-            }
-        }
-
-
-        // Por defecto, devolver salas fáciles (nunca debería llegar aquí)
-        return easyRooms;
     }
-
-
     private GameObject[] CombineRooms(GameObject[] rooms1, GameObject[] rooms2)
     {
         List<GameObject> combined = new List<GameObject>();

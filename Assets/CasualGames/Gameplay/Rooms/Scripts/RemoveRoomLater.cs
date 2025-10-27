@@ -13,14 +13,7 @@ public class RemoveRoomLater : MonoBehaviour
 
     private void Update()
     {
-        DestroyRoom();
-    }
-
-    private void DestroyRoom()
-    {
-        if (gameObject.transform.position.y + 16 < cam.position.y)
-        {
+        if (transform.position.y + 16 < cam.position.y)
             Destroy(gameObject);
-        }
     }
 }
