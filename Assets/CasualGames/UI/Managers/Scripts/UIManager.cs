@@ -89,7 +89,7 @@ public class UIManager : MonoBehaviour
     {
         UpdateHighScore(ScoreManager.Instance.HighScore);
         UpdateTotalCoins(CoinManager.Instance.Coins);
-        UpdateTotalStars(CoinManager.Instance.Stars);
+        UpdateTotalStars(CoinManager.Instance.Diamonds);
     }
 
     private void UpdateText(TMP_Text textElement, int newValue, string prefix = "")
@@ -130,12 +130,12 @@ public class UIManager : MonoBehaviour
         {
             text_Combo.text = "Combo x" + newCombo;
 
-            // Resetea la escala inicial para evitar acumulación de animaciones
+            // Resetea la escala inicial para evitar acumulaciï¿½n de animaciones
             text_Combo.transform.localScale = Vector3.one;
 
-            // Efecto pequeño de "pum"
-            float scaleMultiplier = 1.1f; // Incremento pequeño
-            if (newCombo % 5 == 0) // Efecto más grande cada 5 combos
+            // Efecto pequeï¿½o de "pum"
+            float scaleMultiplier = 1.1f; // Incremento pequeï¿½o
+            if (newCombo % 5 == 0) // Efecto mï¿½s grande cada 5 combos
             {
                 scaleMultiplier = 1.3f;
             }
@@ -144,7 +144,7 @@ public class UIManager : MonoBehaviour
                      .setEase(LeanTweenType.easeOutBack)
                      .setOnComplete(() =>
                      {
-                         // Vuelve a su tamaño original
+                         // Vuelve a su tamaï¿½o original
                          LeanTween.scale(text_Combo.gameObject, Vector3.one, 0.2f)
                                   .setEase(LeanTweenType.easeInOutQuad);
                      });
@@ -156,7 +156,7 @@ public class UIManager : MonoBehaviour
                      .setEase(LeanTweenType.easeInBack)
                      .setOnComplete(() =>
                      {
-                         // Borra el texto cuando la animación termine
+                         // Borra el texto cuando la animaciï¿½n termine
                          text_Combo.text = "";
                      });
         }
@@ -172,7 +172,7 @@ public class UIManager : MonoBehaviour
     private void OnCountdownComplete()
     {
         countdownText.text = "0";
-        Debug.Log("¡Cuenta regresiva finalizada!");
+        Debug.Log("ï¿½Cuenta regresiva finalizada!");
         DesInitilizePopUp();
     }
 
@@ -211,7 +211,7 @@ public class UIManager : MonoBehaviour
         {
             timer.StopCoroutine(timer.countdownCoroutine);
             // Mostrar panel de puntaje si ya se alcanzaron los intentos
-            Debug.Log("Contador máximo alcanzado. Mostrando panel de puntaje.");
+            Debug.Log("Contador mï¿½ximo alcanzado. Mostrando panel de puntaje.");
             P_Score.SetActive(true);
         }
         else
@@ -222,7 +222,7 @@ public class UIManager : MonoBehaviour
             P_Lives.SetActive(true);
         }
 
-        // Animación del panel Game Over
+        // Animaciï¿½n del panel Game Over
         P_GameOver.transform.localScale = Vector3.zero;
         LeanTween.scale(P_GameOver, Vector3.one, 0.5f)
                  .setEase(LeanTweenType.easeOutBack);

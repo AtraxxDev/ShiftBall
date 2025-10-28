@@ -136,7 +136,7 @@ public class ShopItem : MonoBehaviour
         bool purchaseSuccessful = currencyType switch
         {
             CurrencyType.Coins => CoinManager.Instance.SpendCoins(cost),
-            CurrencyType.Stars => CoinManager.Instance.SpendStars(cost),
+            CurrencyType.Diamonds => CoinManager.Instance.SpendDiamonds(cost),
             CurrencyType.AD => HandleAdPurchase(),
             _ => false
         };
@@ -212,7 +212,7 @@ public class ShopItem : MonoBehaviour
             spriteADS?.gameObject.SetActive(false);
             costText.text = $"{cost} {(currencyType == CurrencyType.Coins ? "Coins" : "Stars")}";
             buyButton.interactable = (currencyType == CurrencyType.Coins && CoinManager.Instance.Coins >= cost) ||
-                                      (currencyType == CurrencyType.Stars && CoinManager.Instance.Stars >= cost);
+                                      (currencyType == CurrencyType.Diamonds && CoinManager.Instance.Diamonds >= cost);
         }
     }
 

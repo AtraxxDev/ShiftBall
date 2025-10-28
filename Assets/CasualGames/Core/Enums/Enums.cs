@@ -33,13 +33,13 @@ namespace TB_Tools
         Shield,
         Magnet,
         ExpandigWave,
-        // Añadir más tipos de power-ups según sea necesario
+        // Aï¿½adir mï¿½s tipos de power-ups segï¿½n sea necesario
     }
 
     public enum CurrencyType
     {
         Coins,
-        Stars,
+        Diamonds,
         AD
     }
 

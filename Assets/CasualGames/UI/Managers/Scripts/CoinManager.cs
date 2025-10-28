@@ -9,7 +9,7 @@ public class CoinManager : MonoBehaviour
     public static CoinManager Instance;
 
     public int Coins { get; private set; }
-    public int Stars { get; private set; }
+    public int Diamonds { get; private set; }
     public int CoinsCollected { get; private set; }
     public int StarsCollected { get; private set; }
 
@@ -28,7 +28,7 @@ public class CoinManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             Coins = PlayerPrefs.GetInt("Coins",0);
-            Stars = PlayerPrefs.GetInt("Stars",0);
+            Diamonds = PlayerPrefs.GetInt("Stars",0);
         }
         else
         {
@@ -53,9 +53,9 @@ public class CoinManager : MonoBehaviour
 
     public void AddStars(int amount)
     {
-        Stars += amount;
-        OnStarsChanged?.Invoke(Stars);
-        PlayerPrefs.SetInt("Stars",Stars);
+        Diamonds += amount;
+        OnStarsChanged?.Invoke(Diamonds);
+        PlayerPrefs.SetInt("Stars",Diamonds);
         PlayerPrefs.Save();
     }
 
@@ -72,13 +72,13 @@ public class CoinManager : MonoBehaviour
         return false;
     }
 
-    public bool SpendStars(int amount)
+    public bool SpendDiamonds(int amount)
     {
-        if (Stars >= amount)
+        if (Diamonds >= amount)
         {
-            Stars -= amount;
-            OnStarsChanged?.Invoke(Stars);
-            PlayerPrefs.SetInt("Stars", Stars);
+            Diamonds -= amount;
+            OnStarsChanged?.Invoke(Diamonds);
+            PlayerPrefs.SetInt("Stars", Diamonds);
             PlayerPrefs.Save();
             return true;
         }
@@ -111,13 +111,13 @@ public class CoinManager : MonoBehaviour
     {
       
 
-        // Añade las monedas al total de monedas
+        // Aï¿½ade las monedas al total de monedas
         AddStars(stars);
 
-        // También actualiza el total de las monedas recogidas
+        // Tambiï¿½n actualiza el total de las monedas recogidas
         AddStarsCollected(stars);
 
-        Debug.Log($"Se han añadido {stars} estrellas al total.");
+        Debug.Log($"Se han aï¿½adido {stars} estrellas al total.");
     }
 
 }
