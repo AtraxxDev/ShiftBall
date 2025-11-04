@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Star : MonoBehaviour
+public class Diamond : MonoBehaviour
 {
     [SerializeField] private int starValue = 1;
     private void OnTriggerEnter2D(Collider2D collision)
