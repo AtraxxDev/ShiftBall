@@ -1,3 +1,4 @@
+using System;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -123,9 +124,15 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    public void StopMusic()
+    public void PauseMusic()
     {
         backgroundMusicSource.Pause();
+
+    }
+    
+    public void StopMusic()
+    {
+        backgroundMusicSource.Stop();
 
     }
 

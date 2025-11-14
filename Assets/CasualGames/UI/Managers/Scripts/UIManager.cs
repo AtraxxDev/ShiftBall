@@ -35,8 +35,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Combo")]
     [SerializeField] private TMP_Text text_Combo;
-
-
+    
     private void Start()
     {
         SubscribeToEvents();
@@ -232,6 +231,8 @@ public class UIManager : MonoBehaviour
     {
         GameManager.Instance.StartGame();
         ButtonPause.SetActive(true);
+        P_InGame.SetActive(true);
+        AudioManager.Instance.PlayGameplayMusic();
     }
 
     public void Restart()

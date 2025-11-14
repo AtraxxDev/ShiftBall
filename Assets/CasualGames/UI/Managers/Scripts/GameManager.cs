@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         QualitySettings.vSyncCount = 0;
-        AudioManager.Instance.PlayGameplayMusic();
+        AudioManager.Instance.PlayMenuMusic();
         SetState(GameState.Paused);
     }
 
@@ -79,12 +79,13 @@ public class GameManager : MonoBehaviour
     public void PausedGame()
     {
         SetState(GameState.Paused);
-
+        AudioManager.Instance.PauseMusic();
         OnPauseGame?.Invoke();       
     }
 
     public void ResumeGame()
     {
+        AudioManager.Instance.backgroundMusicSource.UnPause();
         SetState(GameState.Playing);
     }
 
@@ -103,7 +104,7 @@ public class GameManager : MonoBehaviour
             Handheld.Vibrate();
             Debug.Log("Vibraci�n activada");
         }
-        AudioManager.Instance.StopMusic();
+        AudioManager.Instance.PauseMusic();
         AudioManager.Instance.PlayGameOverSound();
         SetState(GameState.GameOver);
 
@@ -126,9 +127,6 @@ public class GameManager : MonoBehaviour
     public void ReturnToMainMenu()
     {
         ScoreManager.Instance.ResetScore();
-
-        // Reinicia la escena actual
-        SceneManager.LoadScene("Menu");
         AudioManager.Instance.PlayMenuMusic();
     }
 

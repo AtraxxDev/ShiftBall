@@ -106,7 +106,7 @@
                 "m_Node": {
                     "m_Id": "440f228014694d21a53b16b3e57982df"
                 },
-                "m_SlotId": 1
+                "m_SlotId": 0
             }
         },
         {
@@ -162,7 +162,7 @@
                 "m_Node": {
                     "m_Id": "440f228014694d21a53b16b3e57982df"
                 },
-                "m_SlotId": 0
+                "m_SlotId": 1
             }
         },
         {
@@ -359,10 +359,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -771.2000122070313,
-            "y": -15.99997329711914,
-            "width": 112.800048828125,
-            "height": 33.60000228881836
+            "x": -763.9999389648438,
+            "y": -2.000001907348633,
+            "width": 92.0,
+            "height": 33.99998474121094
         }
     },
     "m_Slots": [
@@ -581,7 +581,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "5096d3070c284ce3a045749fd7fd0f95",
     "m_Id": 0,
-    "m_DisplayName": "Color2",
+    "m_DisplayName": "Down",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -633,10 +633,10 @@
     "m_Guid": {
         "m_GuidSerialized": "0cc0c485-6e21-4d87-a5b6-f0ed61c38956"
     },
-    "m_Name": "Color1",
+    "m_Name": "Up",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Color1",
-    "m_DefaultReferenceName": "_Color1",
+    "m_RefNameGeneratedByDisplayName": "Up",
+    "m_DefaultReferenceName": "_Up",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -1235,10 +1235,10 @@
     "m_Guid": {
         "m_GuidSerialized": "7d7f161a-678a-4da9-8100-bf1fcdeec98c"
     },
-    "m_Name": "Color2",
+    "m_Name": "Down",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Color2",
-    "m_DefaultReferenceName": "_Color2",
+    "m_RefNameGeneratedByDisplayName": "Down",
+    "m_DefaultReferenceName": "_Down",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -1351,7 +1351,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "e92d592841fd4c0ab1e781fb2c5bdd32",
     "m_Id": 0,
-    "m_DisplayName": "Color1",
+    "m_DisplayName": "Up",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
