@@ -19,10 +19,20 @@ MonoBehaviour:
     - goDatas_byGlobalId:
         keys:
         - globalObjectIdString: GlobalObjectId_V1-2-3fc8acdd13e6c734bafef6554d6fdbcd-408544827-0
+        - globalObjectIdString: GlobalObjectId_V1-2-3fc8acdd13e6c734bafef6554d6fdbcd-1857839242-0
+        - globalObjectIdString: GlobalObjectId_V1-2-3fc8acdd13e6c734bafef6554d6fdbcd-1778224983-0
         values:
-        - colorIndex: 2
+        - colorIndex: 9
           iconNameOrGuid: 
           isIconRecursive: 0
-          isColorRecursive: 1
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: Canvas Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 1
+          iconNameOrGuid: cs Script Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
   bookmarks: []
   bookmarkedScenePaths: []

@@ -1,55 +1,70 @@
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class FadeSystem : MonoBehaviour
 {
     [BoxGroup("Fade Panel Setup")]
-    [Required, LabelText("Canvas Group Panel"), Tooltip("Assign the CanvasGroup component for the fade effect.")]
+    [Required, LabelText("Canvas Group Panel")]
     [SerializeField] private CanvasGroup fadePanel;
 
     [BoxGroup("Fade Settings")]
-    [LabelWidth(120), Tooltip("Duration of the fade transition.")]
+    [LabelWidth(120)]
     [SerializeField, Range(0.1f, 5f)] private float fadeDuration = 1f;
 
     private void Awake()
     {
         if (fadePanel == null)
         {
-            Debug.LogError("Fade Panel is not assigned. Please attach a CanvasGroup.");
+            Debug.LogError("Fade Panel is not assigned.");
             return;
         }
-        fadePanel.alpha = 0f; // Start fully faded in for initialization
+
+        fadePanel.alpha = 0f;
+        fadePanel.gameObject.SetActive(false);
     }
+
+    // ------------------ FADE IN ------------------
 
     [Button(ButtonSizes.Large), GUIColor(0.2f, 0.8f, 0.2f)]
-    public void FadeIn(System.Action onComplete = null)
+    public void FadeIn(Action onComplete = null)
     {
         fadePanel.gameObject.SetActive(true);
-        LeanTween.alphaCanvas(fadePanel, 1f, fadeDuration).setOnComplete(() =>
-        {
-            onComplete?.Invoke();
-        });
+
+        LeanTween.alphaCanvas(fadePanel, 1f, fadeDuration)
+            .setOnComplete(() =>
+            {
+                onComplete?.Invoke();
+            });
     }
+
+    // ------------------ FADE OUT ------------------
 
     [Button(ButtonSizes.Large), GUIColor(0.8f, 0.2f, 0.2f)]
-    public void FadeOut(System.Action onComplete = null)
+    public void FadeOut(Action onComplete = null)
     {
-        LeanTween.alphaCanvas(fadePanel, 0f, fadeDuration).setOnComplete(() =>
-        {
-            fadePanel.gameObject.SetActive(false);
-            onComplete?.Invoke();
-        });
+        fadePanel.gameObject.SetActive(true);
+
+        LeanTween.alphaCanvas(fadePanel, 0f, fadeDuration)
+            .setOnComplete(() =>
+            {
+                fadePanel.gameObject.SetActive(false);
+                onComplete?.Invoke();
+            });
     }
 
+    // ------------------ FADE IN → WAIT → FADE OUT ------------------
+
     [Button(ButtonSizes.Large), GUIColor(0.2f, 0.5f, 1f)]
-    public void FadeInOut(float waitTime, System.Action onComplete = null)
+    public void FadeInOut(float waitTime, Action onFadeInComplete = null)
     {
         FadeIn(() =>
         {
+            // After Fade In completes → run your logic
+            onFadeInComplete?.Invoke();
+
+            // Then wait before fading out
             Invoke(nameof(StartFadeOut), waitTime);
-            onComplete?.Invoke();
         });
     }
 
@@ -57,11 +72,4 @@ public class FadeSystem : MonoBehaviour
     {
         FadeOut();
     }
-
-    public void StartFadeInOut()
-    {
-        FadeInOut(0.5f);
-    }
-
-
 }

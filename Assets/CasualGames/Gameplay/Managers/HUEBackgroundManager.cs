@@ -22,7 +22,7 @@ public class HUEBackgroundManager : MonoBehaviour
         // Inicializa con el color actual del material
         if (gradientMaterial != null)
         {
-            currentColor = gradientMaterial.GetColor("_Color2");
+            currentColor = gradientMaterial.GetColor("_Down");
             targetColor = currentColor;
         }
     }
