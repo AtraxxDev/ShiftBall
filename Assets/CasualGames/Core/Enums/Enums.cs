@@ -9,9 +9,9 @@ namespace TB_Tools
 
     public enum ItemCategory
     {
-        Palette,
-        Trail,
-        Explosion
+        Skin,
+        Explosion,
+        Booster,
     }
 
     public enum GameState

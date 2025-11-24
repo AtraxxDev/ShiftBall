@@ -6,29 +6,27 @@ using UnityEngine;
 [HideMonoScript]
 public class ShopItemModel : ScriptableObject
 {
-    [TitleGroup("Basic Info", boldTitle: true)]
-    [HorizontalGroup("Basic Info/Split", Width = 80)]
-    [PreviewField(80), HideLabel]
+    [HorizontalGroup("Header")]
+    [PreviewField(80)]
     public Sprite Icon;
 
-    [VerticalGroup("Basic Info/Split/Right")]
+    [VerticalGroup("Header/Right")]
     [LabelWidth(100)]
     public string Id;
 
-    [VerticalGroup("Basic Info/Split/Right")]
-    [LabelWidth(100)]
-    public string DisplayName;
-
-    [TitleGroup("Shop Data", boldTitle: true)]
+    [TitleGroup("Pricing")]
     [LabelWidth(100)]
     public int Cost = 50;
 
     [LabelWidth(100)]
     public CurrencyType Currency = CurrencyType.Coins;
 
+    [TitleGroup("Category")]
     [LabelWidth(100)]
-    public ItemCategory Category = ItemCategory.Palette;
+    public ItemCategory Category = ItemCategory.Skin;
 
+    [TitleGroup("Status")]
     [LabelWidth(150)]
     public bool IsDefaultItem = false;
+    
 }

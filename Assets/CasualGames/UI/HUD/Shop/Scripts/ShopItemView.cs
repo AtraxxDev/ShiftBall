@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,95 +7,84 @@ using UnityEngine.UI;
 [HideMonoScript]
 public class ShopItemView : MonoBehaviour
 {
-    [TitleGroup("UI Elements", boldTitle: true)]
-    [BoxGroup("UI Elements/Buttons", centerLabel: true)]
-    [SerializeField, Required, LabelText("Buy Button")] private Button buyButton;
+    [Title("UI")]
+    [SerializeField, Required] private Button mainButton;
+    [SerializeField, Required] private Image icon;
+    [SerializeField, Required] private TMP_Text costText;
+    [SerializeField, Required] private GameObject checkmarkObject; 
+    [SerializeField, Required] private GameObject currencyIcon; 
 
-    [BoxGroup("UI Elements/Buttons")]
-    [SerializeField, Required, LabelText("Select Button")] private Button selectButton;
+    [Title("Data")]
+    [InlineEditor] 
+    [SerializeField, Required] private ShopItemModel itemData;
 
-    [BoxGroup("UI Elements/Text & Icon", centerLabel: true)]
-    [SerializeField, Required, LabelText("Cost Text")] private TMP_Text costText;
+    private void OnEnable()
+    {
+        mainButton.onClick.AddListener(OnButtonClicked);
+        EventManager.StartListening("OnItemPurchased",OnItemPurchased);
+        EventManager.StartListening("OnItemSelected",OnItemSelected);
+        RefreshUI();
+    }
 
-    [BoxGroup("UI Elements/Text & Icon")]
-    [SerializeField, Required, LabelText("Item Icon")] private Image icon;
-
-    [TitleGroup("Data", boldTitle: true)]
-    [InlineEditor(InlineEditorModes.GUIOnly)]
-    [SerializeField, Required, LabelText("Item Data (Scriptable)")]
-    private ShopItemModel itemData;
-
-    [TitleGroup("Configuration", boldTitle: true)]
-    [BoxGroup("Configuration/Colors", centerLabel: true)]
-    [SerializeField, ColorUsage(false), LabelText("Selected Color")]
-    private Color selectedColor = new Color32(100, 200, 255, 255);
-
-    [BoxGroup("Configuration/Colors")]
-    [SerializeField, ColorUsage(false), LabelText("Default Color")]
-    private Color defaultColor = Color.white;
-
-    private ShopManager shopManager;
+    private void OnDisable()
+    {
+        mainButton.onClick.RemoveListener(OnButtonClicked);
+        EventManager.StopListening("OnItemPurchased",OnItemPurchased);
+        EventManager.StopListening("OnItemSelected",OnItemSelected);
+    }
     
-    // --- Runtime State (Visible but ReadOnly) ---
-    [TitleGroup("Runtime State", boldTitle: true)]
-    [ShowInInspector, ReadOnly, LabelText("Is Unlocked")]
-    private bool IsUnlocked => shopManager != null && shopManager.IsUnlocked(itemData.Id);
+    
 
-    [ShowInInspector, ReadOnly, LabelText("Is Selected")]
-    private bool IsSelected => shopManager != null && shopManager.IsSelected(itemData.Id);
-
-    // ------------------------------ Public API ------------------------------
-    public ShopItemModel GetItemData() => itemData;
-
-    [Button("Initialize Item", ButtonSizes.Large)]
-    public void Init(ShopManager manager)
+    private void OnButtonClicked()
     {
-        shopManager = manager;
-
-        buyButton.onClick.RemoveAllListeners();
-        buyButton.onClick.AddListener(OnBuyClicked);
-
-        selectButton.onClick.RemoveAllListeners();
-        selectButton.onClick.AddListener(OnSelectClicked);
-
-        Refresh();
+        if(!ShopManager.Instance.IsPurchased(itemData.Id))
+            ShopManager.Instance.BuyItem(itemData);
+        else
+            ShopManager.Instance.SelectItem(itemData);
     }
 
-    [Button("Refresh UI", ButtonSizes.Medium)]
-    public void Refresh()
+    private void OnItemPurchased(object param)
     {
-        if (itemData == null || shopManager == null)
-        {
-            Debug.LogWarning($"[{name}] ShopItemView not initialized correctly.");
-            return;
-        }
+        // if(param is ShopItemModel purchasedItem && purchasedItem.Id == itemData.Id)
+            RefreshUI();
+    }
 
-        bool unlocked = IsUnlocked;
-        bool selected = IsSelected;
+    private void OnItemSelected(object param)
+    {
+        RefreshUI();
+    }
 
-        buyButton.gameObject.SetActive(!unlocked);
-        selectButton.gameObject.SetActive(unlocked);
-
-        costText.text = selected ? "Selected" : (unlocked ? "Unlocked" : $"{itemData.Cost} {itemData.Currency}");
+    private void RefreshUI()
+    {
         icon.sprite = itemData.Icon;
-        selectButton.image.color = selected ? selectedColor : defaultColor;
-    }
 
-    private void OnBuyClicked()
-    {
-        if (shopManager.TryBuy(itemData.Id))
+        bool isPurchased = ShopManager.Instance.IsPurchased(itemData.Id);
+        bool isSelected = ShopManager.Instance.IsSelected(itemData.Id);
+
+        // Mostrar checkmark solo si está seleccionado
+        checkmarkObject.SetActive(isSelected);
+
+        // Mostrar moneda solo si no está comprado
+        currencyIcon.SetActive(!isPurchased);
+
+        // Lógica del texto del costo:
+        // - Si está seleccionado -> vacío
+        // - Si ya fue comprado pero no seleccionado -> vacío
+        // - Si no está comprado -> mostrar costo
+        if (isPurchased || isSelected)
         {
-            Refresh();
+            costText.text = "";
+            costText.color = Color.white; // el color no importa, está vacío
         }
         else
         {
-            Debug.Log($"[ShopItemView] Purchase failed for {itemData.Id}");
+            costText.text = itemData.Cost.ToString();
+
+            // Si no hay suficiente currency, mostrar en rojo
+            bool canBuy = ShopManager.Instance.currencyService.GetBalance(itemData.Currency) >= itemData.Cost;
+            costText.color = canBuy ? Color.white : Color.red;
         }
     }
 
-    private void OnSelectClicked()
-    {
-        shopManager.SelectItem(itemData.Id);
-        Refresh();
-    }
+
 }

@@ -1,110 +1,110 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using TB_Tools;
+using UnityEditor.Overlays;
+using UnityEngine.Serialization;
 
 [HideMonoScript]
 public class ShopManager : MonoBehaviour
 {
-    [Title("Shop Setup")]
-    [SerializeField, Required, LabelText("Currency Service")]
-    private CurrencyService currencyService;
+    public static ShopManager Instance {  get; private set; }
+    
+    [Title("References")]
+    public ShopDatabase shopDatabase;
+    public CurrencyService currencyService;
+    [FormerlySerializedAs("playerPreview")] [SerializeField] private PlayerPreview previewPlayer;
+    
+    private HashSet<string> _purchasedItems = new HashSet<string>();
+    private string _selectedItemId;
 
-    [SerializeField, Required, LabelText("Save Service (Optional)")]
-    private PlayerPrefsSaveService saveService;
-
-    [Title("Registered Views")]
-    [SerializeField, Required, LabelText("Shop Item Views")]
-    private List<ShopItemView> shopItemViews = new();
-
-    private readonly Dictionary<string, ShopItemModel> items = new();
-    private string selectedItemId;
-
-    public bool IsSelected(string id) => selectedItemId == id;
-
+    
     private void Awake()
     {
-        InitializeShop();
+        if (Instance == null) Instance = this;
+        else Destroy(this);
+        
+        LoadData();
     }
-
-    [Button("Initialize Shop", ButtonSizes.Large)]
-    private void InitializeShop()
+    
+    public void PrintPurchasedItems()
     {
-        items.Clear();
-
-        foreach (var view in shopItemViews)
+        Debug.Log("Items comprados:");
+        foreach (var id in _purchasedItems)
         {
-            if (view == null) continue;
-
-            var data = view.GetItemData();
-            if (data == null) continue;
-
-            items[data.Id] = data;
-            view.Init(this);
+            Debug.Log(id);
         }
-
-        // ---- Persistencia de selección ----
-        selectedItemId = PlayerPrefs.GetString("SelectedItem", null);
-
-        if (string.IsNullOrEmpty(selectedItemId))
-        {
-            foreach (var item in items.Values)
-            {
-                if (item.IsDefaultItem)
-                {
-                    selectedItemId = item.Id;
-                    PlayerPrefs.SetString("SelectedItem", item.Id);
-                    break;
-                }
-            }
-        }
-
-        // Refrescar todas las vistas
-        foreach (var view in shopItemViews)
-        {
-            view.Refresh();
-        }
-
-        Debug.Log($"Shop initialized with {items.Count} items.");
     }
 
 
-    public bool TryBuy(string id)
+    private void LoadData()
     {
-        if (!items.ContainsKey(id)) return false;
-
-        if (IsUnlocked(id)) return false;
-
-        if (currencyService.TrySpend(items[id].Currency, items[id].Cost))
+        print("Loading Shop Data...");
+        
+        _selectedItemId = PlayerPrefs.GetString("SelectedItemId",GetDefaultItem().Id);
+        string savedPurchased = PlayerPrefs.GetString("PurchasedItemId","");
+        if (!string.IsNullOrEmpty(savedPurchased))
         {
-            saveService?.SaveBool(id, true); // marca desbloqueado en runtime/save
-            //RefreshAllViews();
-            return true;
+            _purchasedItems = new  HashSet<string>(savedPurchased.Split(',')); 
         }
-        return false;
+
+        if (!_purchasedItems.Contains(_selectedItemId))
+            _purchasedItems.Add(_selectedItemId);
+        
+        print("Shop Data loaded successfully.");
+        
+        PrintPurchasedItems();
+        
     }
 
-
-    public void SelectItem(string id)
+    private void SaveData()
     {
-        if (!IsUnlocked(id))
+        PlayerPrefs.SetString("SelectedItemId", _selectedItemId);
+        PlayerPrefs.SetString("PurchasedItemId", string.Join(",", _purchasedItems));
+        PlayerPrefs.Save();
+    }
+
+    public ShopItemModel GetDefaultItem()
+    {
+        foreach (var item in shopDatabase.items)
         {
-            Debug.Log($"Cannot select locked item: {id}");
+            if(item.IsDefaultItem) return item;
+        }
+
+        return shopDatabase.items[0];
+    }
+    
+    public bool IsPurchased(string itemId) => _purchasedItems.Contains(itemId);
+    public bool IsSelected(string itemId) => _selectedItemId == itemId;
+
+    public void BuyItem(ShopItemModel item)
+    {
+        if (IsPurchased(item.Id)) return;
+
+        // Validacion si el jugador tiene suficiente currency
+
+        bool canBuy = currencyService.TrySpend(item.Currency, item.Cost);
+        
+        if (!canBuy)
+        {
+            Debug.Log("No tienes suficiente " + item.Currency + " para comprar " + item.Id);
             return;
         }
-
-        selectedItemId = id;
-        PlayerPrefs.SetString("SelectedItem", id);
-        PlayerPrefs.Save();
-
-        foreach (var view in shopItemViews)
-        {
-            view.Refresh();
-        }
-        Debug.Log($"Selected item: {id}");
+        
+        _purchasedItems.Add(item.Id);
+        SaveData();
+        EventManager.TriggerEvent("OnItemPurchased",item);
     }
 
-    public bool IsUnlocked(string id)
+    public void SelectItem(ShopItemModel item)
     {
-        return items.ContainsKey(id) && (items[id].IsDefaultItem || PlayerPrefs.GetInt(id, 0) == 1);
+        if(!IsPurchased(item.Id)) return;
+        _selectedItemId = item.Id;
+        SaveData();
+        
+        EventManager.TriggerEvent("OnItemSelected",item);
     }
+    
+    
 }
