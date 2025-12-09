@@ -1,4 +1,5 @@
 using System.Collections;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class ShakeCamera : MonoBehaviour
@@ -6,39 +7,43 @@ public class ShakeCamera : MonoBehaviour
     private Transform cameraTransform;
     private Vector3 initialPosition;
 
-    public float shakeDuration = 0.8f;
-    public float shakeMagnitude = 0.05f;
+    public float shakeDuration = 0.4f;
+    public float shakeMagnitude = 0.08f;
+
+    private Coroutine shakeRoutine;
 
     private void Start()
     {
         cameraTransform = Camera.main.transform;
-        initialPosition = cameraTransform.position;
+        initialPosition = cameraTransform.localPosition;
     }
 
+    [Button]
     public void Shake()
     {
-        StopAllCoroutines();
-        StartCoroutine(ShakeCoroutine());
+        if (shakeRoutine != null)
+            StopCoroutine(shakeRoutine);
+
+        shakeRoutine = StartCoroutine(ShakeCoroutine());
     }
 
     private IEnumerator ShakeCoroutine()
     {
-        // Guardar la posición inicial en el momento del sacudón
         Vector3 originalPosition = cameraTransform.position;
-
+        
         float elapsed = 0f;
 
         while (elapsed < shakeDuration)
         {
-            float x = Random.Range(-1f, 1f) * shakeMagnitude;
             float y = Random.Range(-1f, 1f) * shakeMagnitude;
 
-            cameraTransform.position = originalPosition + new Vector3(x, y, 0);
+            cameraTransform.position = originalPosition + new Vector3(0, y, 0);
 
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        // No restablecer la posición original; la cámara mantiene la posición final
+        //cameraTransform.localPosition = initialPosition; // regresar
+        shakeRoutine = null;
     }
 }

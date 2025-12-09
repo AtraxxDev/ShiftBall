@@ -6142,7 +6142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shakeDuration: 0.8
-  shakeMagnitude: 0.05
+  shakeMagnitude: 0.2
 --- !u!1 &519869912
 GameObject:
   m_ObjectHideFlags: 0
@@ -24344,6 +24344,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6673626033853392520, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
+      propertyPath: shakeCamera
+      value: 
+      objectReference: {fileID: 519420034}
     - target: {fileID: 8045826080229567226, guid: e849e25b2ae4fd749ac14e6aeab48386, type: 3}
       propertyPath: m_Name
       value: Player
