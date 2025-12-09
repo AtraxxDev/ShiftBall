@@ -27,7 +27,7 @@ public class ChangeData : MonoBehaviour
 
             case DataType.ParticleEffect:
                 // Asumiendo que ParticleManager es una clase que maneja los efectos de part�culas
-                ParticleManager.Instance.ChangeParticleEffectID(dataID);
+                //ParticleManager.Instance.ChangeParticleEffectID(dataID);
                 break;
         }
     }

@@ -6,9 +6,6 @@ public class ParticleManager : MonoBehaviour
 
     [SerializeField] private ParticleData particleData;
 
-    public delegate void ParticleEffectChangedHandler(int newParticleEffectID);
-    public event ParticleEffectChangedHandler OnParticleEffectChanged;
-
     private void Awake()
     {
         if (Instance == null)
@@ -22,7 +19,7 @@ public class ParticleManager : MonoBehaviour
         }
     }
 
-    public void PlayParticleEffect(int id, Vector3 position)
+    public void PlayParticleEffect(string id, Vector3 position)
     {
         ParticleSystem effect = particleData.GetParticleSystem(id);
         if (effect != null)
@@ -33,12 +30,13 @@ public class ParticleManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"ParticleEffect with ID {id} not found.");
+            Debug.LogWarning($"ParticleEffect with ID '{id}' not found.");
         }
     }
 
-    public void ChangeParticleEffectID(int newParticleEffectID)
+    public ParticleSystem GetById(string id)
     {
-        OnParticleEffectChanged?.Invoke(newParticleEffectID);
+        return particleData.GetParticleSystem(id);
     }
+
 }

@@ -1,39 +1,23 @@
-using System;
 using UnityEngine;
 
 public class ColorTrail : MonoBehaviour
 {
     [SerializeField] private TrailRenderer trailRenderer;
-    [SerializeField] private TrailData gradientTrailData;
+    [SerializeField] private TrailData trailData;
 
-    public event Action<int> OnTrailGradientChanged;
-
-    public int currentTrailID;
-    
-
-    private void Start()
+    private void OnEnable()
     {
-        currentTrailID = PlayerPrefs.GetInt("TrailKey", 0);
-        ApplyTrailGradient();
+        ApplyRandomTrail();
     }
 
-    public void SetTrailGradient(int id)
+    private void ApplyRandomTrail()
     {
-        currentTrailID = id;
-        ApplyTrailGradient();
-        PlayerPrefs.SetInt("TrailKey", currentTrailID);
-        PlayerPrefs.Save();
-    }
+        if (trailRenderer == null || trailData == null || trailData.trailGradients.Count == 0)
+            return;
 
+        int randomIndex = Random.Range(0, trailData.trailGradients.Count);
+        Gradient randomGradient = trailData.trailGradients[randomIndex].trailGradient;
 
-
-    public void ApplyTrailGradient()
-    {
-        if (trailRenderer != null && gradientTrailData != null)
-        {
-            Gradient newGradient = gradientTrailData.GetTrailGradient(currentTrailID);
-            trailRenderer.colorGradient = newGradient; // Aplicar el gradiente al TrailRenderer
-            OnTrailGradientChanged?.Invoke(currentTrailID);
-        }
+        trailRenderer.colorGradient = randomGradient;
     }
 }

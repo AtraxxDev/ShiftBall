@@ -12,14 +12,14 @@ public class ParticleData : ScriptableObject
     [System.Serializable]
     public class ParticleEffectData
     {
-        public int id;
+        public string id;
         public ParticleSystem particleSystemPrefab;
     }
 
     
-    public ParticleSystem GetParticleSystem(int id)
+    public ParticleSystem GetParticleSystem(string id)
     {
-        ParticleEffectData effect = particleEffects.Find(e => e.id == id);
+        var effect = particleEffects.Find(e => e.id == id);
         return effect != null ? effect.particleSystemPrefab : null;
     }
 }

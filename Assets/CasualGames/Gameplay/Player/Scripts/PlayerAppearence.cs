@@ -1,90 +1,79 @@
-using System;
 using System.Linq;
-using Sirenix.OdinInspector;
 using UnityEngine;
+using Sirenix.OdinInspector;
+using TB_Tools;
 
 public class PlayerAppearence : MonoBehaviour
 {
-   [SerializeField] private SpriteRenderer playerRenderer;
+    [SerializeField] private SpriteRenderer playerRenderer;
 
-   [ShowInInspector,ReadOnly]
-   private string currentSkinId;
+    [ShowInInspector, ReadOnly]
+    private string currentSkinId;
 
+    private const ItemCategory TARGET_CATEGORY = ItemCategory.Skin;
 
-   private void OnEnable()
-   {
-      EventManager.StartListening("OnItemSelected",OnSkinSelected);
-   }
+    private void OnEnable()
+    {
+        EventManager.StartListening("OnItemSelected", OnItemSelected);
+    }
 
-   private void OnDisable()
-   {
-      EventManager.StopListening("OnItemSelected",OnSkinSelected);
+    private void OnDisable()
+    {
+        EventManager.StopListening("OnItemSelected", OnItemSelected);
+    }
 
-   }
+    private void Start()
+    {
+        // Cargar selección guardada para la categoría Skin
+        string savedSkinId = PlayerPrefs.GetString("Selected_Skin", "");
+        print(savedSkinId);
 
-   private void OnSkinSelected(object param)
-   {
-      if (param is ShopItemModel item)
-      {
-         ApplySkin(item.Id);
-      }
-        
-   }
+        if (string.IsNullOrEmpty(savedSkinId))
+        {
+            var defaultItem = ShopManager.Instance.GetDefaultItemByCategory(TARGET_CATEGORY);
+            if (defaultItem != null)
+                savedSkinId = defaultItem.Id;
+                print(savedSkinId);
+            
+        }
 
-   private void Start()
-   {
-      string savedSkinId = PlayerPrefs.GetString("SelectedItemId", null);
+        ApplySkin(savedSkinId);
+    }
 
-      // Si no hay skin guardado, tomar el default del ShopManager
-      if (string.IsNullOrEmpty(savedSkinId))
-      {
-         var defaultItem = ShopManager.Instance?.GetDefaultItem();
-         if(defaultItem != null)
-            savedSkinId = defaultItem.Id;
-         currentSkinId = savedSkinId;
-         print("Default SkinId: " + savedSkinId);
-      }
+    private void OnItemSelected(object param)
+    {
+        if (param is not ShopItemModel item) return;
 
-      ApplySkin(savedSkinId);
-   }
+        // Ignorar selecciones de otras categorías
+        if (item.Category != TARGET_CATEGORY) return;
 
-   private void ApplySkin(string skinId)
-   {
-      // Si no hay skinId válido, usar el default
-      if (string.IsNullOrEmpty(skinId))
-      {
-         var defaultItem = ShopManager.Instance.GetDefaultItem();
-         skinId = defaultItem?.Id;
-         if (string.IsNullOrEmpty(skinId)) return; // No hay default asignado
-      }
+        ApplySkin(item.Id);
+    }
 
-      Debug.Log($"Applying skinId: {skinId}");
+    private void ApplySkin(string skinId)
+    {
+        if (string.IsNullOrEmpty(skinId))
+        {
+            var def = ShopManager.Instance.GetDefaultItemByCategory(TARGET_CATEGORY);
+            if (def != null) skinId = def.Id;
+        }
 
-      // Buscar el item en la base de datos
-      var item = ShopManager.Instance.shopDatabase.items
-         .FirstOrDefault(i => i.Id == skinId);
+        var item = ShopManager.Instance.shopDatabase.items
+            .FirstOrDefault(i => i.Id == skinId);
 
-      // Si no se encuentra, usar default
-      if (item == null)
-      {
-         Debug.LogError($"SkinId '{skinId}' no encontrado en la base de datos, aplicando default.");
-         item = ShopManager.Instance.GetDefaultItem();
-      }
+        if (item == null)
+        {
+            Debug.LogError($"Skin '{skinId}' no encontrada, aplicando default.");
 
-      // Asignar sprite si existe
-      if (item != null && item.Icon != null)
-      {
-         playerRenderer.sprite = item.Icon;
-         currentSkinId = item.Id;
-         Debug.Log("Assign skin: " + item.Id);
-      }
-      else
-      {
-         Debug.LogError("No hay sprite disponible para la skin: " + skinId);
-      }
-   }
+            item = ShopManager.Instance.GetDefaultItemByCategory(TARGET_CATEGORY);
+            if (item == null) return;
+        }
 
-   
-   public string GetCurrentSkinId() => currentSkinId;
-    
+        playerRenderer.sprite = item.Icon;
+        currentSkinId = item.Id;
+
+        Debug.Log("Skin aplicada: " + currentSkinId);
+    }
+
+    public string GetCurrentSkinId() => currentSkinId;
 }

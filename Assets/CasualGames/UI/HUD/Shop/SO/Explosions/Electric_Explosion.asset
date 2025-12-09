@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bbfd1b0fb3dd614c9ce77623161568e, type: 3}
+  m_Name: Electric_Explosion
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: c78f6c1a010ad31428a1874208b78b34, type: 3}
+  Id: electric_explosion
+  Cost: 50
+  Currency: 0
+  Category: 1
+  IsDefaultItem: 0

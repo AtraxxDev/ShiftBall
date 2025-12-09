@@ -13,25 +13,25 @@ MonoBehaviour:
   m_Name: ParticleData
   m_EditorClassIdentifier: 
   particleEffects:
-  - id: 0
+  - id: default_explosion
     particleSystemPrefab: {fileID: 401608899608083824, guid: 3b9c48a29949efe49964fcc8a7f05728, type: 3}
-  - id: 1
+  - id: watermelon_explosion
     particleSystemPrefab: {fileID: 401608899608083824, guid: 0a076104a81b54b4da7ba40c48101dfe, type: 3}
-  - id: 2
+  - id: electric_explosion
     particleSystemPrefab: {fileID: 401608899608083824, guid: 0d65989348c691d4d94bb3e6d45aa3f5, type: 3}
-  - id: 3
+  - id: neon_explosion
     particleSystemPrefab: {fileID: 401608899608083824, guid: abee1db71e404904884ce37cf97fc8cf, type: 3}
-  - id: 4
+  - id: fire_explosion
     particleSystemPrefab: {fileID: 401608899608083824, guid: 2073dce84f5b8a8488bae74159a12370, type: 3}
-  - id: 5
+  - id: nuclear_explosion
     particleSystemPrefab: {fileID: 401608899608083824, guid: a5c480a5450658a4cb3d8adcd4cf6fa1, type: 3}
-  - id: 6
+  - id: water_explosion
     particleSystemPrefab: {fileID: 401608899608083824, guid: da62a49e743b2784aabd24c00d52e499, type: 3}
-  - id: 7
+  - id: yellow_explosion
     particleSystemPrefab: {fileID: 401608899608083824, guid: 7f2aeefe1c152b545a2a39ed399022b6, type: 3}
-  - id: 8
+  - id: purple_explosion
     particleSystemPrefab: {fileID: 401608899608083824, guid: ab060fd5d0a371b4d80e5f1991fe1f8e, type: 3}
-  - id: 9
+  - id: pink_explosion
     particleSystemPrefab: {fileID: 401608899608083824, guid: 532350fb70927ea4a8ec057920a21eaa, type: 3}
-  - id: 10
+  - id: radioactive_explosion
     particleSystemPrefab: {fileID: 401608899608083824, guid: 07c943fb96229c84891d329fc78c07e7, type: 3}

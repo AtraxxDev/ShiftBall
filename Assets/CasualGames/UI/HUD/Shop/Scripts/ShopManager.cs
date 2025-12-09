@@ -1,110 +1,168 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using TB_Tools;
-using UnityEditor.Overlays;
-using UnityEngine.Serialization;
 
 [HideMonoScript]
 public class ShopManager : MonoBehaviour
 {
-    public static ShopManager Instance {  get; private set; }
-    
+    public static ShopManager Instance { get; private set; }
+
     [Title("References")]
     public ShopDatabase shopDatabase;
     public CurrencyService currencyService;
-    [FormerlySerializedAs("playerPreview")] [SerializeField] private PlayerPreview previewPlayer;
-    
-    private HashSet<string> _purchasedItems = new HashSet<string>();
-    private string _selectedItemId;
 
-    
+    private HashSet<string> _purchasedItems = new();
+    [SerializeField] private List<CategorySelection> selectedItems = new();
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(this);
-        
+
         LoadData();
     }
-    
-    public void PrintPurchasedItems()
+
+    // ---------------------------
+    //   PURCHASE / SELECTION
+    // ---------------------------
+
+    public bool IsPurchased(string id) => _purchasedItems.Contains(id);
+
+    public bool IsSelected(string id)
     {
-        Debug.Log("Items comprados:");
-        foreach (var id in _purchasedItems)
-        {
-            Debug.Log(id);
-        }
+        var item = shopDatabase.items.FirstOrDefault(i => i.Id == id);
+        if (item == null) return false;
+
+        return GetSelectedItemId(item.Category) == id;
     }
 
-
-    private void LoadData()
+    public string GetSelectedItemId(ItemCategory category)
     {
-        print("Loading Shop Data...");
-        
-        _selectedItemId = PlayerPrefs.GetString("SelectedItemId",GetDefaultItem().Id);
-        string savedPurchased = PlayerPrefs.GetString("PurchasedItemId","");
-        if (!string.IsNullOrEmpty(savedPurchased))
-        {
-            _purchasedItems = new  HashSet<string>(savedPurchased.Split(',')); 
-        }
-
-        if (!_purchasedItems.Contains(_selectedItemId))
-            _purchasedItems.Add(_selectedItemId);
-        
-        print("Shop Data loaded successfully.");
-        
-        PrintPurchasedItems();
-        
+        var entry = selectedItems.Find(s => s.Category == category);
+        return entry?.SelectedId;
     }
 
-    private void SaveData()
+    public ShopItemModel GetSelectedItemByCategory(ItemCategory category)
     {
-        PlayerPrefs.SetString("SelectedItemId", _selectedItemId);
-        PlayerPrefs.SetString("PurchasedItemId", string.Join(",", _purchasedItems));
-        PlayerPrefs.Save();
+        string id = GetSelectedItemId(category);
+        return shopDatabase.items.FirstOrDefault(i => i.Id == id);
     }
 
-    public ShopItemModel GetDefaultItem()
+    public ShopItemModel GetDefaultItemByCategory(ItemCategory category)
     {
-        foreach (var item in shopDatabase.items)
-        {
-            if(item.IsDefaultItem) return item;
-        }
-
-        return shopDatabase.items[0];
+        return shopDatabase.items.FirstOrDefault(i => i.Category == category && i.IsDefaultItem);
     }
-    
-    public bool IsPurchased(string itemId) => _purchasedItems.Contains(itemId);
-    public bool IsSelected(string itemId) => _selectedItemId == itemId;
 
+    // ---------------------------
+    //          BUY
+    // ---------------------------
     public void BuyItem(ShopItemModel item)
     {
         if (IsPurchased(item.Id)) return;
 
-        // Validacion si el jugador tiene suficiente currency
-
         bool canBuy = currencyService.TrySpend(item.Currency, item.Cost);
-        
         if (!canBuy)
         {
-            Debug.Log("No tienes suficiente " + item.Currency + " para comprar " + item.Id);
+            Debug.Log("No tienes suficiente " + item.Currency);
             return;
         }
-        
+
         _purchasedItems.Add(item.Id);
         SaveData();
-        EventManager.TriggerEvent("OnItemPurchased",item);
+
+        EventManager.TriggerEvent("OnItemPurchased", item);
     }
 
+    // ---------------------------
+    //         SELECT
+    // ---------------------------
     public void SelectItem(ShopItemModel item)
     {
-        if(!IsPurchased(item.Id)) return;
-        _selectedItemId = item.Id;
+        if (!IsPurchased(item.Id)) return;
+
+        var entry = selectedItems.Find(s => s.Category == item.Category);
+
+        if (entry == null)
+        {
+            selectedItems.Add(new CategorySelection
+            {
+                Category = item.Category,
+                SelectedId = item.Id
+            });
+        }
+        else
+        {
+            entry.SelectedId = item.Id;
+        }
+
         SaveData();
-        
-        EventManager.TriggerEvent("OnItemSelected",item);
+        EventManager.TriggerEvent("OnItemSelected", item);
     }
-    
-    
+
+    // ---------------------------
+    //       SAVE / LOAD
+    // ---------------------------
+    private void LoadData()
+    {
+        Debug.Log("Loading shop data...");
+
+        // Load purchased items
+        string purchased = PlayerPrefs.GetString("PurchasedItemId", "");
+        if (!string.IsNullOrEmpty(purchased))
+            _purchasedItems = new HashSet<string>(purchased.Split(','));
+
+        // Load per-category selected items
+        selectedItems.Clear();
+        foreach (ItemCategory cat in Enum.GetValues(typeof(ItemCategory)))
+        {
+            string savedId = PlayerPrefs.GetString($"Selected_{cat}", "");
+
+            if (string.IsNullOrEmpty(savedId))
+            {
+                var def = GetDefaultItemByCategory(cat);
+                if (def != null)
+                {
+                    savedId = def.Id;
+                    _purchasedItems.Add(def.Id);
+                }
+            }
+
+            selectedItems.Add(new CategorySelection
+            {
+                Category = cat,
+                SelectedId = savedId
+            });
+        }
+
+        Debug.Log("Shop data loaded.");
+    }
+
+    private void SaveData()
+    {
+        PlayerPrefs.SetString("PurchasedItemId", string.Join(",", _purchasedItems));
+
+        foreach (var entry in selectedItems)
+            PlayerPrefs.SetString($"Selected_{entry.Category}", entry.SelectedId);
+
+        PlayerPrefs.Save();
+    }
+}
+
+
+
+[System.Serializable]
+public class CategorySelection
+{
+    public ItemCategory Category;
+    public string SelectedId;
+}
+
+[System.Serializable]
+public class SerializationWrapper<T>
+{
+    public List<T> list;
+    public SerializationWrapper(List<T> list) => this.list = list;
 }
