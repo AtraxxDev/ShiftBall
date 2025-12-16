@@ -23,8 +23,8 @@ public class ShieldPowerUp : PowerUpBase
     {
         base.OnActivate();
         Debug.Log("Shield Activated");
-
-        // Aquí puedes activar efectos visuales, como un aura de escudo
+        
+        // Aquï¿½ puedes activar efectos visuales, como un aura de escudo
         EnableShieldVisual(true);
     }
 
@@ -40,7 +40,7 @@ public class ShieldPowerUp : PowerUpBase
     {
         if (isActive)
         {
-            Debug.Log("El escudo está activo y absorbió el golpe.");
+            Debug.Log("El escudo estï¿½ activo y absorbiï¿½ el golpe.");
             OnDeactivate(); 
             return true; // Golpe absorbido
         }

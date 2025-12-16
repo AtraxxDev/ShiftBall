@@ -30,6 +30,7 @@ public class ShopPages : MonoBehaviour
         if (param is Page page)
         {
             ChangePage(page);
+            AudioManager.Instance.PlaySFX("SelectUI");
         }
     }
 

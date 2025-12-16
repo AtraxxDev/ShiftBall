@@ -29,7 +29,7 @@ public class MagnentPowerUp : PowerUpBase
         base.OnActivate();
         particleEffect.Play();
         Debug.Log("Magnet Activated");
-        // Aquí puedes agregar efectos visuales si es necesario
+        // Aquï¿½ puedes agregar efectos visuales si es necesario
     }
 
     public override void OnDeactivate()

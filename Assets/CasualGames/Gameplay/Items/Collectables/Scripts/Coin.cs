@@ -18,7 +18,7 @@ public class Coin : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            AudioManager.Instance.PlayCoinPickupSound();
+            AudioManager.Instance.PlaySFX("Coin");
             ComboManager.Instance.AddCombo();
             int comboMultiplier = ComboManager.Instance.GetComboMultiplier();
             int finalCoinValue = baseCoinValue * comboMultiplier;
@@ -30,9 +30,9 @@ public class Coin : MonoBehaviour
 
     private void UpdateCoinValue(int combo)
     {
-        // Este método se llama cada vez que cambia el valor del combo.
+        // Este mï¿½todo se llama cada vez que cambia el valor del combo.
         // En este caso, el valor de la moneda se calcula en OnTriggerEnter2D,
-        // por lo que esta función no hace nada actualmente.
-        // Puedes usarlo si necesitas ajustar algo en función del valor del combo.
+        // por lo que esta funciï¿½n no hace nada actualmente.
+        // Puedes usarlo si necesitas ajustar algo en funciï¿½n del valor del combo.
     }
 }

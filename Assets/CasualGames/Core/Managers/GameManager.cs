@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TB_Tools;
 
@@ -14,7 +11,7 @@ public class GameManager : MonoBehaviour
     public GameState CurrentState { get; private set;}
 
     public Action OnGameOver;
-    private bool isPaused = false;
+    private bool _isPaused;
 
 
     public static event Action OnPauseGame;
@@ -34,7 +31,7 @@ public class GameManager : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         QualitySettings.vSyncCount = 0;
-        AudioManager.Instance.PlayMenuMusic();
+        AudioManager.Instance.PlayMusic("Menu");
         SetState(GameState.Paused);
     }
 
@@ -47,22 +44,20 @@ public class GameManager : MonoBehaviour
         switch (newstate)
         {
             case GameState.Playing:
-                isPaused = false;
+                _isPaused = false;
                 break;
             case GameState.Paused:
-                isPaused = true;
+                _isPaused = true;
                 break;
             case GameState.GameOver:
-                isPaused = true;
-                break;
-            default:
+                _isPaused = true;
                 break;
         }
     }
 
     public bool IsPaused()
     {
-        return isPaused;
+        return _isPaused;
     }
 
     
@@ -79,20 +74,20 @@ public class GameManager : MonoBehaviour
     public void PausedGame()
     {
         SetState(GameState.Paused);
-        AudioManager.Instance.PauseMusic();
+        AudioManager.Instance.PauseGameplayMusic();
         OnPauseGame?.Invoke();       
     }
 
     public void ResumeGame()
     {
-        AudioManager.Instance.backgroundMusicSource.UnPause();
+        AudioManager.Instance.ResumeGameplayMusic();
         SetState(GameState.Playing);
     }
 
     public void ResumeNewLive()
     {
         SetState(GameState.Playing);
-        AudioManager.Instance.backgroundMusicSource.UnPause();
+        AudioManager.Instance.ResumeGameplayMusic();
 
 
     }
@@ -104,8 +99,8 @@ public class GameManager : MonoBehaviour
             Handheld.Vibrate();
             Debug.Log("Vibraci�n activada");
         }
-        AudioManager.Instance.PauseMusic();
-        AudioManager.Instance.PlayGameOverSound();
+        AudioManager.Instance.PauseGameplayMusic();
+        AudioManager.Instance.PlaySFX("Explosion");
         SetState(GameState.GameOver);
 
 
@@ -127,7 +122,7 @@ public class GameManager : MonoBehaviour
     public void ReturnToMainMenu()
     {
         ScoreManager.Instance.ResetScore();
-        AudioManager.Instance.PlayMenuMusic();
+        AudioManager.Instance.PlayMusic("Menu");
     }
 
 
@@ -135,7 +130,7 @@ public class GameManager : MonoBehaviour
     public void RevivePlayer()
     {
         OnRevivePlayer?.Invoke();
-        AudioManager.Instance?.PlayReviveSound();
+        AudioManager.Instance?.PlaySFX("Revive");
         ResumeNewLive();
     }
 

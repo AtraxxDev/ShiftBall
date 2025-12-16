@@ -37,7 +37,7 @@ public class HighScoreAnim : MonoBehaviour
         newHighScoreText.gameObject.SetActive(true);
         if (!hasPlay)
         {
-            AudioManager.Instance.PlayCelebrationSFX();
+            AudioManager.Instance.PlaySFX("Celebrate");
             hasPlay = true;
             StartCoroutine(StartAnim());
             StartCoroutine(RainbowText());
@@ -74,7 +74,7 @@ public class HighScoreAnim : MonoBehaviour
             Color.magenta
         };
 
-        float cycleDuration = rainbowDuration; // Duración total del ciclo de arcoíris
+        float cycleDuration = rainbowDuration; // Duraciï¿½n total del ciclo de arcoï¿½ris
         float elapsedTime = 0f;
 
         while (elapsedTime < cycleDuration)

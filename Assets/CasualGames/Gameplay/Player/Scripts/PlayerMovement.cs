@@ -17,7 +17,7 @@ public class PlayerMovement : Unit
 
     public void HandleInput()
     {
-        // Verifica si hay un toque y no está sobre la UI
+        // Verifica si hay un toque y no estï¿½ sobre la UI
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
@@ -43,7 +43,7 @@ public class PlayerMovement : Unit
         if (collision.gameObject.CompareTag("Wall"))
         {
             ToggleDirection();
-            AudioManager.Instance.PlayWallHitSound();
+            AudioManager.Instance.PlaySFX("Pop");
         }
     }
 

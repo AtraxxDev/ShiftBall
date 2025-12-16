@@ -203,7 +203,7 @@ public class UIManager : MonoBehaviour
     {
         // Ocultar el panel de juego
         P_InGame.SetActive(false);
-
+        AudioManager.Instance.PlaySFX("Lose");
         P_GameOver.SetActive(true);
 
         if (timer.GetCounter() >= timer.GetMaxCounter())
@@ -232,7 +232,7 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.StartGame();
         ButtonPause.SetActive(true);
         P_InGame.SetActive(true);
-        AudioManager.Instance.PlayGameplayMusic();
+        AudioManager.Instance.PlayMusic("Gameplay");
     }
 
     public void Restart()

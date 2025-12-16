@@ -9,7 +9,7 @@ public class Diamond : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            AudioManager.Instance.PlayStarPickupSound();
+            AudioManager.Instance.PlaySFX("Diamond");
             CoinManager.Instance.AddStars(starValue);
             CoinManager.Instance.AddStarsCollected(starValue);
             gameObject.SetActive(false);

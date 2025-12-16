@@ -67,10 +67,12 @@ public class ShopManager : MonoBehaviour
         if (!canBuy)
         {
             Debug.Log("No tienes suficiente " + item.Currency);
+            AudioManager.Instance.PlaySFX("Error_UI");
             return;
         }
 
         _purchasedItems.Add(item.Id);
+        AudioManager.Instance.PlaySFX("Spend_Shop");
         SaveData();
 
         EventManager.TriggerEvent("OnItemPurchased", item);
@@ -99,6 +101,7 @@ public class ShopManager : MonoBehaviour
         }
 
         SaveData();
+        AudioManager.Instance.PlaySFX("SelectUI");
         EventManager.TriggerEvent("OnItemSelected", item);
     }
 

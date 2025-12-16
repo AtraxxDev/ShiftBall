@@ -7,7 +7,7 @@ public class PlaySFX : MonoBehaviour
     
     public void PlaySoundSFX()
     {
-        AudioManager.Instance.PlaySelectSFX();
+        AudioManager.Instance.PlaySFX("SelectUI");
     }
 
 }

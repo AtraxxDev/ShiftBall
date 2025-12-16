@@ -22,6 +22,7 @@ public abstract class PowerUpBase : MonoBehaviour
         timerRemaining = powerUpData.duration;
 
         OnPowerUpActivate?.Invoke(powerUpData.powerUpType, powerUpData.icon, powerUpData.duration);
+        AudioManager.Instance.PlaySFX("PowerUp");
         Debug.Log($"Power-Up Activado: {powerUpData.powerUpType}");
     }
     public virtual void OnDeactivate()
