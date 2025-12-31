@@ -29,7 +29,22 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.OnRevivePlayer += HandlePlayerRevival;
+        GameManager.Instance.OnRestartGame += ResetPlayer;
+
     }
+
+    private void ResetPlayer()
+    {
+        playerMovement.ResetPosition();
+        playerMovement.RestoreDiagonalMovement();
+
+        isInvencible = false;
+        playerSprite.enabled = true;
+        
+
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
+
 
     private void OnDisable()
     {
@@ -38,7 +53,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.IsPaused()) return;
+        if (GameManager.Instance == null) return;
+        if (GameManager.Instance.IsPaused) return;
 
         // Cambia la dirección del jugador al tocar la pantalla
         playerMovement.HandleInput();
@@ -46,7 +62,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameManager.Instance.IsPaused()) return;
+        if (GameManager.Instance == null) return;
+        if (GameManager.Instance.IsPaused) return;
 
         playerMovement.MovePlayer();
     }
@@ -91,11 +108,7 @@ public class PlayerController : MonoBehaviour
         {
             ScoreManager.Instance.OnHighScoreChanged -= (_) => playerParticles.PlayHighScoreParticles();
         }
-
-        if (GameManager.Instance != null)
-        {
-            GameManager.OnPauseGame -= PausedGame;
-        }
+        
 
         GameManager.Instance.OnRevivePlayer -= HandlePlayerRevival;
     }
@@ -123,4 +136,6 @@ public class PlayerController : MonoBehaviour
         playerSprite.enabled = true;
         isInvencible = false;
     }
+
+  
 }

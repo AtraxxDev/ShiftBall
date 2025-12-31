@@ -1,7 +1,9 @@
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
     using Sirenix.OdinInspector;
+    using TB_Tools;
 
     public class AudioManager : MonoBehaviour
     {
@@ -49,6 +51,11 @@
             {
                 Destroy(gameObject);
             }
+        }
+
+        private void Start()
+        {
+            GameManager.Instance.OnStateChanged += OnGameStateChanged;
         }
 
         private void BuildDictionary()
@@ -174,5 +181,25 @@
         public void SetSFX(bool value)
         {
             PlayerPrefs.SetInt(SFX_PREF, value ? 1 : 0);
+        }
+        
+        private void OnGameStateChanged(GameState state)
+        {
+            switch (state)
+            {
+                case GameState.Playing:
+                    ResumeGameplayMusic();
+                    print("Estoy PLay");
+                    break;
+
+                case GameState.Paused:
+                    PauseGameplayMusic();
+                    break;
+
+                case GameState.GameOver:
+                    PauseGameplayMusic();
+                    PlaySFX("Explosion");
+                    break;
+            }
         }
     }

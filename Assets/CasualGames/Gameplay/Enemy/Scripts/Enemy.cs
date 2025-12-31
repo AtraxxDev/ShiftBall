@@ -19,7 +19,8 @@ public class Enemy : Unit
 
     private void Update()
     {
-        if (GameManager.Instance.IsPaused()) return;
+        if (GameManager.Instance == null) return;
+        if (GameManager.Instance.IsPaused) return;
 
         if (!isDetecting && !isChasing && Vector3.Distance(transform.position, target.transform.position) <= visionRange)
         {
@@ -36,16 +37,16 @@ public class Enemy : Unit
     {
         isDetecting = true;
 
-        // Iniciar la animación de detección
+        // Iniciar la animaciï¿½n de detecciï¿½n
         ChangeSprite.StartDetectAnimation();
 
-        // Esperar a que termine la animación de detección
+        // Esperar a que termine la animaciï¿½n de detecciï¿½n
         yield return new WaitForSeconds(0.2f);
 
         isDetecting = false;
         isChasing = true;
 
-        // Iniciar la lógica de persecución
+        // Iniciar la lï¿½gica de persecuciï¿½n
         yield return StartCoroutine(ChasePlayerCoroutine());
     }
 
@@ -55,7 +56,7 @@ public class Enemy : Unit
 
         while (Vector3.Distance(transform.position, target.transform.position) <= visionRange && Time.time < chaseEndTime)
         {
-            if (GameManager.Instance.IsPaused())
+            if (GameManager.Instance == null || GameManager.Instance.IsPaused)
             {
                 yield break;
             }
@@ -64,13 +65,14 @@ public class Enemy : Unit
             yield return null;
         }
 
-        // Después de que termine la persecución
+        // Despuï¿½s de que termine la persecuciï¿½n
         isChasing = false;
     }
 
     private void MoveTowardsPlayer()
     {
-        if (GameManager.Instance.IsPaused()) return; // No mover si el juego está en pausa
+        if (GameManager.Instance == null) return;
+        if (GameManager.Instance.IsPaused) return; // No mover si el juego estï¿½ en pausa
 
         Vector3 direction = (target.transform.position - transform.position).normalized;
         Vector3 velocity = direction * speed * Time.deltaTime;
@@ -93,7 +95,7 @@ public class Enemy : Unit
 
     private void OnDrawGizmosSelected()
     {
-        // Dibujar una esfera amarilla en la posición del transform para representar el rango de visión
+        // Dibujar una esfera amarilla en la posiciï¿½n del transform para representar el rango de visiï¿½n
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, visionRange);
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,11 +8,13 @@ using UnityEngine.EventSystems;
 public class PlayerMovement : Unit
 {
     [SerializeField] private bool isMovingLeft = true;
+    private Vector3 _startPosition;
+    private Vector3 _currentPosition;
 
     private void Start()
     {
+        _startPosition = transform.position;
         direction = new Vector3(isMovingLeft ? -1 : 1, 1, 0).normalized;
-
 
     }
 
@@ -62,6 +65,14 @@ public class PlayerMovement : Unit
     public void RestoreDiagonalMovement()
     {
         direction = new Vector3(isMovingLeft ? -1 : 1, 1, 0).normalized; // Restaurar movimiento diagonal
+    }
+
+    [Button]
+    public void ResetPosition()
+    {
+        transform.position = _startPosition;
+        isMovingLeft = true;
+        direction = new Vector3(-1, 1, 0).normalized;
     }
 
 

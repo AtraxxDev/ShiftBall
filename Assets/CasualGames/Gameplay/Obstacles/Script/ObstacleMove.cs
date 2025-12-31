@@ -3,17 +3,17 @@ using UnityEngine;
 public class ObstacleMove : MonoBehaviour
 {
     public float speed = 2f; // Velocidad del movimiento
-    private Vector2 initialPosition; // Posición inicial del obstáculo
-    private Vector2 targetPosition; // Posición objetivo
+    private Vector2 initialPosition; // Posiciï¿½n inicial del obstï¿½culo
+    private Vector2 targetPosition; // Posiciï¿½n objetivo
 
     [SerializeField] private bool isLeft;
 
     void Start()
     {
-        // Establecer la posición inicial como la posición actual del obstáculo
+        // Establecer la posiciï¿½n inicial como la posiciï¿½n actual del obstï¿½culo
         initialPosition = transform.position;
 
-        // Determina la primera posición objetivo aleatoriamente
+        // Determina la primera posiciï¿½n objetivo aleatoriamente
         if (Random.value < 0.5f)
         {
             targetPosition = new Vector2(-1.7f, initialPosition.y); // Mover a la izquierda
@@ -26,16 +26,17 @@ public class ObstacleMove : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.IsPaused()) return;
+        if (GameManager.Instance == null) return;
+        if (GameManager.Instance.IsPaused) return;
 
 
-        // Mueve el obstáculo hacia la posición objetivo
+        // Mueve el obstï¿½culo hacia la posiciï¿½n objetivo
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
-        // Si el obstáculo ha llegado a la posición objetivo, selecciona la siguiente posición
+        // Si el obstï¿½culo ha llegado a la posiciï¿½n objetivo, selecciona la siguiente posiciï¿½n
         if ((Vector2)transform.position == targetPosition)
         {
-            // Alterna la posición objetivo entre izquierda y derecha
+            // Alterna la posiciï¿½n objetivo entre izquierda y derecha
             if (targetPosition.x == -1.7f)
             {
                 targetPosition = new Vector2(1.7f, initialPosition.y);
