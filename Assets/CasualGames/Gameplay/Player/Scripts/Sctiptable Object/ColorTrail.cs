@@ -1,13 +1,22 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ColorTrail : MonoBehaviour
 {
     [SerializeField] private TrailRenderer trailRenderer;
     [SerializeField] private TrailData trailData;
+    
 
-    private void OnEnable()
+    private void Start()
     {
-        ApplyRandomTrail();
+        GameManager.Instance.OnStartGame += ApplyRandomTrail;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnStartGame -= ApplyRandomTrail;
+
     }
 
     private void ApplyRandomTrail()

@@ -1,19 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RemoveRoomLater : MonoBehaviour
 {
     private Transform cam;
+    private bool active;
 
-    private void Start()
+    public void Init(Transform camera)
     {
-        cam = GameObject.Find("Main Camera").transform;
+        cam = camera;
+        active = true;
     }
 
     private void Update()
     {
-        if (transform.position.y + 16 < cam.position.y)
+        if (!active || cam == null) return;
+
+        if (transform.position.y + 16f < cam.position.y)
+        {
             Destroy(gameObject);
+        }
     }
 }

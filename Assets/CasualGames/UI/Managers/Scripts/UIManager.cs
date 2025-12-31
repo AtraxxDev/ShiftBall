@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject inGamePanel;
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject gameOverPanel;
-    [SerializeField] private GameObject pauseButton;
+    //[SerializeField] private GameObject pauseButton;
 
     //[SerializeField] private UIGameOverSequence gameOverSequence;
 
@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
 
     private void HandleGameOver()
     {
-        pauseButton.SetActive(false);
+        //pauseButton.SetActive(false);
         inGamePanel.SetActive(false);
         gameOverPanel.SetActive(true);
 
@@ -36,13 +36,15 @@ public class UIManager : MonoBehaviour
     {
         gameOverPanel.SetActive(false);
         inGamePanel.SetActive(true);
+        AudioManager.Instance.PlaySFX("Revive");
+        
     }
 
     // Botones
     public void OnStartGame()
     {
         GameManager.Instance.StartGame();
-        pauseButton.SetActive(true);
+        //pauseButton.SetActive(true);
         inGamePanel.SetActive(true);
         AudioManager.Instance.PlayMusic("Gameplay");
     }
@@ -51,9 +53,16 @@ public class UIManager : MonoBehaviour
     public void OnRestart()
     {
         GameManager.Instance.Restart();
-        pauseButton.SetActive(true);
+        //pauseButton.SetActive(true);
         inGamePanel.SetActive(true);
         AudioManager.Instance.PlayMusic("Gameplay");
     }
-    public void OnReturnMainMenu() => GameManager.Instance.ReturnToMainMenu();
+
+    [Button]
+    public void OnReturnMainMenu()
+    {
+        GameManager.Instance.ReturnToMainMenu();
+        menuPanel.SetActive(true);
+        inGamePanel.SetActive(false);
+    } 
 }

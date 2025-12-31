@@ -5131,7 +5131,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6299088699401169584}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -10414,6 +10414,7 @@ MonoBehaviour:
   playerMovement: {fileID: 6034778039218677977}
   playerParticles: {fileID: 6673626033853392520}
   shieldPowerUp: {fileID: 8010516378323014003}
+  trailRenderer: {fileID: 1052233376448359610}
   playerSprite: {fileID: 3281211943995429005}
   invulnerabilityDuration: 3
   blinkInterval: 0.1
@@ -10447,7 +10448,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particles_HighScore: {fileID: 3366435615518398240}
   particles_Revive: {fileID: 5793247863620383022}
-  particleEffectID: 0
   shakeCamera: {fileID: 0}
 --- !u!1001 &1518080532333485791
 PrefabInstance:

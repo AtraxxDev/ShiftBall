@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public event Action OnGameOver;
     public event Action OnRevivePlayer;
     public event Action OnRestartGame;
+    public event Action OnStartGame;
 
     public static bool IsVibrationEnabled = true;
 
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
 
         CoinManager.Instance.ResetCoins_StarsCollected();
         SetState(GameState.Playing);
+        OnStartGame?.Invoke();
     }
 
     public void PauseGame()
@@ -66,6 +68,7 @@ public class GameManager : MonoBehaviour
         OnGameOver?.Invoke();
     }
 
+    [Button]
     public void RevivePlayer()
     {
         OnRevivePlayer?.Invoke();
@@ -84,6 +87,9 @@ public class GameManager : MonoBehaviour
     {
         ScoreManager.Instance.ResetScore();
         SetState(GameState.Paused);
+        OnRestartGame?.Invoke();
+        AudioManager.Instance.PlayMusic("Menu");
+        
     }
     
     public void SetState(GameState newState)

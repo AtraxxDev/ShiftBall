@@ -1,58 +1,108 @@
-using System.Collections;
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class SpawnRoom : MonoBehaviour
 {
-    public Transform cam;
-    public Transform parent;
-    
-    [Title("Difficulty Prefabs")]
-    public GameObject[] easyRooms;  
-    public GameObject[] mediumRooms; 
-    public GameObject[] hardRooms;  
+    [Title("References")]
+    [SerializeField] private Transform cam;
+    [SerializeField] private Transform parent;
 
-    private float _roomHeight = 10.5f;
+    [Title("Difficulty Prefabs")]
+    [SerializeField] private GameObject[] easyRooms;
+    [SerializeField] private GameObject[] mediumRooms;
+    [SerializeField] private GameObject[] hardRooms;
+
+    [Title("Settings")]
+    [SerializeField] private float roomHeight = 10.5f;
+    [SerializeField] private int initialRooms = 5;
+
+    private float nextSpawnY;
+    private float startSpawnY;
+
+    private void Awake()
+    {
+        startSpawnY = transform.position.y;
+        nextSpawnY = startSpawnY;
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.OnRestartGame += ResetGenerator;
+        ResetGenerator();
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnRestartGame -= ResetGenerator;
+    }
 
     public void GenerateRooms()
     {
-        if (transform.position.y - 12 < cam.position.y)
+        while (nextSpawnY - 12f < cam.position.y)
         {
-            GameObject nextRoom = GetRoomBasedOnDifficulty();
+            Spawn();
+        }
+    }
 
-            GameObject newRoom = Instantiate(nextRoom, parent);
-            newRoom.transform.position = transform.position;
+    private void Spawn()
+    {
+        GameObject prefab = GetRoomBasedOnDifficulty();
+        if (prefab == null) return;
 
-            transform.Translate(0, _roomHeight, 0);
+        GameObject room = Instantiate(prefab, parent);
+        room.transform.position = new Vector3(0, nextSpawnY, 0);
+
+        // Inicializa el auto-destruido
+        if (room.TryGetComponent(out RemoveRoomLater remover))
+        {
+            remover.Init(cam);
+        }
+
+        nextSpawnY += roomHeight;
+    }
+
+    public void ResetGenerator()
+    {
+        // Reset dificultad
+        //DificultyManager.Instance.ResetDifficulty();
+
+        // Borrar rooms existentes
+        foreach (Transform child in parent)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Reset spawn position
+        nextSpawnY = startSpawnY;
+
+        // Pre-generar rooms
+        for (int i = 0; i < initialRooms; i++)
+        {
+            Spawn();
         }
     }
 
     private GameObject GetRoomBasedOnDifficulty()
     {
         float diff = DificultyManager.Instance.GetDifficult();
-        
-        // Pesos que cambian progresivamente
-        float easyWeight = Mathf.Lerp(1f, 0.2f, diff); // cada vez menos
-        float mediumWeight = Mathf.Sin(diff * Mathf.PI); // sube al medio
-        float hardWeight = Mathf.Lerp(0f, 1f, diff); // cada vez mas
-        
+
+        float easyWeight = Mathf.Lerp(1f, 0.2f, diff);
+        float mediumWeight = Mathf.Sin(diff * Mathf.PI);
+        float hardWeight = Mathf.Lerp(0f, 1f, diff);
+
         float total = easyWeight + mediumWeight + hardWeight;
-        float rand = Random.value * total;  
+        float rand = Random.value * total;
         
-        if (rand < easyWeight)
+
+        if (rand < easyWeight && easyRooms.Length > 0)
             return easyRooms[Random.Range(0, easyRooms.Length)];
-        else if  (rand < easyWeight + mediumWeight)
+
+        if (rand < easyWeight + mediumWeight && mediumRooms.Length > 0)
             return mediumRooms[Random.Range(0, mediumRooms.Length)];
-        else
+
+        if (hardRooms.Length > 0)
             return hardRooms[Random.Range(0, hardRooms.Length)];
 
-    }
-    private GameObject[] CombineRooms(GameObject[] rooms1, GameObject[] rooms2)
-    {
-        List<GameObject> combined = new List<GameObject>();
-        combined.AddRange(rooms1);
-        combined.AddRange(rooms2);
-        return combined.ToArray();
+        return null;
     }
 }

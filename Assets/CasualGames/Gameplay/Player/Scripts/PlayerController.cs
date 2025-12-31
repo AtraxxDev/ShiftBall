@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private PlayerParticles playerParticles;
     [SerializeField] private ShieldPowerUp shieldPowerUp;
+    [SerializeField] private TrailRenderer trailRenderer;
 
     [Header("Visuals")]
     [SerializeField] private SpriteRenderer playerSprite;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         GameManager.Instance.OnRevivePlayer += HandlePlayerRevival;
         GameManager.Instance.OnRestartGame += ResetPlayer;
+        GameManager.Instance.OnStartGame += EnableTrail;
 
     }
 
@@ -40,10 +42,23 @@ public class PlayerController : MonoBehaviour
 
         isInvencible = false;
         playerSprite.enabled = true;
+        DisableTrail();
         
 
         transform.GetChild(0).gameObject.SetActive(true);
     }
+    
+    public void EnableTrail()
+    {
+        //trailRenderer.Clear();
+        trailRenderer.enabled = true;
+    }
+    public void DisableTrail()
+    {
+        //trailRenderer.Clear();
+        trailRenderer.enabled = false;
+    }
+
 
 
     private void OnDisable()

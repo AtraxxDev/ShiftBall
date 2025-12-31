@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+using TB_Tools;
 using UnityEngine;
 
 public class SpawnerController : MonoBehaviour
 {
     [SerializeField] private SpawnRoom spawnRoom;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        if (GameManager.Instance.CurrentState != GameState.Playing)
+            return;
+
         spawnRoom.GenerateRooms();
     }
 }
