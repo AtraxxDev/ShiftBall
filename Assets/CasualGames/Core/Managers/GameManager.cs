@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
 
         AudioManager.Instance.PlayMusic("Menu");
         SetState(GameState.Paused);
+        
     }
 
     public void StartGame()
@@ -81,6 +82,7 @@ public class GameManager : MonoBehaviour
         OnRestartGame?.Invoke();
         SetState(GameState.Paused);
         StartGame();
+        print("Se llamo restart");
     }
 
     public void ReturnToMainMenu()

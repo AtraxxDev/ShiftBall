@@ -8,6 +8,9 @@ public class UiScore : MonoBehaviour
 
     private void Start()
     {
+        UpdateScore(ScoreManager.Instance.Score);
+        UpdateHighScore(ScoreManager.Instance.HighScore);        
+        
         ScoreManager.Instance.OnScoreChanged += UpdateScore;
         ScoreManager.Instance.OnHighScoreChanged += UpdateHighScore;
     }

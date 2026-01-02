@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class CountdownSlider : MonoBehaviour
@@ -18,6 +19,7 @@ public class CountdownSlider : MonoBehaviour
     // -----------------------------
     // Public API
     // -----------------------------
+    [ShowInInspector,ReadOnly]
     public int Counter => counter;
     public int MaxCounter => maxCounter;
     public float Duration => countdownDuration;

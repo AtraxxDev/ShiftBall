@@ -24,9 +24,16 @@ public class ColorTrail : MonoBehaviour
         if (trailRenderer == null || trailData == null || trailData.trailGradients.Count == 0)
             return;
 
+        trailRenderer.Clear();            // 👈 CLAVE
+        trailRenderer.enabled = false;    // reset visual
+        trailRenderer.enabled = true;
+        
         int randomIndex = Random.Range(0, trailData.trailGradients.Count);
-        Gradient randomGradient = trailData.trailGradients[randomIndex].trailGradient;
+        var data = trailData.trailGradients[randomIndex];
 
-        trailRenderer.colorGradient = randomGradient;
+        trailRenderer.colorGradient = data.trailGradient;
+        
+        Debug.Log($"[ColorTrail] Trail seleccionado → Index: {randomIndex} | ID: {data.id}");
+
     }
 }

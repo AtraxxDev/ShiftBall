@@ -27,6 +27,7 @@ public class ParticleManager : MonoBehaviour
             ParticleSystem instance = Instantiate(effect, position, Quaternion.identity);
             instance.Play();
             Destroy(instance.gameObject, instance.main.duration);
+            print("Play Particle Effect");
         }
         else
         {

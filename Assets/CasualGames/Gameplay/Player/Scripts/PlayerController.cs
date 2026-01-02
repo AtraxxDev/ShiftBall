@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     private void ResetPlayer()
     {
         playerMovement.ResetPosition();
-        playerMovement.RestoreDiagonalMovement();
+        //playerMovement.RestoreDiagonalMovement();
 
         isInvencible = false;
         playerSprite.enabled = true;
@@ -80,12 +80,12 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance == null) return;
         if (GameManager.Instance.IsPaused) return;
 
-        playerMovement.MovePlayer();
+        playerMovement.Move();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        playerMovement.HandleCollision(collision);
+        //playerMovement.HandleCollision(collision);
     }
 
     public void TakeDamage(GameObject visual)

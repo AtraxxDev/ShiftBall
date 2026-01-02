@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -25,6 +26,18 @@ public class HUEBackgroundManager : MonoBehaviour
             currentColor = gradientMaterial.GetColor("_Down");
             targetColor = currentColor;
         }
+
+        GameManager.Instance.OnStartGame += ChangeToNextHue;
+        GameManager.Instance.OnRestartGame += ChangeToNextHue;
+        ScoreManager.Instance.OnScoreStepReached += OnScoreStepReached;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnStartGame -= ChangeToNextHue;
+        GameManager.Instance.OnRestartGame -= ChangeToNextHue;
+        ScoreManager.Instance.OnScoreStepReached -= OnScoreStepReached;
+        
     }
 
     private void Update()
@@ -55,5 +68,10 @@ public class HUEBackgroundManager : MonoBehaviour
         targetColor = Color.HSVToRGB(hue, saturation,brightness);
         isTransitioning = true;
         t = 0f;
+    }
+    
+    private void OnScoreStepReached(int score)
+    {
+        ChangeToNextHue();
     }
 }

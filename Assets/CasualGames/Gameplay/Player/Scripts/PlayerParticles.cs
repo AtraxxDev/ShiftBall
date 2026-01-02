@@ -9,6 +9,7 @@ public class PlayerParticles : MonoBehaviour
     [Header("Particle Systems (UI Feedback)")]
     [SerializeField] private ParticleSystem particles_HighScore;
     [SerializeField] private ParticleSystem particles_Revive;
+    [SerializeField] private GameObject player;
 
     [Header("Dependencies")]
     [SerializeField] private ShakeCamera shakeCamera;
@@ -17,11 +18,12 @@ public class PlayerParticles : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnGameOverParticles += PlayGameOverParticles;
     }
 
     private void Start()
     {
+        GameEvents.OnGameOverParticles += PlayGameOverParticles;
+        ScoreManager.Instance.OnHighScoreChanged += (_) => PlayHighScoreParticles();
         GameManager.Instance.OnRevivePlayer += PlayReviveParticles;
     }
 
@@ -29,6 +31,7 @@ public class PlayerParticles : MonoBehaviour
     {
         GameManager.Instance.OnRevivePlayer -= PlayReviveParticles;
         GameEvents.OnGameOverParticles -= PlayGameOverParticles;
+        ScoreManager.Instance.OnHighScoreChanged -= (_) => PlayHighScoreParticles();
     }
 
     // =============================
@@ -58,7 +61,7 @@ public class PlayerParticles : MonoBehaviour
     public void PlayGameOverParticles()
     {
         // Apaga sprite del jugador
-        transform.GetChild(0).gameObject.SetActive(false);
+        player.gameObject.SetActive(false);
 
         // Obtener item seleccionado desde ShopManager
         var selectedExplosion = ShopManager.Instance.GetSelectedItemByCategory(ItemCategory.Explosion);
@@ -76,7 +79,7 @@ public class PlayerParticles : MonoBehaviour
 
 
         // Reproducir explosión
-        ParticleManager.Instance.PlayParticleEffect(explosionID, transform.position);
+        ParticleManager.Instance.PlayParticleEffect(explosionID, player.transform.position);
 
         // Shake
         if (shakeCamera != null)

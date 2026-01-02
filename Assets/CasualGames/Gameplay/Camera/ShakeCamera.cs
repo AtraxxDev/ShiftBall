@@ -1,49 +1,52 @@
 using System.Collections;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class ShakeCamera : MonoBehaviour
 {
-    private Transform cameraTransform;
-    private Vector3 initialPosition;
+    [Header("Shake Settings")]
+    [SerializeField] private float duration = 0.15f;
+    [SerializeField] private float magnitude = 0.12f;
+    [SerializeField] private AnimationCurve decayCurve = new AnimationCurve(
+        new Keyframe(0f, 1f),
+        new Keyframe(0.15f, 0.9f),
+        new Keyframe(1f, 0f)
+    );
 
-    public float shakeDuration = 0.4f;
-    public float shakeMagnitude = 0.08f;
 
+    private Vector3 initialLocalPos;
     private Coroutine shakeRoutine;
 
-    private void Start()
+    private void Awake()
     {
-        cameraTransform = Camera.main.transform;
-        initialPosition = cameraTransform.localPosition;
+        initialLocalPos = transform.localPosition;
     }
 
-    [Button]
     public void Shake()
     {
         if (shakeRoutine != null)
             StopCoroutine(shakeRoutine);
 
-        shakeRoutine = StartCoroutine(ShakeCoroutine());
+        shakeRoutine = StartCoroutine(ShakeRoutine());
+        
     }
 
-    private IEnumerator ShakeCoroutine()
+    private IEnumerator ShakeRoutine()
     {
-        Vector3 originalPosition = cameraTransform.position;
-        
         float elapsed = 0f;
 
-        while (elapsed < shakeDuration)
+        while (elapsed < duration)
         {
-            float y = Random.Range(-1f, 1f) * shakeMagnitude;
+            float strength = decayCurve.Evaluate(elapsed / duration);
+            Vector2 offset = Random.insideUnitCircle * magnitude * strength;
 
-            cameraTransform.position = originalPosition + new Vector3(0, y, 0);
+            transform.localPosition = initialLocalPos +
+                                      new Vector3(offset.x, offset.y, 0f);
 
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        //cameraTransform.localPosition = initialPosition; // regresar
+        transform.localPosition = initialLocalPos;
         shakeRoutine = null;
     }
 }

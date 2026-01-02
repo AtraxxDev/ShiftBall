@@ -1,16 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-
     public static ScoreManager Instance { get; private set; }
+
     public int Score { get; private set; }
     public int HighScore { get; private set; }
 
     [SerializeField] private float scoreInterval = 1f;
+    [SerializeField] private int scoreStep = 200; // 🔥 cada 200 puntos
+
     private float scoreTimer;
+    private int lastStepReached = 0;
 
     public delegate void ScoreChanged(int newScore);
     public event ScoreChanged OnScoreChanged;
@@ -18,8 +19,8 @@ public class ScoreManager : MonoBehaviour
     public delegate void HighScoreChanged(int newHighScore);
     public event HighScoreChanged OnHighScoreChanged;
 
-
-    
+    // 🔔 NUEVO EVENTO
+    public event System.Action<int> OnScoreStepReached;
 
     private void Awake()
     {
@@ -33,46 +34,45 @@ public class ScoreManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        HighScore = PlayerPrefs.GetInt("HighScore",0);
+        HighScore = PlayerPrefs.GetInt("HighScore", 0);
     }
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        Score = 0;
-        scoreTimer = 0;
-
-        
+        ResetScore();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (GameManager.Instance == null) return;
         if (GameManager.Instance.IsPaused) return;
-        
+
         scoreTimer += Time.deltaTime;
-        if (scoreTimer > scoreInterval)
+        if (scoreTimer >= scoreInterval)
         {
             AddScore(1);
-            scoreTimer = 0;
+            scoreTimer = 0f;
         }
     }
 
     public void AddScore(int amount)
     {
-        // El score va aumentando
         Score += amount;
-        // Se invoca la funcion
-        OnScoreChanged.Invoke(Score);
+        OnScoreChanged?.Invoke(Score);
 
-
-        if (Score > HighScore) // si es mayor el score que l highscore
+        // 🔔 CHECK DE STEP (200, 400, 600, etc.)
+        int currentStep = Score / scoreStep;
+        if (currentStep > lastStepReached)
         {
-            HighScore = Score; // se iiguala 
-            PlayerPrefs.SetInt("HighScore", HighScore); // se establece en highscore
-            PlayerPrefs.Save(); // se guarda el pref 
+            lastStepReached = currentStep;
+            OnScoreStepReached?.Invoke(Score);
+        }
+
+        if (Score > HighScore)
+        {
+            HighScore = Score;
+            PlayerPrefs.SetInt("HighScore", HighScore);
+            PlayerPrefs.Save();
             OnHighScoreChanged?.Invoke(HighScore);
         }
     }
@@ -80,9 +80,9 @@ public class ScoreManager : MonoBehaviour
     public void ResetScore()
     {
         Score = 0;
+        lastStepReached = 0;
+        scoreTimer = 0f;
+
         OnScoreChanged?.Invoke(Score);
     }
-
-    
-
 }

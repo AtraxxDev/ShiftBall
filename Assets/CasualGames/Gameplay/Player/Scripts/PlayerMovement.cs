@@ -1,80 +1,121 @@
-using System.Collections;
-using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-
-public class PlayerMovement : Unit
+public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private bool isMovingLeft = true;
-    private Vector3 _startPosition;
-    private Vector3 _currentPosition;
+    [Header("Movement")]
+    [SerializeField] private float speed = 5f;
+
+    [Header("Horizontal Limits")]
+    [SerializeField] private float leftLimit = -2.5f;
+    [SerializeField] private float rightLimit = 2.5f;
+
+    private Vector2 direction;
+    private bool isMovingLeft = true;
+    private Vector3 startPosition;
+
+    private void Awake()
+    {
+        startPosition = transform.position;
+    }
 
     private void Start()
     {
-        _startPosition = transform.position;
-        direction = new Vector3(isMovingLeft ? -1 : 1, 1, 0).normalized;
-
+        SetDirectionLeft();
     }
+    
 
-    public void HandleInput()
+    // =============================
+    // MOVEMENT
+    // =============================
+    public void Move()
     {
-        // Verifica si hay un toque y no est� sobre la UI
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
-            {
-                print("Se apreto la UI");
-            }
-            else
-            {
-                ToggleDirection();
-            }
+        transform.position += (Vector3)(direction * speed * Time.fixedDeltaTime);
 
+        // Cambiar dirección por límites en X
+        if (transform.position.x <= leftLimit)
+        {
+            SetDirectionRight();
+            AudioManager.Instance.PlaySFX("Pop");
+            
         }
-    }
-
-    public void MovePlayer()
-    {
-        float deltaSpeed = speed * Time.fixedDeltaTime;
-        transform.Translate(direction * deltaSpeed);
-    }
-
-    public void HandleCollision(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Wall"))
+        else if (transform.position.x >= rightLimit)
         {
-            ToggleDirection();
+            SetDirectionLeft();
             AudioManager.Instance.PlaySFX("Pop");
         }
+        
+        
     }
 
+    // =============================
+    // INPUT
+    // =============================
+    public void HandleInput()
+    {
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) 
+        { 
+            if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) 
+            { 
+                print("Se apreto la UI"); 
+            }else{ 
+                ToggleDirection(); 
+            } 
+        } 
+    }
+
+    // =============================
+    // DIRECTION
+    // =============================
     private void ToggleDirection()
     {
-
-        isMovingLeft = !isMovingLeft;
-        direction = new Vector3(isMovingLeft ? -1 : 1, 1, 0).normalized;
+        if (isMovingLeft)
+            SetDirectionRight();
+        else
+            SetDirectionLeft();
     }
 
-    public void SetZero()
+    private void SetDirectionLeft()
     {
-        direction = Vector3.zero; // Movimiento solo vertical
+        isMovingLeft = true;
+        direction = new Vector2(-1f, 1f).normalized;
     }
 
-    public void RestoreDiagonalMovement()
+    private void SetDirectionRight()
     {
-        direction = new Vector3(isMovingLeft ? -1 : 1, 1, 0).normalized; // Restaurar movimiento diagonal
+        isMovingLeft = false;
+        direction = new Vector2(1f, 1f).normalized;
     }
 
-    [Button]
+    // =============================
+    // PUBLIC CONTROLS
+    // =============================
+    public void StopMovement()
+    {
+        direction = Vector2.zero;
+    }
+
+    public void ResumeMovement()
+    {
+        if (isMovingLeft)
+            SetDirectionLeft();
+        else
+            SetDirectionRight();
+    }
+
     public void ResetPosition()
     {
-        transform.position = _startPosition;
-        isMovingLeft = true;
-        direction = new Vector3(-1, 1, 0).normalized;
+        transform.position = startPosition;
+        SetDirectionLeft();
     }
 
-
-
+    // =============================
+    // DEBUG
+    // =============================
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(new Vector3(leftLimit, -10f, 0f), new Vector3(leftLimit, 10f, 0f));
+        Gizmos.DrawLine(new Vector3(rightLimit, -10f, 0f), new Vector3(rightLimit, 10f, 0f));
+    }
 }

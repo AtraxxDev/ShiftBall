@@ -1,37 +1,52 @@
-using TMPro;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UICountdown : MonoBehaviour
 {
     [SerializeField] private Image fillImage;
-    [SerializeField] private TMP_Text countdownText;
     [SerializeField] private CountdownSlider timer;
+
+    private Button _button;
 
     private void OnEnable()
     {
-        timer.OnTimeChanged += UpdateUI;
+        if (timer == null) return;
+
+        timer.OnTimeChanged += UpdateFill;
         timer.OnTimerCompleted += OnCompleted;
+
+        // Sincroniza el estado actual al activarse
+        UpdateFill(1f - (timer.RemainingTime / timer.Duration));
     }
 
     private void OnDisable()
     {
-        timer.OnTimeChanged -= UpdateUI;
+        if (timer == null) return;
+
+        timer.OnTimeChanged -= UpdateFill;
         timer.OnTimerCompleted -= OnCompleted;
     }
 
-    private void UpdateUI(float normalized)
+    private void Awake()
     {
-        fillImage.fillAmount = 1 - normalized;
-
-        float remainingSeconds = (1 - normalized) * timer.Duration;
-        countdownText.text = Mathf.Ceil(remainingSeconds).ToString();
+        fillImage.TryGetComponent(out _button);
     }
 
-
+    private void UpdateFill(float normalized)
+    {
+        // Countdown: lleno → vacío
+        fillImage.fillAmount = 1f - normalized;
+        
+        if (_button != null)
+            _button.interactable = true;
+       
+    }
 
     private void OnCompleted()
     {
-        countdownText.text = "0";
+        fillImage.fillAmount = 0f;
+        if (_button != null)
+            _button.interactable = false;
     }
 }

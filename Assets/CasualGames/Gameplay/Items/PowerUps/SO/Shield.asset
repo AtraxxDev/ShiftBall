@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Shield
   m_EditorClassIdentifier: 
   powerUpType: 1
-  icon: {fileID: 21300000, guid: c491c7b4e138dc04182e81067bd34ef6, type: 3}
+  icon: {fileID: 21300000, guid: c7b36541a77b6bd42b150d9a8b4dfec8, type: 3}
   duration: 5
