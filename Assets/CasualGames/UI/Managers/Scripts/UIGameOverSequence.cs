@@ -101,6 +101,7 @@ public class UIGameOverSequence : MonoBehaviour
     [Button]
     public void Hide()
     {
+        timer.StopCountdown();
         LeanTween.move(rootPanel, hiddenPos, slideDuration)
                  .setEase(LeanTweenType.easeInCubic)
                  .setOnComplete(() =>

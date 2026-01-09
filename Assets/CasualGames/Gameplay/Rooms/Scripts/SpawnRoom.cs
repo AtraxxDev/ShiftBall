@@ -6,6 +6,8 @@ public class SpawnRoom : MonoBehaviour
     [Title("References")]
     [SerializeField] private Transform cam;
     [SerializeField] private Transform parent;
+    [Title("Anchor")]
+    [SerializeField] private Transform spawnAnchor;
 
     [Title("Difficulty Prefabs")]
     [SerializeField] private GameObject[] easyRooms;
@@ -21,9 +23,14 @@ public class SpawnRoom : MonoBehaviour
 
     private void Awake()
     {
-        startSpawnY = transform.position.y;
+        if (spawnAnchor != null)
+            startSpawnY = spawnAnchor.position.y;
+        else
+            startSpawnY = transform.position.y;
+
         nextSpawnY = startSpawnY;
     }
+
 
     private void Start()
     {
@@ -63,24 +70,25 @@ public class SpawnRoom : MonoBehaviour
 
     public void ResetGenerator()
     {
-        // Reset dificultad
-        //DificultyManager.Instance.ResetDifficulty();
-
         // Borrar rooms existentes
         foreach (Transform child in parent)
         {
             Destroy(child.gameObject);
         }
 
-        // Reset spawn position
-        nextSpawnY = startSpawnY;
+        // Reset spawn position desde el anchor
+        if (spawnAnchor != null)
+            nextSpawnY = spawnAnchor.position.y;
+        else
+            nextSpawnY = startSpawnY;
 
-        // Pre-generar rooms
+        // Pre-generar rooms hacia arriba
         for (int i = 0; i < initialRooms; i++)
         {
             Spawn();
         }
     }
+
 
     private GameObject GetRoomBasedOnDifficulty()
     {
