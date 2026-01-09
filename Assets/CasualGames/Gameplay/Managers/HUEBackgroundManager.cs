@@ -1,43 +1,41 @@
-using System;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class HUEBackgroundManager : MonoBehaviour
 {
+    [Title("References")]
     [SerializeField, Required] private Material gradientMaterial;
-    [SerializeField, Range(0f, 1f)] private float transitionSpeed = 1f;
-    [Range(0f, 1f)] public float saturation = 0.6f;
-    [Range(0f, 1f)] public float brightness = 0.8f;
+    [SerializeField, Required] private GradientDatabase gradientDatabase;
 
+    [Title("Settings")]
+    [SerializeField] private float transitionSpeed = 1f;
 
-    [ColorUsage(true, true)]
-    [SerializeField, ReadOnly] private Color currentColor;
-    private Color targetColor;
-    private float hue;
+    private Color currentUp;
+    private Color currentDown;
+    private Color targetUp;
+    private Color targetDown;
 
-    private bool isTransitioning = false;
-    private float t = 0f;
+    private bool isTransitioning;
+    private float t;
+
+    // Evita repetir el mismo gradiente
+    private int lastGradientIndex = -1;
 
     private void Start()
     {
-        // Inicializa con el color actual del material
-        if (gradientMaterial != null)
-        {
-            currentColor = gradientMaterial.GetColor("_Down");
-            targetColor = currentColor;
-        }
+        // Color inicial desde el material
+        currentUp = gradientMaterial.GetColor("_Up");
+        currentDown = gradientMaterial.GetColor("_Down");
 
-        GameManager.Instance.OnStartGame += ChangeToNextHue;
-        GameManager.Instance.OnRestartGame += ChangeToNextHue;
-        ScoreManager.Instance.OnScoreStepReached += OnScoreStepReached;
-    }
+        targetUp = currentUp;
+        targetDown = currentDown;
 
-    private void OnDisable()
-    {
-        GameManager.Instance.OnStartGame -= ChangeToNextHue;
-        GameManager.Instance.OnRestartGame -= ChangeToNextHue;
-        ScoreManager.Instance.OnScoreStepReached -= OnScoreStepReached;
-        
+        // Siempre iniciar con el gradiente 0
+        ApplyGradientByIndex(0);
+
+        //GameManager.Instance.OnStartGame += ApplyGradientByIndex(0);
+        GameManager.Instance.OnRestartGame += ApplyNextGradient;
+        ScoreManager.Instance.OnScoreStepReached += _ => ApplyNextGradient();
     }
 
     private void Update()
@@ -45,33 +43,68 @@ public class HUEBackgroundManager : MonoBehaviour
         if (!isTransitioning || gradientMaterial == null)
             return;
 
-        // Lerp suave entre color actual y el objetivo
         t += Time.deltaTime * transitionSpeed;
-        Color newColor = Color.Lerp(currentColor, targetColor, t);
-        gradientMaterial.SetColor("_Down", newColor);
+
+        gradientMaterial.SetColor("_Up", Color.Lerp(currentUp, targetUp, t));
+        gradientMaterial.SetColor("_Down", Color.Lerp(currentDown, targetDown, t));
 
         if (t >= 1f)
         {
-            currentColor = targetColor;
+            currentUp = targetUp;
+            currentDown = targetDown;
             isTransitioning = false;
             t = 0f;
         }
     }
 
-    [Button("Cambiar Color (Hue)")]
-    private void ChangeToNextHue()
-    {
-        // Genera un nuevo color en base al HUE
-        hue += 0.15f; // cambia el paso de color (0.1 - 0.3 es ideal)
-        if (hue > 1f) hue -= 1f;
+    // ===============================
+    // GRADIENT LOGIC
+    // ===============================
 
-        targetColor = Color.HSVToRGB(hue, saturation,brightness);
+    [Button("Apply Random Gradient")]
+    public void ApplyNextGradient()
+    {
+        if (gradientDatabase == null || gradientDatabase.gradients.Length == 0)
+            return;
+
+        int count = gradientDatabase.gradients.Length;
+
+        // Si solo hay uno, no hay alternativa
+        if (count == 1)
+        {
+            ApplyGradientByIndex(0);
+            return;
+        }
+
+        int index;
+        do
+        {
+            index = Random.Range(0, count);
+        }
+        while (index == lastGradientIndex);
+
+        ApplyGradientByIndex(index);
+    }
+
+    public void ApplyGradientByIndex(int index)
+    {
+        if (gradientDatabase == null ||
+            index < 0 ||
+            index >= gradientDatabase.gradients.Length)
+            return;
+
+        lastGradientIndex = index;
+
+        var data = gradientDatabase.gradients[index];
+        SetTargetGradient(data);
+    }
+
+    private void SetTargetGradient(GradientDatabase.GradientData data)
+    {
+        targetUp = data.upColor;
+        targetDown = data.downColor;
+
         isTransitioning = true;
         t = 0f;
-    }
-    
-    private void OnScoreStepReached(int score)
-    {
-        ChangeToNextHue();
     }
 }
