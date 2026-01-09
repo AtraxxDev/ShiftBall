@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using TB_Tools;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +12,11 @@ public class ShopItemView : MonoBehaviour
     [SerializeField] private Image icon;
     [SerializeField] private TMP_Text costText;
     [SerializeField] private GameObject checkmarkObject;
-    [SerializeField] private GameObject currencyIcon;
+    [SerializeField] private Image currencyIcon;
+
+    [Title("Currency Icons")]
+    [SerializeField] private Sprite coinSprite;
+    [SerializeField] private Sprite diamondSprite;
 
     [Title("Data")]
     [SerializeField] private ShopItemModel itemData;
@@ -39,13 +44,24 @@ public class ShopItemView : MonoBehaviour
         var shop = ShopManager.Instance;
 
         if (!shop.IsPurchased(itemData.Id))
+        {
             shop.BuyItem(itemData);
+        }
         else
+        {
             shop.SelectItem(itemData);
+        }
     }
 
-    private void OnItemPurchased(object param) => RefreshUI();
-    private void OnItemSelected(object param) => RefreshUI();
+    private void OnItemPurchased(object param)
+    {
+        RefreshUI();
+    }
+
+    private void OnItemSelected(object param)
+    {
+        RefreshUI();
+    }
 
     private void RefreshUI()
     {
@@ -55,17 +71,33 @@ public class ShopItemView : MonoBehaviour
         bool selected = ShopManager.Instance.IsSelected(itemData.Id);
 
         checkmarkObject.SetActive(selected);
-        currencyIcon.SetActive(!purchased);
+        currencyIcon.gameObject.SetActive(!purchased);
 
         if (purchased)
         {
             costText.text = "";
+            return;
         }
-        else
+
+        // Texto del costo
+        costText.text = itemData.Cost.ToString();
+
+        bool canBuy = ShopManager.Instance.currencyService
+            .GetBalance(itemData.Currency) >= itemData.Cost;
+
+        costText.color = canBuy ? Color.white : Color.red;
+
+        // Icono según tipo de moneda
+        currencyIcon.sprite = GetCurrencySprite(itemData.Currency);
+    }
+
+    private Sprite GetCurrencySprite(CurrencyType currency)
+    {
+        return currency switch
         {
-            costText.text = itemData.Cost.ToString();
-            bool canBuy = ShopManager.Instance.currencyService.GetBalance(itemData.Currency) >= itemData.Cost;
-            costText.color = canBuy ? Color.white : Color.red;
-        }
+            CurrencyType.Coins => coinSprite,
+            CurrencyType.Diamonds => diamondSprite,
+            _ => null
+        };
     }
 }

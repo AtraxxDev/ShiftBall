@@ -97,7 +97,9 @@ MonoBehaviour:
   icon: {fileID: 5841199341187751796}
   costText: {fileID: 7956095598991257290}
   checkmarkObject: {fileID: 4021610526287661156}
-  currencyIcon: {fileID: 2738944477589060546}
+  currencyIcon: {fileID: 2929762330659903840}
+  coinSprite: {fileID: 21300000, guid: b206e8d0250a9754a884a43f47009026, type: 3}
+  diamondSprite: {fileID: 21300000, guid: 60f5eac7ca236374aa551e2239fe3e78, type: 3}
   itemData: {fileID: 0}
 --- !u!114 &2263490090424188761
 MonoBehaviour:
@@ -321,6 +323,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -459,6 +462,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
